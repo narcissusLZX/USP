@@ -1,0 +1,1715 @@
+
+<question str="What activates lymphocyte?">
+<label>correct</label>
+<answer>Transcription factor activation</answer>
+<sentence id="1843:0">Transcription factor activation in lymphokine activated killer cells and lymphocytes from patients receiving IL-2 immunotherapy .</sentence>
+
+<question str="What binds c-rel?">
+<label>correct</label>
+<answer>the TF site</answer>
+<sentence id="0986:5">In vitro binding studies demonstrated that the TF site bound translated c-Rel and p65 homodimers but not p50\/p65 heterodimers or p50 homodimers .</sentence>
+
+<question str="What binds gata-1?">
+<label>wrong: noun cluster</label>
+<answer>Spi-B</answer>
+<sentence id="1228:9">Gel-retardation experiments show that Spi-B can bind to all putative PU.1 binding sites , but do not reveal any preferred Spi-B binding site .</sentence>
+
+<question str="What binds gata-1?">
+<label>wrong: noun cluster</label>
+<answer>pRb</answer>
+<sentence id="1816:5">p130 , predominantly in Form 1 , and hypophosphorylated pRb bind an E2F DNA binding site ; p130 complexes E2F-4 , whereas pRb binds both E2F-4 and E2F-1 .</sentence>
+
+<question str="What binds gata-1?">
+<label>correct</label>
+<answer>this paired motif</answer>
+<sentence id="0683:2">We find that HMG-I binds preferentially to the more 3' of a pair of GATA motifs in the gamma-globin promoter ; this paired motif is bound by the erythroid factor GATA-1 .</sentence>
+
+<question str="What binds nf-kappa b?">
+<label>correct</label>
+<answer>GGGACTTTCC</answer>
+<sentence id="0499:1">The kappa B sequence ( GGGACTTTCC ) binds a factor , NF-kappa B , that is constitutively found in its functional , DNA binding form only in B lymphocytes .</sentence>
+
+<question str="What binds nf-kappa b?">
+<label>wrong: negation/syntax error</label>
+<answer>The IL-2R alpha enhancer</answer>
+<sentence id="1059:2">The IL-2R alpha enhancer binds NF-kappa B poorly and is only weakly activated by the NF-kappa B site alone .</sentence>
+
+<question str="What binds nf-kappa b?">
+<label>correct</label>
+<answer>The kappa B sequence</answer>
+<sentence id="0499:1">The kappa B sequence ( GGGACTTTCC ) binds a factor , NF-kappa B , that is constitutively found in its functional , DNA binding form only in B lymphocytes .</sentence>
+
+<question str="What binds nf-kappa b?">
+<label>correct</label>
+<answer>three sites</answer>
+<sentence id="0513:3">Although three sites in the TNF-alpha promoter ( kappa 1 , kappa 2 , and kappa 3 ) specifically bind the transcription factor NF-kappa B in lymphoid nuclear extracts , TNF-alpha mRNA induction by PMA does not correlate with NF-kappa B binding activities displayed by different T and B cell lines .</sentence>
+
+<question str="What blocks il-2?">
+<label>correct: partial</label>
+<answer>IL-4</answer>
+<sentence id="0919:0">IL-4 down-regulates IL-2- , IL-3- , and GM-CSF-induced cytokine gene expression in peripheral blood monocytes .</sentence>
+
+<question str="What blocks il-2?">
+<label>correct</label>
+<answer>a tyrosine kinase inhibitor</answer>
+<sentence id="0737:9">Furthermore , both transforming growth factor-beta and genistein , a tyrosine kinase inhibitor , could suppress IL-2 and IL-12 signaling but CsA was generally inactive .</sentence>
+
+<question str="What blocks il-2?">
+<label>correct</label>
+<answer>genistein</answer>
+<sentence id="0737:9">Furthermore , both transforming growth factor-beta and genistein , a tyrosine kinase inhibitor , could suppress IL-2 and IL-12 signaling but CsA was generally inactive .</sentence>
+
+<question str="What blocks il-2?">
+<label>correct</label>
+<answer>transforming growth factor-beta</answer>
+<sentence id="0737:9">Furthermore , both transforming growth factor-beta and genistein , a tyrosine kinase inhibitor , could suppress IL-2 and IL-12 signaling but CsA was generally inactive .</sentence>
+
+<question str="What causes gene?">
+<label>skip: vacuous query, wrong answer</label>
+<answer>4 hours</answer>
+<sentence id="1734:6">We identified a cell-type-specific differential response : CREB , CTF , OTF-1 , OFT-2 , and NF-kappa B genes were strongly induced 1 to 4 hours after influenza A virus infection in the monocytic cell line Mono Mac 6 , while in freshly prepared human monocytes no significant changes were detected .</sentence>
+
+<question str="What causes gene?">
+<label>skip: vacuous query, correct answer</label>
+<answer>ATRA treatment of Kasumi-1 cells</answer>
+<sentence id="0261:7">Consistent with these findings , VD-responsive genes are induced by ATRA treatment of Kasumi-1 cells , suggesting that the genetic program underlying monocytic differentiation is activated .</sentence>
+
+<question str="What causes gene?">
+<label>skip: vacuous query, correct answer</label>
+<answer>Stable expression a diverged homeobox human gene</answer>
+<sentence id="0315:0">Stable expression of HB24 , a diverged human homeobox gene , in T lymphocytes induces genes involved in T cell activation and growth .</sentence>
+
+<question str="What causes gene?">
+<label>skip: vacuous query, correct answer</label>
+<answer>Stable expression of HB24</answer>
+<sentence id="0315:0">Stable expression of HB24 , a diverged human homeobox gene , in T lymphocytes induces genes involved in T cell activation and growth .</sentence>
+
+<question str="What causes gene?">
+<label>skip: vacuous query, correct answer</label>
+<answer>TPA</answer>
+<sentence id="1030:8">Other studies further demonstrate that the jun-B and fra-1 genes are induced by TPA in both HL-60\/vinc and HL-60\/vinc\/R cells , whereas c-fos expression is attenuated in the HL-60\/vinc line .</sentence>
+
+<question str="What causes gene?">
+<label>skip: vacuous query, correct answer</label>
+<answer>lipopolysaccharide lp</answer>
+<sentence id="1475:3">We and others have shown that SAA gene is induced in monocyte\/macrophage cells by lipopolysaccharide ( LPS ) .</sentence>
+
+<question str="What contains c-jun?">
+<label>correct</label>
+<answer>AP-1</answer>
+<sentence id="1064:12">In contrast , AP-1 from PHA-activated cells contains c-Jun and low levels of c-Fos .</sentence>
+
+<question str="What contains c-jun?">
+<label>correct</label>
+<answer>The AP-1 binding protein</answer>
+<sentence id="0666:9">The AP-1 binding proteins contained c-Jun , Jun-D , and Fra-1 , but marginal amounts of Jun-B and c-Fos .</sentence>
+
+<question str="What contains c-jun?">
+<label>skip: which/that</label>
+<answer>that</answer>
+<sentence id="1064:11">Gel-shift analysis reveals the constitutive presence of nuclear factors in resting PBL that bind to the proximal AP-1 site of the IL-2 promoter and that contain immunoreactive c-Jun but not c-Fos protein .</sentence>
+
+<question str="What contains nfatp?">
+<label>correct</label>
+<answer>the kappa 3 binding factor</answer>
+<sentence id="0902:4">Here , we demonstrate that the kappa 3 binding factor contains NFATp , a cyclosporin-sensitive DNA-binding protein required for interleukin-2 gene transcription .</sentence>
+
+<question str="What contains p50\/p65 heterodimer?">
+<label>correct</label>
+<answer>fresh ATL samples</answer>
+<sentence id="0053:6">Whereas the NF-kappaB binding activity in Tax-expressing T-cell lines consisted mostly of p50\/c-Rel , fresh ATL samples contained p50\/p50 and p50\/p65 heterodimers .</sentence>
+
+<question str="What contains p50\/p65 heterodimer?">
+<label>correct</label>
+<answer>the nucleoprotein complex</answer>
+<sentence id="1644:5">Electrophoretic mobility shift assays show that the nucleoprotein complex formed on the upstream site ( NF kappa B1 ) contains the classical p50\/p65 heterodimer .</sentence>
+
+<question str="What demonstrates hsp90?">
+<label>correct</label>
+<answer>Western-blot analysis of the sedimentation peak</answer>
+<sentence id="1190:8">Western-blot analysis of the sedimentation peak showed the concomitant presence of MBP-HBD by a monoclonal anti-MBP antibody , and hsp90 by a monoclonal anti-hsp antibody .</sentence>
+
+<question str="What encodes gata-1?">
+<label>wrong: noun cluster</label>
+<answer>One cDNA clone of a primary response gene</answer>
+<sentence id="0756:2">One cDNA clone of a primary response gene , expressed upon macrophage differentiation , encoded for Egr-1 , a zinc finger transcription factor .</sentence>
+
+<question str="What enhances creb?">
+<label>wrong: merge role</label>
+<answer>4 hours</answer>
+<sentence id="1734:6">We identified a cell-type-specific differential response : CREB , CTF , OTF-1 , OFT-2 , and NF-kappa B genes were strongly induced 1 to 4 hours after influenza A virus infection in the monocytic cell line Mono Mac 6 , while in freshly prepared human monocytes no significant changes were detected .</sentence>
+
+<question str="What enhances nf-kappa b?">
+<label>correct</label>
+<answer>Fc gamma R cross-linking</answer>
+<sentence id="1111:3">In THP-1 cells , Fc gamma R cross-linking induced NF-kappa B , which is known to bind to the regulatory region of the long terminal repeat ( LTR ) of HIV-1 and to activate HIV-1 transcription .</sentence>
+
+<question str="What enhances nf-kappa b?">
+<label>correct</label>
+<answer>IL-2</answer>
+<sentence id="0737:11">In addition , IL-2 but not IL-12 induced nuclear factors NF-kappa B and AP1 , and regulation of the nuclear levels of these two DNA binding protein complexes is correlated with IFN-gamma and GM-CSF gene expression .</sentence>
+
+<question str="What enhances nf-kappa b?">
+<label>correct</label>
+<answer>PMA</answer>
+<sentence id="1671:1">Double-stimulation was used to demonstrate that , in a T lymphocytic cell line ( CEM ) , phorbol myristate acetate ( PMA ) rapidly induced NF-kappa B through a signaling pathway which did not involve reactive oxygen species ( ROS ) and was different from the activation triggered by either H2O2 or tumor necrosis factor-alpha ( TNF-alpha ) .</sentence>
+
+<question str="What enhances nf-kappa b?">
+<label>correct</label>
+<answer>T. pallidum lipoproteins-lipopeptides</answer>
+<sentence id="1253:7">Finally , the biological relevance of the observation that T. pallidum lipoproteins-lipopeptides induce both NF-kappa B and cytokine production in monocytes was supported by the ability of the synthetic analogs to promote human immunodeficiency virus replication in chronically infected U1 monocytoid cells ; these observations also suggest a potential mechanism whereby a syphilitic chancre can serve as a cofactor for human immunodeficiency virus transmission .</sentence>
+
+<question str="What enhances nf-kappa b?">
+<label>correct</label>
+<answer>myristate phorbol acetate</answer>
+<sentence id="1671:1">Double-stimulation was used to demonstrate that , in a T lymphocytic cell line ( CEM ) , phorbol myristate acetate ( PMA ) rapidly induced NF-kappa B through a signaling pathway which did not involve reactive oxygen species ( ROS ) and was different from the activation triggered by either H2O2 or tumor necrosis factor-alpha ( TNF-alpha ) .</sentence>
+
+<question str="What expresses ap-1?">
+<label>correct: partial</label>
+<answer>anergized CD4 cells</answer>
+<sentence id="1122:0">In vivo anergized CD4+ T cells express perturbed AP-1 and NF-kappa B transcription factors .</sentence>
+
+<question str="What expresses ap-1?">
+<label>correct: partial</label>
+<answer>anergized T cells</answer>
+<sentence id="1122:0">In vivo anergized CD4+ T cells express perturbed AP-1 and NF-kappa B transcription factors .</sentence>
+
+<question str="What induces ap-1?">
+<label>correct</label>
+<answer>ALD</answer>
+<sentence id="1118:4">We had previously found that aspirin-like drugs ( ALD ) induce AP-1 in human T lymphocytes .</sentence>
+
+<question str="What induces ap-1?">
+<label>correct</label>
+<answer>B7 costimulation</answer>
+<sentence id="0666:5">LFA-3 induced moderate levels of AP-1 , but did not influence the levels of NF-kappa B , while B7 costimulation strongly induced both AP-1 and substantially enhanced NF-kappa B binding proteins .</sentence>
+
+<question str="What induces ap-1?">
+<label>correct</label>
+<answer>B7 stimulation</answer>
+<sentence id="1316:4">However , subsequent analysis of transcription factor generation revealed that B7 stimulation induced both activator protein-1 ( AP-1 ) and nuclear factor-kappaB ( NF-kappaB ) complexes , but not NF-AT .</sentence>
+
+<question str="What induces ap-1?">
+<label>correct</label>
+<answer>aspirin-like drugs</answer>
+<sentence id="1118:4">We had previously found that aspirin-like drugs ( ALD ) induce AP-1 in human T lymphocytes .</sentence>
+
+<question str="What induces il-1alpha?">
+<label>wrong: noun cluster</label>
+<answer>PMA</answer>
+<sentence id="0718:2">TG plus phorbol myristate acetate ( PMA ) but not TG alone induced IL-2 in Jurkat T cells , suggesting that TG had no effect on protein kinase C ( PKC ) .</sentence>
+
+<question str="What induces il-1alpha?">
+<label>wrong: noun cluster</label>
+<answer>TG</answer>
+<sentence id="0718:2">TG plus phorbol myristate acetate ( PMA ) but not TG alone induced IL-2 in Jurkat T cells , suggesting that TG had no effect on protein kinase C ( PKC ) .</sentence>
+
+<question str="What induces il-1alpha?">
+<label>wrong: noun cluster</label>
+<answer>myristate phorbol acetate</answer>
+<sentence id="0718:2">TG plus phorbol myristate acetate ( PMA ) but not TG alone induced IL-2 in Jurkat T cells , suggesting that TG had no effect on protein kinase C ( PKC ) .</sentence>
+
+<question str="What induces il-1alpha?">
+<label>wrong: noun cluster</label>
+<answer>phorbol myristate acetate PMA stimulation</answer>
+<sentence id="1912:4">These B cells expressed p40 and p35 mRNA , and phorbol myristate acetate ( PMA ) stimulation strongly enhanced p40 and p70 production .</sentence>
+
+<question str="What induces mcp-1?">
+<label>correct</label>
+<answer>ADP-activated platelets</answer>
+<sentence id="1833:6">In addition , ADP-activated platelets induced MCP-1 and ICAM-1 promoter-dependent transcription .</sentence>
+
+<question str="What induces mcp-1?">
+<label>correct</label>
+<answer>Binding of activated platelets</answer>
+<sentence id="1538:11">Binding of activated platelets induces IL-1 beta , IL-8 , and MCP-1 in leukocytes .</sentence>
+
+<question str="What inhibits ca2 +?">
+<label>skip: which/that</label>
+<answer>which</answer>
+<sentence id="1333:2">The latter class of events is blocked in lymphocytes by the immunosuppressive drugs cyclosporin A and FK506 , which inhibit calcineurin , a Ca2+-activated serine\/threonine phosphatase necessary for the nuclear import of NF-AT transcription factors .</sentence>
+
+<question str="What inhibits il-2?">
+<label>correct</label>
+<answer>IL-4</answer>
+<sentence id="0919:0">IL-4 down-regulates IL-2- , IL-3- , and GM-CSF-induced cytokine gene expression in peripheral blood monocytes .</sentence>
+
+<question str="What inhibits il-2?">
+<label>correct</label>
+<answer>a tyrosine kinase inhibitor</answer>
+<sentence id="0737:9">Furthermore , both transforming growth factor-beta and genistein , a tyrosine kinase inhibitor , could suppress IL-2 and IL-12 signaling but CsA was generally inactive .</sentence>
+
+<question str="What inhibits il-2?">
+<label>correct</label>
+<answer>genistein</answer>
+<sentence id="0737:9">Furthermore , both transforming growth factor-beta and genistein , a tyrosine kinase inhibitor , could suppress IL-2 and IL-12 signaling but CsA was generally inactive .</sentence>
+
+<question str="What inhibits il-2?">
+<label>correct</label>
+<answer>transforming growth factor-beta</answer>
+<sentence id="0737:9">Furthermore , both transforming growth factor-beta and genistein , a tyrosine kinase inhibitor , could suppress IL-2 and IL-12 signaling but CsA was generally inactive .</sentence>
+
+<question str="What inhibits il-6?">
+<label>correct: partial</label>
+<answer>Forced expression of SOCS-1</answer>
+<sentence id="0288:9">Forced expression of SOCS-1 in a macrophage cell line , RAW264 , markedly suppressed trans-activation of an IL-4-inducible reporter as well as IL-6- and IFN-gamma-induced reporter gene activity .</sentence>
+
+<question str="What inhibits il-6?">
+<label>correct: partial</label>
+<answer>RAW264</answer>
+<sentence id="0288:9">Forced expression of SOCS-1 in a macrophage cell line , RAW264 , markedly suppressed trans-activation of an IL-4-inducible reporter as well as IL-6- and IFN-gamma-induced reporter gene activity .</sentence>
+
+<question str="What inhibits tal1?">
+<label>wrong: noun cluster</label>
+<answer>Combined treatment of HPCs</answer>
+<sentence id="0201:8">Combined treatment of HPCs with alpha-PML and alpha-Rb oligomers inhibited both PML and Rb protein expression and completely blocked erythroid colony development .</sentence>
+
+<question str="What inhibits tnf-alpha?">
+<label>wrong: negation/syntax error</label>
+<answer>NAC</answer>
+<sentence id="1618:3">Monocytic cell adhesion to EC in response to tumor necrosis factor-alpha ( TNF-alpha ) , lipopolysaccharide ( LPS ) , alpha-thrombin , or phorbol 12-myristate 13-acetate ( PMA ) was similarly inhibited by NAC .</sentence>
+
+<question str="What mediates hiv-1?">
+<label>correct</label>
+<answer>T cell activation signals</answer>
+<sentence id="0575:9">In conclusion , HIV-1 and HIV-2 are differentially regulated by T cell activation signals , and this difference may account for the longer period of viral latency observed with HIV-2 than with HIV-1 infection .</sentence>
+
+<question str="What observes glucocorticoid receptor?">
+<label>correct</label>
+<answer>we</answer>
+<sentence id="0761:2">In a subject with primary cortisol resistance we have observed glucocorticoid receptors ( hGR ) with a decreased affinity for dexamethasone .</sentence>
+
+<question str="What prevents gene?">
+<label>skip: vacuous query, correct answer</label>
+<answer>Interleukin-10</answer>
+<sentence id="0007:0">Interleukin-10 inhibits expression of both interferon alpha- and interferon gamma-induced genes by suppressing tyrosine phosphorylation of STAT1 .</sentence>
+
+<question str="What regulates il-4?">
+<label>correct</label>
+<answer>other cytokines</answer>
+<sentence id="0917:5">Therefore , the effects of PGE2 vary depending on the mode of T cell activation , and the IL-4 and IL-5 are regulated differently from other cytokines .</sentence>
+
+<question str="What requires stat1?">
+<label>wrong: noun cluster</label>
+<answer>the IL-12-dependent transactivation of an IRF-1 reporter construct</answer>
+<sentence id="0176:9">First , STAT4 was required for the IL-12-dependent transactivation of an IRF-1 reporter construct , and second , STAT4 binding to the IRF-1 promoter was shown using EMSA .</sentence>
+
+<question str="What reveals nf-kappa b?">
+<label>correct: partial</label>
+<answer>I kappa b alpha</answer>
+<sentence id="0695:5">In contrast to hematopoietic cells , I kappa B alpha-\/- embryonic fibroblasts show minimal constitutive NF-kappa B , as well as normal signal-dependent NF-kappa B activation that is concomitant with I kappa B beta degradation .</sentence>
+
+<question str="What shows interleukin-2?">
+<label>correct: partial</label>
+<answer>AIDS-C patients</answer>
+<sentence id="1651:8">AIDS-C patients showed low IL-2 and high IL-4 , IL-10 , and IgE concentratios ; conversely , AIDS-GR patients showed high IL-2 and low IL-4 and IgE concentrations .</sentence>
+
+<question str="What shows interleukin-2?">
+<label>correct</label>
+<answer>AIDS-GR patients</answer>
+<sentence id="1651:8">AIDS-C patients showed low IL-2 and high IL-4 , IL-10 , and IgE concentratios ; conversely , AIDS-GR patients showed high IL-2 and low IL-4 and IgE concentrations .</sentence>
+
+<question str="What shows nf-kappa b?">
+<label>correct: partial</label>
+<answer>I kappa b alpha</answer>
+<sentence id="0695:5">In contrast to hematopoietic cells , I kappa B alpha-\/- embryonic fibroblasts show minimal constitutive NF-kappa B , as well as normal signal-dependent NF-kappa B activation that is concomitant with I kappa B beta degradation .</sentence>
+
+<question str="What shows t-cell lymphoma?">
+<label>correct</label>
+<answer>histopathological analysis</answer>
+<sentence id="1348:8">To further unravel the tal-1 oncogenic potential , a strain of tal-1 transgenic mice was crossbred with p53-\/- mice ; the survival rate in these animals was reduced by more than one-half when compared with that of tal-1 mice , and histopathological analysis revealed exclusively T-cell lymphomas .</sentence>
+
+<question str="What studies interleukin-2?">
+<label>correct</label>
+<answer>We</answer>
+<sentence id="1997:3">We evaluated two cytokine systems , IL-2 and IFNgamma , and demonstrate that Nmi augments STAT-mediated transcription in response to these cytokines .</sentence>
+
+<question str="What studies patient?">
+<label>correct: partial</label>
+<answer>We</answer>
+<sentence id="1985:2">We evaluated 49 female patients with MPD and informative at the X-linked androgen receptor ( AR ) locus to establish the X chromosome inactivation pattern of hemopoietic cells .</sentence>
+
+<question str="What does il-2 activate?">
+<label>wrong: negation/syntax error</label>
+<answer>JNK</answer>
+<sentence id="0058:6">Similarly , IL-2 neither activates JNK nor increases AP-1 binding activity to a consensus o-tetradecanoylphorbol 13-acetate ( TPA ) response element .</sentence>
+
+<question str="What does il-2 activate?">
+<label>correct</label>
+<answer>PI3K</answer>
+<sentence id="1704:2">Phosphatidyl inositol 3-kinase ( PI3K ) is activated by IL-2 .</sentence>
+
+<question str="What does il-2 activate?">
+<label>correct</label>
+<answer>Phosphatidyl inositol 3-kinase</answer>
+<sentence id="1704:2">Phosphatidyl inositol 3-kinase ( PI3K ) is activated by IL-2 .</sentence>
+
+<question str="What does il-2 activate?">
+<label>correct</label>
+<answer>STAT1 alpha</answer>
+<sentence id="1222:3">Although IL-2 and IFN-alpha activated STAT1 alpha and STAT5 , IL-2 predominantly activated STAT5 , while IFN-alpha predominantly activated STAT1 alpha .</sentence>
+
+<question str="What does il-2 activate?">
+<label>correct</label>
+<answer>STAT5</answer>
+<sentence id="1222:3">Although IL-2 and IFN-alpha activated STAT1 alpha and STAT5 , IL-2 predominantly activated STAT5 , while IFN-alpha predominantly activated STAT1 alpha .</sentence>
+
+<question str="What does il-2 activate?">
+<label>correct</label>
+<answer>Stat3</answer>
+<sentence id="0776:2">Interleukin-2 ( IL-2 ) rapidly activated Stat5 in fresh PBL , and Stat3 and Stat5 in preactivated PBL .</sentence>
+
+<question str="What does il-2 activate?">
+<label>correct</label>
+<answer>Stat3alpha</answer>
+<sentence id="1888:4">As determined by tyrosine phosphorylation , nuclear translocation and binding to an hSIE-oligonucleotide probe , IL-2 and IL-15 activated the slowly migrating isoform , Stat3alpha .</sentence>
+
+<question str="What does il-2 activate?">
+<label>correct</label>
+<answer>Stat3alpha</answer>
+<sentence id="1888:5">In contrast , minimal or no activation of Stat3beta was observed , suggesting that IL-2 and IL-15 predominantly activate Stat3alpha in human CD4(+) T cells .</sentence>
+
+<question str="What does il-2 activate?">
+<label>correct</label>
+<answer>Stat5</answer>
+<sentence id="0776:2">Interleukin-2 ( IL-2 ) rapidly activated Stat5 in fresh PBL , and Stat3 and Stat5 in preactivated PBL .</sentence>
+
+<question str="What does il-2 activate?">
+<label>wrong: noun cluster</label>
+<answer>Stat5</answer>
+<sentence id="1561:6">Prolactin activates Stat5 , and interleukin-4 ( IL-4 ) activates Stat6 .</sentence>
+
+<question str="What does il-2 activate?">
+<label>correct</label>
+<answer>nf-kappa b</answer>
+<sentence id="0334:2">Similarly , IL-2 activates NF-kappa B in the human monocytic cell line U 937 , but not in resting human T-cells .</sentence>
+
+<question str="What does il-2 activate?">
+<label>correct</label>
+<answer>the migrating isoform</answer>
+<sentence id="1888:4">As determined by tyrosine phosphorylation , nuclear translocation and binding to an hSIE-oligonucleotide probe , IL-2 and IL-15 activated the slowly migrating isoform , Stat3alpha .</sentence>
+
+<question str="What does nf-kappa b activate?">
+<label>correct</label>
+<answer>many immunoregulatory genes</answer>
+<sentence id="0681:5">Because NF-kappa B activates many immunoregulatory genes in response to pro-inflammatory stimuli , the inhibition of its activity can be a major component of the anti-inflammatory activity of glucocorticoids .</sentence>
+
+<question str="What does nf-kappa b activate?">
+<label>correct</label>
+<answer>the E-selectin promoter</answer>
+<sentence id="0668:5">CsA also suppressed E-selectin , but not vascular cell adhesion molecule-1 ( VCAM-1 ) expression in endothelial cells , even though the E-selectin promoter is activated by NF-kappa B rather than NFAT .</sentence>
+
+<question str="What does nf-kappa b activate?">
+<label>correct</label>
+<answer>the expression of gene many</answer>
+<sentence id="1386:2">Although NF-kappa B activates the expression of many genes involved in immune and inflammatory responses , little is known about the role of NF-kappa B activation in the induction of IgE synthesis in human B cells .</sentence>
+
+<question str="What does nfat activate?">
+<label>correct</label>
+<answer>These enhancer regions</answer>
+<sentence id="0798:5">These promoter and enhancer regions are mainly activated by the transcription factor nuclear factor of activated T cells ( NFAT ) .</sentence>
+
+<question str="What does nfat activate?">
+<label>correct</label>
+<answer>These promoter regions</answer>
+<sentence id="0798:5">These promoter and enhancer regions are mainly activated by the transcription factor nuclear factor of activated T cells ( NFAT ) .</sentence>
+
+<question str="What does nk cell activate?">
+<label>correct</label>
+<answer>porcine EC in</answer>
+<sentence id="1900:2">We have previously demonstrated that human NK cells activate porcine EC in vitro , which results in adhesion molecule expression and cytokine secretion .</sentence>
+
+<question str="What does cd28 bind?">
+<label>correct</label>
+<answer>ligands</answer>
+<sentence id="0907:1">The T cell surface molecule CD28 binds to ligands on accessory cells and APCs , playing an important costimulatory role in the response of T cells to Ags .</sentence>
+
+<question str="What does glucocorticoid bind?">
+<label>correct</label>
+<answer>the GR</answer>
+<sentence id="0565:2">Cortisol and various synthetic glucocorticoids bind to the GR with one-site kinetics .</sentence>
+
+<question str="What does il-2 bind?">
+<label>correct</label>
+<answer>receptors</answer>
+<sentence id="1393:1">Both IL-2 and IL-4 bind to receptors containing the common gamma chain and JAK3 .</sentence>
+
+<question str="What does interleukin-2 bind?">
+<label>correct</label>
+<answer>receptors</answer>
+<sentence id="1393:1">Both IL-2 and IL-4 bind to receptors containing the common gamma chain and JAK3 .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct</label>
+<answer>B-cell activation</answer>
+<sentence id="0418:1">Cyclosporin A and FK506 inhibit T- and B-cell activation and other processes essential to an effective immune response .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct</label>
+<answer>NFAT activation</answer>
+<sentence id="1147:3">With these clones , we demonstrated that NFAT activation induced by phorbol 12-myristate 13-acetate and ionomycin was inhibited by both cyclosporin A ( CsA ) ( IC50 = 8 nM ) and FK506 ( IC50 = 160 pM ) , presumably by inhibition of calcineurin activity .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct</label>
+<answer>T</answer>
+<sentence id="0418:1">Cyclosporin A and FK506 inhibit T- and B-cell activation and other processes essential to an effective immune response .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct</label>
+<answer>The activation of calcineurin of NF-ATc</answer>
+<sentence id="0850:4">The activation of calcineurin and the nuclear import of NF-ATc can both be blocked by cyclosporin A or FK506 in complex with their respective immunophilins .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct</label>
+<answer>The activation the nuclear import of NF-ATc</answer>
+<sentence id="0850:4">The activation of calcineurin and the nuclear import of NF-ATc can both be blocked by cyclosporin A or FK506 in complex with their respective immunophilins .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct</label>
+<answer>other processes essential</answer>
+<sentence id="0418:1">Cyclosporin A and FK506 inhibit T- and B-cell activation and other processes essential to an effective immune response .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct</label>
+<answer>the PMA\/ionomycin-induced activation</answer>
+<sentence id="0629:7">Furthermore , we confirmed the previous report that FK506 suppressed the PMA\/ionomycin-induced activation through authentic kappa B site of immunoglobulin ( Ig ) gene , to which NF-kappa B binding was also decreased by FK506 , indicating that both IL-8 kappa B-like site and Ig kappa B site are FK506-sensitive in spite of the difference of binding factors .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct</label>
+<answer>the activating function of p95vav</answer>
+<sentence id="0719:10">Furthermore , the activating function of p95vav is blocked by FK506 , suggesting that its activity also depends on calcineurin .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct</label>
+<answer>the appearance of DNA binding activity of factors</answer>
+<sentence id="0323:6">However , CsA and FK506 inhibit the appearance of DNA binding activity of factors that bind to the NF-AT and AP-1 sites in the IL-2 enhancer .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct: partial</label>
+<answer>the effect of SML cytosol of FKBP51</answer>
+<sentence id="0000:6">A role for changes in immunophilins , causing glucocorticoid resistance in neotropical primates , is supported by the following : the changes in FKBP51 and FKBP52 were observed in cells from other neotropical primates with glucocorticoid resistance ; the elevated level of FKBP51 was reflected in an abundance of FKBP51 in heat shock protein 90 complexes in SML ; when cytosols of SML and L929 cells were mixed , the decrease in GR binding was associated with incorporation of FKBP51 into GR heterocomplexes ; the effect of SML cytosol on GR binding was reproduced with cytosol from COS cells expressing squirrel monkey FKBP51 ; and both the effect of SML cytosol on GR binding and the incorporation of FKBP51 into GR heterocomplexes were blocked by FK506 .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct</label>
+<answer>the production of IL-2</answer>
+<sentence id="0323:3">Cyclosporin A ( CsA ) and FK506 inhibit the production of IL-2 in T lymphocytes at the level of gene transcription .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct</label>
+<answer>the production of several cytokines</answer>
+<sentence id="0629:1">FK506 , an immunosuppressant , inhibits the production of several cytokines in T lymphocytes .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct</label>
+<answer>the transcription IL-8</answer>
+<sentence id="0629:2">We observed that FK506 suppressed the transcription of a chemotactic cytokine , interleukin-8 ( IL-8 ) in a human T cell line , Jurkat cells , activated by phorbol 12-myristate 13-acetate ( PMA ) and calcium ( Ca2+ ) ionophore ( ionomycin ) .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct</label>
+<answer>the transcription Jurkat cell activate</answer>
+<sentence id="0629:2">We observed that FK506 suppressed the transcription of a chemotactic cytokine , interleukin-8 ( IL-8 ) in a human T cell line , Jurkat cells , activated by phorbol 12-myristate 13-acetate ( PMA ) and calcium ( Ca2+ ) ionophore ( ionomycin ) .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct</label>
+<answer>the transcription interleukin-8</answer>
+<sentence id="0629:2">We observed that FK506 suppressed the transcription of a chemotactic cytokine , interleukin-8 ( IL-8 ) in a human T cell line , Jurkat cells , activated by phorbol 12-myristate 13-acetate ( PMA ) and calcium ( Ca2+ ) ionophore ( ionomycin ) .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct</label>
+<answer>the transcription of a chemotactic cytokine</answer>
+<sentence id="0629:2">We observed that FK506 suppressed the transcription of a chemotactic cytokine , interleukin-8 ( IL-8 ) in a human T cell line , Jurkat cells , activated by phorbol 12-myristate 13-acetate ( PMA ) and calcium ( Ca2+ ) ionophore ( ionomycin ) .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct</label>
+<answer>the transcriptions</answer>
+<sentence id="0629:4">FK506 suppressed the transcriptions through the AP-1 or kappa B-like sites induced by PMA plus Ca(2+)-mobilizing agents , but not those induced by Ca(2+)-independent stimuli .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct</label>
+<answer>transcription</answer>
+<sentence id="0414:3">Using constructs in which mRNA production controlled by a specific transcription factor could be readily measured we found that both cyclosporin A and FK506 completely inhibited transcription activated by NF-AT , NFIL2 A , NFIL2 B and partially inhibited transcription activated by NF kappa B .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct</label>
+<answer>transcriptional activation</answer>
+<sentence id="0414:4">Cyclosporin A and FK506 inhibited only transcriptional activation that was dependent on Ca2+ mobilization .</sentence>
+
+<question str="What does fk506 block?">
+<label>correct</label>
+<answer>translocation of the cytoplasmic component</answer>
+<sentence id="0418:7">FK506 and cyclosporin A block translocation of the cytoplasmic component without affecting synthesis of the nuclear subunit .</sentence>
+
+<question str="What does t cell contain?">
+<label>correct</label>
+<answer>NFAT1</answer>
+<sentence id="1977:6">Activated primed CD4 T cells contain more NFAT1 and support greater NFAT-directed transcription than unprimed CD4 T cells , while activator protein 1 binding and activator protein 1-mediated transcription by both cell types is similar .</sentence>
+
+<question str="What does il-2 control?">
+<label>correct</label>
+<answer>IL-2 receptor alpha gene transcription</answer>
+<sentence id="0783:2">We have shown that interleukin-1 ( IL-1 ) and IL-2 control IL-2 receptor alpha ( IL-2R alpha ) gene transcription in CD4-CD8- murine T lymphocyte precursors .</sentence>
+
+<question str="What does il-2 control?">
+<label>correct</label>
+<answer>IL-2R alpha gene transcription</answer>
+<sentence id="0783:2">We have shown that interleukin-1 ( IL-1 ) and IL-2 control IL-2 receptor alpha ( IL-2R alpha ) gene transcription in CD4-CD8- murine T lymphocyte precursors .</sentence>
+
+<question str="What does il-2 control?">
+<label>wrong: merge role</label>
+<answer>Transcriptional control of the IL-5 gene IL-5 synthesis</answer>
+<sentence id="0155:0">Transcriptional control of the IL-5 gene by human helper T cells : IL-5 synthesis is regulated independently from IL-2 or IL-4 synthesis .</sentence>
+
+<question str="What does il-2 control?">
+<label>correct</label>
+<answer>the cellular distribution of Aiolos</answer>
+<sentence id="0195:3">Indirect immunofluorescence shows that IL-2 controls the cellular distribution of Aiolos and induces its tyrosine phosphorylation , required for dissociation from Ras .</sentence>
+
+<question str="What does il-2 control?">
+<label>correct</label>
+<answer>transcription</answer>
+<sentence id="0783:1">Interleukin-1 and interleukin-2 control transcription via distinct cis-acting elements .</sentence>
+
+<question str="What does il-2 control?">
+<label>correct</label>
+<answer>transcription of gene different</answer>
+<sentence id="0650:2">The exact mechanism by which IL-2 regulates transcription of different genes is presently unknown .</sentence>
+
+<question str="What does nf-kappa b control?">
+<label>correct</label>
+<answer>I kappa B alpha\/MAD -3 gene transcription</answer>
+<sentence id="0652:4">The demonstration that NF-kappa B can regulate I kappa B alpha\/MAD-3 gene transcription in other cell types suggested that the rapid increase in steady-state I kappa B alpha\/MAD-3 mRNA levels we observed within 30 min of monocyte adherence would result from NF-kappa B-dependent transcriptional stimulation of the I kappa B alpha\/MAD-3 gene .</sentence>
+
+<question str="What does nf-kappa b control?">
+<label>correct: partial</label>
+<answer>each other</answer>
+<sentence id="1062:5">We propose a model in which NF-kappa B and I kappa B-alpha mutually regulate each other in a cycle : saturating amounts of the inhibitory I kappa B-alpha protein are destroyed upon stimulation , allowing rapid activation of NF-kappa B .</sentence>
+
+<question str="What does nf-kappa b control?">
+<label>correct</label>
+<answer>expression of inhibitor kappa i b alpha</answer>
+<sentence id="0941:0">NF-kappa B controls expression of inhibitor I kappa B alpha : evidence for an inducible autoregulatory pathway .</sentence>
+
+<question str="What does nf-kappa b control?">
+<label>correct</label>
+<answer>the NF-kappa B1 gene</answer>
+<sentence id="1439:3">Previously , we and others have demonstrated that NF-kappa B regulates the NF-kappa B1 gene .</sentence>
+
+<question str="What does nf-kappa b control?">
+<label>wrong: negation/syntax error</label>
+<answer>the activation of lymphocyte T</answer>
+<sentence id="1603:1">The transcription factor NF-kappa B controls the induction of numerous cytokine promoters during the activation of T lymphocytes .</sentence>
+
+<question str="What does nf-kappa b control?">
+<label>correct</label>
+<answer>the expression of kappa i b alpha</answer>
+<sentence id="0941:6">Together , these results show that NF-kappa B controls the expression of I kappa B alpha by means of an inducible autoregulatory pathway .</sentence>
+
+<question str="What does nf-kappa b control?">
+<label>correct</label>
+<answer>the induction of numerous cytokine promoters</answer>
+<sentence id="1603:1">The transcription factor NF-kappa B controls the induction of numerous cytokine promoters during the activation of T lymphocytes .</sentence>
+
+<question str="What does rpos control?">
+<label>correct: partial</label>
+<answer>genes</answer>
+<sentence id="0253:8">These data suggest that L. pneumophila possesses a growth phase-dependent resistance to stress that is independent of RpoS control and that RpoS likely regulates genes that enable it to survive in the environment within protozoa .</sentence>
+
+<question str="What does il-10 demonstrate?">
+<label>wrong: negation/syntax error</label>
+<answer>any effect</answer>
+<sentence id="1244:12">Furthermore , neither IL-10 nor IL-4 showed any effect on I-kappa B mRNA expression as determined by Northern experiments .</sentence>
+
+<question str="What does il-10 demonstrate?">
+<label>wrong: negation/syntax error</label>
+<answer>no effect</answer>
+<sentence id="1244:8">Binding activity of NF-IL6 was also strongly inhibited by IL-4 whereas IL-10 showed no effect .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>wrong: negation/syntax error</label>
+<answer>Ca2</answer>
+<sentence id="0923:4">Normal T lymphocytes whose surface expression of CD3 was depleted showed impaired UV-induced tyrosine phosphorylation and Ca2+ signals .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>correct</label>
+<answer>a greater proliferation rate</answer>
+<sentence id="1861:4">RESULTS : Cord lymphocytes revealed a greater proliferation rate with PHA and alphaCD3 than adult lymphocytes ( p = 0.0081 and 0.0023 , respectively ) .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>correct</label>
+<answer>a significant diminished proliferation capacity</answer>
+<sentence id="0992:4">Phytohemagglutinin stimulated lymphocytes derived from DS subjects showed a statistically significant diminished proliferation capacity in comparison with lymphocytes derived from NCL and healthy individuals .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>correct</label>
+<answer>a significant reduction</answer>
+<sentence id="1277:2">In contrast , activated T lymphocytes from older individuals show a significant reduction in the induction of NF kappa B in response to the same stimuli .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>correct: partial</label>
+<answer>an early hyperpolarization</answer>
+<sentence id="0421:2">Human T and B lymphocytes demonstrate an early and transient hyperpolarization after ligand binding .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>correct</label>
+<answer>an equivalent increase</answer>
+<sentence id="1861:6">Adult lymphocytes showed an equivalent increase in mRNA expression of c-fos and c-jun ( 140+\/-25 and 155+\/-31 % ) at 30 min post-PHA stimulation , while cord lymphocyte maximum c-fos and c-jun expression ( 82+\/-6 and 142+\/-12 % ) occurred at 15 min post-PHA stimulation ( c-fos , p = 0.0354 ; c-jun , p = 0.0112 ) .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>correct: partial</label>
+<answer>an expression &lt; fmol\/mg</answer>
+<sentence id="0906:4">The ZR-75-1 cell line showed an expression of 642 fmol\/mg whereas lymphocytes of pregnant women showed an expression &lt; or = 4 fmol\/mg .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>correct: partial</label>
+<answer>an expression = fmol\/mg</answer>
+<sentence id="0906:4">The ZR-75-1 cell line showed an expression of 642 fmol\/mg whereas lymphocytes of pregnant women showed an expression &lt; or = 4 fmol\/mg .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>correct</label>
+<answer>an transient hyperpolarization</answer>
+<sentence id="0421:2">Human T and B lymphocytes demonstrate an early and transient hyperpolarization after ligand binding .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>correct: partial</label>
+<answer>equivalent levels</answer>
+<sentence id="0906:5">Lymphocytes of non-pregnant women , women with threatened pre-term delivery , and men showed equivalent levels : 3 +\/- 1 , 3 +\/- 2 and 5 +\/- 4 fmol\/mg respectively .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>correct: partial</label>
+<answer>impaired UV-induced tyrosine phosphorylation</answer>
+<sentence id="0923:4">Normal T lymphocytes whose surface expression of CD3 was depleted showed impaired UV-induced tyrosine phosphorylation and Ca2+ signals .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>correct: partial</label>
+<answer>impaired activation nf-kappab of the transcription factor</answer>
+<sentence id="0222:1">T lymphocytes from patients with renal cell carcinoma ( RCC ) show reduced immune function and impaired activation of the transcription factor , NF-kappaB .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>correct: partial</label>
+<answer>kappa i b alpha</answer>
+<sentence id="0875:5">In addition to the inducible phosphorylation after stimulation , B lymphocytes containing constitutive nuclear NF-kappa B revealed constitutively phosphorylated p65 and I kappa B alpha .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>correct: partial</label>
+<answer>little basal activity low nuclear expression</answer>
+<sentence id="0506:3">Cloned , normal T lymphocytes show very little , if any , basal activity of the HIV enhancer and low nuclear expression of NF-kappa B , a potent transcriptional activator of the HIV enhancer .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>wrong: negation/syntax error</label>
+<answer>little basal activity of the HIV enhancer a potent transcriptional activator of the HIV enhancer</answer>
+<sentence id="0506:3">Cloned , normal T lymphocytes show very little , if any , basal activity of the HIV enhancer and low nuclear expression of NF-kappa B , a potent transcriptional activator of the HIV enhancer .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>correct: partial</label>
+<answer>little basal activity of the HIV enhancer of nf-kappa b</answer>
+<sentence id="0506:3">Cloned , normal T lymphocytes show very little , if any , basal activity of the HIV enhancer and low nuclear expression of NF-kappa B , a potent transcriptional activator of the HIV enhancer .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>correct</label>
+<answer>phosphorylated p65</answer>
+<sentence id="0875:5">In addition to the inducible phosphorylation after stimulation , B lymphocytes containing constitutive nuclear NF-kappa B revealed constitutively phosphorylated p65 and I kappa B alpha .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>correct</label>
+<answer>reduced immune function</answer>
+<sentence id="0222:1">T lymphocytes from patients with renal cell carcinoma ( RCC ) show reduced immune function and impaired activation of the transcription factor , NF-kappaB .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>correct: partial</label>
+<answer>signals</answer>
+<sentence id="0923:4">Normal T lymphocytes whose surface expression of CD3 was depleted showed impaired UV-induced tyrosine phosphorylation and Ca2+ signals .</sentence>
+
+<question str="What does lymphocyte demonstrate?">
+<label>correct</label>
+<answer>similar enhancement of Ig-secreting cells</answer>
+<sentence id="0445:2">Lymphocytes from patients who have received anti-estrogen therapy show similar enhancement of Ig-secreting cells after PWM stimulation .</sentence>
+
+<question str="What does piec clone demonstrate?">
+<label>correct</label>
+<answer>99 % suppression SLA-DQ antigen induction</answer>
+<sentence id="1778:10">PIEC clones stably transfected with one of these constructs showed up to 99 % suppression of SLA-DR and SLA-DQ antigen induction and marked suppression of SLA-DRA mRNA induction .</sentence>
+
+<question str="What does piec clone demonstrate?">
+<label>correct</label>
+<answer>99 % suppression marked suppression of SLA-DRA mRNA induction</answer>
+<sentence id="1778:10">PIEC clones stably transfected with one of these constructs showed up to 99 % suppression of SLA-DR and SLA-DQ antigen induction and marked suppression of SLA-DRA mRNA induction .</sentence>
+
+<question str="What does piec clone demonstrate?">
+<label>correct</label>
+<answer>99 % suppression of SLA-DR</answer>
+<sentence id="1778:10">PIEC clones stably transfected with one of these constructs showed up to 99 % suppression of SLA-DR and SLA-DQ antigen induction and marked suppression of SLA-DRA mRNA induction .</sentence>
+
+<question str="What does lymphoid cell display?">
+<label>correct: partial</label>
+<answer>resistance</answer>
+<sentence id="1179:8">In vitro , chronically HIV-infected cells of the lymphoid CEM line displayed resistance to glucocorticoid-induced apoptosis .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>correct</label>
+<answer>activation</answer>
+<sentence id="1139:0">IL-13 induces phosphorylation and activation of JAK2 Janus kinase in human colon carcinoma cell lines : similarities between IL-4 and IL-13 signaling .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>correct: partial</label>
+<answer>distinct STAT6-DNA binding complexes JAK3</answer>
+<sentence id="1765:8">Furthermore , we demonstrate that IL-13 , like IL-4 , induces distinct STAT6-DNA binding complexes and tyrosine phosphorylation of STAT6 and Janus kinase 3 ( JAK3 ) in NK and T cells .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>correct: partial</label>
+<answer>distinct STAT6-DNA binding complexes Janus kinase 3</answer>
+<sentence id="1765:8">Furthermore , we demonstrate that IL-13 , like IL-4 , induces distinct STAT6-DNA binding complexes and tyrosine phosphorylation of STAT6 and Janus kinase 3 ( JAK3 ) in NK and T cells .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>wrong: negation/syntax error</label>
+<answer>distinct STAT6-DNA binding complexes of STAT6</answer>
+<sentence id="1765:8">Furthermore , we demonstrate that IL-13 , like IL-4 , induces distinct STAT6-DNA binding complexes and tyrosine phosphorylation of STAT6 and Janus kinase 3 ( JAK3 ) in NK and T cells .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>wrong: negation/syntax error</label>
+<answer>dose</answer>
+<sentence id="1750:5">IL-4 and IL-13 induced dose- and time-dependent increases in IL-1RI and IL-1RII mRNA levels .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>correct</label>
+<answer>expression of a distinct subset of genes</answer>
+<sentence id="0033:1">The Th2-type cytokines , interleukin-4 ( IL-4 ) and interleukin-13 ( IL-13 ) , induce expression of a distinct subset of genes in human monocytes , including FcepsilonRIIb ( CD23 ) , 15-lipoxygenase , IL-1 receptor antagonist ( IL-1ra ) , and type I and type II IL-1 receptors ( IL-1R ) .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>correct</label>
+<answer>expression of a distinct subset of genes</answer>
+<sentence id="1750:1">The Th2-type cytokines IL-4 and IL-13 induce expression of a distinct subset of genes in human monocytes .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>correct: partial</label>
+<answer>low levels of IFN-gamma secretion</answer>
+<sentence id="1765:3">We demonstrate that , in primary NK cells , IL-13 , but not IL-4 , may induce low levels of IFN-gamma secretion .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>correct</label>
+<answer>phosphorylation STAT6</answer>
+<sentence id="1139:9">Both IL-13 and IL-4 induced phosphorylation of IL-4 STAT ( STAT6 ) but not STAT1 , STAT3 , or STAT5 .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>correct</label>
+<answer>phosphorylation of IL-4 STAT</answer>
+<sentence id="1139:9">Both IL-13 and IL-4 induced phosphorylation of IL-4 STAT ( STAT6 ) but not STAT1 , STAT3 , or STAT5 .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>correct</label>
+<answer>phosphorylation of JAK2 Janus kinase</answer>
+<sentence id="1139:0">IL-13 induces phosphorylation and activation of JAK2 Janus kinase in human colon carcinoma cell lines : similarities between IL-4 and IL-13 signaling .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>correct</label>
+<answer>rapid phosphorylation of four members of the known Janus family JAKs</answer>
+<sentence id="1139:3">IL-13 caused rapid phosphorylation of the three out of four members of the known Janus family of kinases ( JAKs ) .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>correct: partial</label>
+<answer>rapid phosphorylation of four members of the known Janus family of kinases</answer>
+<sentence id="1139:3">IL-13 caused rapid phosphorylation of the three out of four members of the known Janus family of kinases ( JAKs ) .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>correct</label>
+<answer>the 12-lipoxygenase activity of murine macrophages</answer>
+<sentence id="1838:9">The data presented here indicate that ( 1 ) the 12-lipoxygenase activity of murine macrophages is upregulated in vitro and in vivo by IL-4 and\/or IL-13 , ( 2 ) this upregulation requires expression of the transcription factor STAT6 , and ( 3 ) the constitutive expression of the enzyme appears to be STAT6 independent .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>correct</label>
+<answer>the expression of genomic HIV mRNA</answer>
+<sentence id="1383:2">IL-4 and IL-13 up-regulated the expression of both genomic and spliced HIV mRNA in monocytes cultured on Teflon , as determined by Northern analysis and p24 Ag assay .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>correct</label>
+<answer>the expression of spliced HIV mRNA</answer>
+<sentence id="1383:2">IL-4 and IL-13 up-regulated the expression of both genomic and spliced HIV mRNA in monocytes cultured on Teflon , as determined by Northern analysis and p24 Ag assay .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>correct</label>
+<answer>the same complexes</answer>
+<sentence id="0776:4">IL-13 Induced the same complexes as IL-4 , a finding explained by our studies implicating IL-4R as a shared component of the receptors .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>correct</label>
+<answer>time-dependent increases</answer>
+<sentence id="1750:5">IL-4 and IL-13 induced dose- and time-dependent increases in IL-1RI and IL-1RII mRNA levels .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>correct</label>
+<answer>tyrosine phosphorylation</answer>
+<sentence id="1765:8">Furthermore , we demonstrate that IL-13 , like IL-4 , induces distinct STAT6-DNA binding complexes and tyrosine phosphorylation of STAT6 and Janus kinase 3 ( JAK3 ) in NK and T cells .</sentence>
+
+<question str="What does il-13 enhance?">
+<label>correct</label>
+<answer>upregulation of the murine macrophage 12\/15-lipoxygenase activity</answer>
+<sentence id="1838:0">Interleukin-4 and -13 induce upregulation of the murine macrophage 12\/15-lipoxygenase activity : evidence for the involvement of transcription factor STAT6 .</sentence>
+
+<question str="What does th1 cell express?">
+<label>wrong: negation/syntax error</label>
+<answer>the GATA-3 protein</answer>
+<sentence id="1609:6">During the differentiation of naive CD4(+) T cells isolated from T cell receptor transgenic mice , GATA-3 gene expression was up-regulated in developing Th2 cells , but was down-regulated in Th1 cells , and antigen- or cAMP-activated Th2 cells ( but not Th1 cells ) expressed the GATA-3 protein .</sentence>
+
+<question str="What does stat1 form?">
+<label>correct</label>
+<answer>heterocomplexes</answer>
+<sentence id="1159:6">STAT1 and STAT2 or STAT1 and STAT3 translated in reticulocyte lysate spontaneously form heterocomplexes when the translation lysates are mixed at 0 degrees C .</sentence>
+
+<question str="What does interleukin-2 include?">
+<label>wrong: negation/syntax error</label>
+<answer>rapamycin-resistant components</answer>
+<sentence id="0198:5">Our present results show that IL-2- and PI 3-kinase-induced pathways for the regulation of E2F transcriptional activity include both rapamycin-resistant and rapamycin-sensitive components .</sentence>
+
+<question str="What does interleukin-2 include?">
+<label>wrong: negation/syntax error</label>
+<answer>rapamycin-sensitive components</answer>
+<sentence id="0198:5">Our present results show that IL-2- and PI 3-kinase-induced pathways for the regulation of E2F transcriptional activity include both rapamycin-resistant and rapamycin-sensitive components .</sentence>
+
+<question str="What does tnf-alpha increase?">
+<label>correct: partial</label>
+<answer>AP-1 kappa B dna binding</answer>
+<sentence id="0840:3">TNF-alpha , IL-1 beta and phorbol myristate acetate ( PMA ) treatment increased AP-1 and NF kappa B DNA binding by up to 200 % but decreased CREB binding ( 38 % ) over a 60-min time course .</sentence>
+
+<question str="What does tnf-alpha increase?">
+<label>correct</label>
+<answer>NF kappa B dna binding</answer>
+<sentence id="0840:3">TNF-alpha , IL-1 beta and phorbol myristate acetate ( PMA ) treatment increased AP-1 and NF kappa B DNA binding by up to 200 % but decreased CREB binding ( 38 % ) over a 60-min time course .</sentence>
+
+<question str="What does camp induce?">
+<label>correct</label>
+<answer>PMA-dependent IL-5 production</answer>
+<sentence id="0936:2">EL-4 cells also produce low levels of IL-5 when stimulated by PMA alone ; however , cAMP greatly augments PMA-dependent IL-5 production .</sentence>
+
+<question str="What does camp induce?">
+<label>correct</label>
+<answer>a down-regulation of the levels of this proto-oncogene</answer>
+<sentence id="1550:7">Nevertheless , dibutyryl cAMP induced a down-regulation of the levels of this proto-oncogene .</sentence>
+
+<question str="What does g-csf induce?">
+<label>correct</label>
+<answer>activation</answer>
+<sentence id="1409:4">In murine Ba\/F3 cells transfected with the human G-CSFR and NFS-60 cells constitutively expressing the murine G-CSFR , G-CSF induced tyrosine phosphorylation and activation of Jak1 , Jak2 , and Tyk2 .</sentence>
+
+<question str="What does g-csf induce?">
+<label>correct</label>
+<answer>prominent tyrosine phosphorylation of a protein of a relative molecular mass of 80 kDa</answer>
+<sentence id="0627:4">Antiphosphotyrosine immunoblots of whole cell lysates prepared from neutrophils show that the G-CSF rapidly induces prominent tyrosine phosphorylation of a protein of a relative molecular mass of 80 kDa .</sentence>
+
+<question str="What does g-csf induce?">
+<label>correct</label>
+<answer>tyrosine phosphorylation Jak2</answer>
+<sentence id="1409:4">In murine Ba\/F3 cells transfected with the human G-CSFR and NFS-60 cells constitutively expressing the murine G-CSFR , G-CSF induced tyrosine phosphorylation and activation of Jak1 , Jak2 , and Tyk2 .</sentence>
+
+<question str="What does g-csf induce?">
+<label>correct</label>
+<answer>tyrosine phosphorylation Tyk2</answer>
+<sentence id="1409:4">In murine Ba\/F3 cells transfected with the human G-CSFR and NFS-60 cells constitutively expressing the murine G-CSFR , G-CSF induced tyrosine phosphorylation and activation of Jak1 , Jak2 , and Tyk2 .</sentence>
+
+<question str="What does g-csf induce?">
+<label>correct</label>
+<answer>tyrosine phosphorylation of Jak1</answer>
+<sentence id="1409:4">In murine Ba\/F3 cells transfected with the human G-CSFR and NFS-60 cells constitutively expressing the murine G-CSFR , G-CSF induced tyrosine phosphorylation and activation of Jak1 , Jak2 , and Tyk2 .</sentence>
+
+<question str="What does histamine induce?">
+<label>correct</label>
+<answer>mRNA expression of an immediate early gene c-fos</answer>
+<sentence id="1353:6">Histamine induced mRNA expression of an immediate early gene c-fos .</sentence>
+
+<question str="What does hiv-1 induce?">
+<label>correct: partial</label>
+<answer>latent infection</answer>
+<sentence id="0488:1">Human immunodeficiency virus ( HIV ) often causes latent infection .</sentence>
+
+<question str="What does human cell line induce?">
+<label>wrong: negation/syntax error</label>
+<answer>NF kappaB activation</answer>
+<sentence id="1494:6">In Jurkat cells , a human T-cell lymphoma cell line , tumor necrosis factor-alpha ( TNF-alpha ) induces NF kappaB activation that is inhibited by PDTC .</sentence>
+
+<question str="What does human cell line induce?">
+<label>wrong: negation/syntax error</label>
+<answer>the accumulation of class II-CLIP complexes</answer>
+<sentence id="1638:5">Expression of HLA-DO in a class II+ and DM+ , DO- human T cell line caused the accumulation of class II-CLIP complexes , indicating that HLA-DO blocked DM function in vivo and suggesting that HLA-DO is an important modulator of class II-restricted antigen processing .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>CD11b</answer>
+<sentence id="1383:9">IL-4 enhanced CD11b , but inhibited CD26 expression and delayed CD13 loss .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>Cepsilon germline transcripts</answer>
+<sentence id="1529:3">IL-4 induces Cepsilon germline transcripts and IgE isotype switching in B cells from patients with gammac chain deficiency .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>Germ line C transcripts</answer>
+<sentence id="0723:2">Germ line C transcripts can be induced by IL-4 in the human B cell line , BL-2 .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>IgE isotype switching</answer>
+<sentence id="1529:3">IL-4 induces Cepsilon germline transcripts and IgE isotype switching in B cells from patients with gammac chain deficiency .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>STAT-6</answer>
+<sentence id="0123:7">Electrophoretic mobility shift assays showed that p50\/p65\/c-Rel and STAT-6 are effectively induced by CD40L and IL-4 , respectively , and bind to specific DNA motifs within the ECS .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>Stat6 DNA binding activity</answer>
+<sentence id="1434:6">IL-4 also induced Stat6 DNA binding activity from lysates of 1D4 but not E1C3 cells utilizing a radiolabeled immunoglobulin heavy chain germline epsilon promotor sequence ( Iepsilon ) in an electrophoretic mobility shift assay .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>TGF-beta1 mRNA</answer>
+<sentence id="1763:8">IL-3 , IL-4 , and IL-5 independently up-regulated TGF-beta1 mRNA and product expression by eosinophils in all donors .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>a binding activity of BL-2 cells</answer>
+<sentence id="0723:3">Utilizing a IFN-gamma activation site-like DNA sequence element located upstream of the I epsilon exon , we demonstrated by gel mobility shift assays that IL-4 induced a binding activity in the cytosol and nucleus of BL-2 cells .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>a multimerized response element</answer>
+<sentence id="1919:9">We show that , whereas a multimerized response element from the germline IgE promoter was highly induced by IL-4 in Stat6-expressing Jurkat cells , the intact human IL-4 promoter was repressed under similar conditions .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>a weak up-regulation of VDR expression</answer>
+<sentence id="1290:2">Treatment of B lymphocytes with the cytokine IL-4 ( IL-4 ) , in the absence of prior activation , induces a weak up-regulation of VDR expression but fails to generate vitamin D-responsive element ( VDRE ) -reactive nuclear protein complexes or to initiate the genomic transcription of 25-hydroxyvitamin D3 24-hydroxylase .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>activation PI3-kinase</answer>
+<sentence id="1452:3">Both IL-4 and anti-CD40 mAb induced activation of phosphatidylinositol 3-kinase ( PI3-kinase ) , translocation of a zeta isoform of protein kinase C , and nuclear expression of NF-kappa B .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>activation of phosphatidylinositol 3-kinase</answer>
+<sentence id="1452:3">Both IL-4 and anti-CD40 mAb induced activation of phosphatidylinositol 3-kinase ( PI3-kinase ) , translocation of a zeta isoform of protein kinase C , and nuclear expression of NF-kappa B .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>different C epsilon GAS DNA-protein binding complexes</answer>
+<sentence id="1801:5">In contrast , IL-4 induces different C epsilon GAS DNA-protein binding complexes in both T and NK cells .</sentence>
+
+<question str="What does il-4 induce?">
+<label>wrong: negation/syntax error</label>
+<answer>dose</answer>
+<sentence id="1750:5">IL-4 and IL-13 induced dose- and time-dependent increases in IL-1RI and IL-1RII mRNA levels .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>expression of a distinct subset of genes</answer>
+<sentence id="1750:1">The Th2-type cytokines IL-4 and IL-13 induce expression of a distinct subset of genes in human monocytes .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>expression of gene IL-4</answer>
+<sentence id="1919:5">The molecular mechanisms by which IL-4 induces expression of the IL-4 gene are not known , although the IL-4-activated transcription factor signal transducer and activator of transcription 6 ( Stat6 ) is required for this effect .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>mRNA degradation</answer>
+<sentence id="0779:9">Further examination reveals that , unlike IL-10 , IL-4 enhances mRNA degradation and does not suppress cytokine gene transcription .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>nuclear expression of nf-kappa b</answer>
+<sentence id="1452:3">Both IL-4 and anti-CD40 mAb induced activation of phosphatidylinositol 3-kinase ( PI3-kinase ) , translocation of a zeta isoform of protein kinase C , and nuclear expression of NF-kappa B .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>p50\/p65\/c-Rel</answer>
+<sentence id="0123:7">Electrophoretic mobility shift assays showed that p50\/p65\/c-Rel and STAT-6 are effectively induced by CD40L and IL-4 , respectively , and bind to specific DNA motifs within the ECS .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>phosphorylation STAT6</answer>
+<sentence id="1139:9">Both IL-13 and IL-4 induced phosphorylation of IL-4 STAT ( STAT6 ) but not STAT1 , STAT3 , or STAT5 .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>phosphorylation of IL-4 STAT</answer>
+<sentence id="1139:9">Both IL-13 and IL-4 induced phosphorylation of IL-4 STAT ( STAT6 ) but not STAT1 , STAT3 , or STAT5 .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>product expression</answer>
+<sentence id="1763:8">IL-3 , IL-4 , and IL-5 independently up-regulated TGF-beta1 mRNA and product expression by eosinophils in all donors .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>robust Janus 3 JAK3 kinase activity</answer>
+<sentence id="0723:6">Congruous with the involvement of a Stat protein , IL-4 induced robust Janus kinase 3 ( JAK3 ) activity in BL-2 cells .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>the 12-lipoxygenase activity of murine macrophages</answer>
+<sentence id="1838:9">The data presented here indicate that ( 1 ) the 12-lipoxygenase activity of murine macrophages is upregulated in vitro and in vivo by IL-4 and\/or IL-13 , ( 2 ) this upregulation requires expression of the transcription factor STAT6 , and ( 3 ) the constitutive expression of the enzyme appears to be STAT6 independent .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>the expression of genomic HIV mRNA</answer>
+<sentence id="1383:2">IL-4 and IL-13 up-regulated the expression of both genomic and spliced HIV mRNA in monocytes cultured on Teflon , as determined by Northern analysis and p24 Ag assay .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>the expression of spliced HIV mRNA</answer>
+<sentence id="1383:2">IL-4 and IL-13 up-regulated the expression of both genomic and spliced HIV mRNA in monocytes cultured on Teflon , as determined by Northern analysis and p24 Ag assay .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>time-dependent increases</answer>
+<sentence id="1750:5">IL-4 and IL-13 induced dose- and time-dependent increases in IL-1RI and IL-1RII mRNA levels .</sentence>
+
+<question str="What does il-4 induce?">
+<label>correct</label>
+<answer>translocation of a zeta isoform of protein kinase c</answer>
+<sentence id="1452:3">Both IL-4 and anti-CD40 mAb induced activation of phosphatidylinositol 3-kinase ( PI3-kinase ) , translocation of a zeta isoform of protein kinase C , and nuclear expression of NF-kappa B .</sentence>
+
+<question str="What does nf-kappa b induce?">
+<label>correct</label>
+<answer>I kappa B-alpha mRNA</answer>
+<sentence id="1062:6">Subsequently , I kappa B-alpha mRNA and protein levels are quickly induced by the activated NF-kappa B .</sentence>
+
+<question str="What does nf-kappa b induce?">
+<label>correct</label>
+<answer>protein levels</answer>
+<sentence id="1062:6">Subsequently , I kappa B-alpha mRNA and protein levels are quickly induced by the activated NF-kappa B .</sentence>
+
+<question str="What does nf-kappa b induce?">
+<label>correct</label>
+<answer>the I kappa B-alpha mRNA</answer>
+<sentence id="1062:4">Transfection studies reveal that the I kappa B-alpha mRNA and the encoded protein are potently induced by NF-kappa B and by homodimers of p65 and of c-Rel .</sentence>
+
+<question str="What does nf-kappa b induce?">
+<label>correct</label>
+<answer>the encoded protein</answer>
+<sentence id="1062:4">Transfection studies reveal that the I kappa B-alpha mRNA and the encoded protein are potently induced by NF-kappa B and by homodimers of p65 and of c-Rel .</sentence>
+
+<question str="What does tal1 induce?">
+<label>correct</label>
+<answer>retinaldehyde dehydrogenase 2 expression</answer>
+<sentence id="1896:0">TAL1 and LIM-only proteins synergistically induce retinaldehyde dehydrogenase 2 expression in T-cell acute lymphoblastic leukemia by acting as cofactors for GATA3 .</sentence>
+
+<question str="What does anti-stat 1 inhibit?">
+<label>correct</label>
+<answer>the formation of the IFN-gamma-induced complex</answer>
+<sentence id="1828:3">The IL-4-induced complex reacted with anti-STAT ( signal transducers and activators of transcription ) 6 , resulting in a supershift whereas the formation of the IFN-gamma-induced complex was inhibited by anti-STAT 1 .</sentence>
+
+<question str="What does gm-csf inhibit?">
+<label>correct</label>
+<answer>the EPO signal</answer>
+<sentence id="0892:6">In contrast , the addition of GM-CSF to the M-TAT\/EPO cell culture decreased the amount of hemoglobin , even in the presence of EPO , indicating that the EPO signal for erythroid differentiation is suppressed by GM-CSF .</sentence>
+
+<question str="What does inos inhibit?">
+<label>wrong: negation/syntax error</label>
+<answer>NF kappaB</answer>
+<sentence id="1494:4">NO derived from nNOS in glia inhibits the transcription factor nuclear factor kappaB ( NF kappaB ) as NOS inhibitors enhance basal NF kappaB activation .</sentence>
+
+<question str="What does inos inhibit?">
+<label>correct: partial</label>
+<answer>cytokine-induced endothelial cell activation</answer>
+<sentence id="1798:3">We find that iNO produced by murine macrophage-like cells , RAW264.7 , can inhibit cytokine-induced endothelial cell activation in a separated and mixed endothelial-RAW264.7 coculture system .</sentence>
+
+<question str="What does inos inhibit?">
+<label>wrong: noun cluster</label>
+<answer>interleukin IL -1 alpha-stimulated VCAM-1 expression</answer>
+<sentence id="0661:3">In a concentration-dependent manner , NO inhibited interleukin ( IL ) -1 alpha-stimulated VCAM-1 expression by 35-55 % as determined by cell surface enzyme immunoassays and flow cytometry .</sentence>
+
+<question str="What does inos inhibit?">
+<label>correct: partial</label>
+<answer>the activation of b nuclear factor-kappa</answer>
+<sentence id="1798:7">Immunofluorescence studies using an Ab to the RelA ( p65 ) subunit of nuclear factor-kappa B revealed that iNO inhibited the activation of nuclear factor-kappa B .</sentence>
+
+<question str="What does inos inhibit?">
+<label>wrong: negation/syntax error</label>
+<answer>the transcription factor nuclear factor kappaB</answer>
+<sentence id="1494:4">NO derived from nNOS in glia inhibits the transcription factor nuclear factor kappaB ( NF kappaB ) as NOS inhibitors enhance basal NF kappaB activation .</sentence>
+
+<question str="What does pebp2betamyh11 inhibit?">
+<label>correct</label>
+<answer>neutrophil development</answer>
+<sentence id="1842:8">These results show that PEBP2betaMYH11 can impair neutrophil development and provide evidence that alterations of Pebp2 can contribute to the genesis of myelodysplasia .</sentence>
+
+<question str="What does pebp2betamyh11 inhibit?">
+<label>correct</label>
+<answer>neutrophilic differentiation</answer>
+<sentence id="1842:6">In addition , PEBP2betaMYH11 inhibited neutrophilic differentiation in colonies derived from hematopoietic progenitors .</sentence>
+
+<question str="What does ap-1 mediate?">
+<label>correct</label>
+<answer>LPS induction of collagenase transcription</answer>
+<sentence id="1152:8">These data indicate that , in contrast to most LPS effects , AP-1 , but not nuclear factor-kappaB , mediates LPS induction of collagenase transcription in macrophagelike cells .</sentence>
+
+<question str="What does ap-1 mediate?">
+<label>correct</label>
+<answer>The expression of gene QR</answer>
+<sentence id="1118:3">The expression of the QR gene is regulated by the transcription factor AP-1 .</sentence>
+
+<question str="What does ap-1 mediate?">
+<label>correct</label>
+<answer>Transcriptional induction of collagenase-1</answer>
+<sentence id="1481:0">Transcriptional induction of collagenase-1 in differentiated monocyte-like ( U937 ) cells is regulated by AP-1 and an upstream C\/EBP-beta site .</sentence>
+
+<question str="What does il-2 mediate?">
+<label>correct</label>
+<answer>IL-2 receptor alpha gene transcription</answer>
+<sentence id="0783:2">We have shown that interleukin-1 ( IL-1 ) and IL-2 control IL-2 receptor alpha ( IL-2R alpha ) gene transcription in CD4-CD8- murine T lymphocyte precursors .</sentence>
+
+<question str="What does il-2 mediate?">
+<label>correct</label>
+<answer>IL-2R alpha gene transcription</answer>
+<sentence id="0783:2">We have shown that interleukin-1 ( IL-1 ) and IL-2 control IL-2 receptor alpha ( IL-2R alpha ) gene transcription in CD4-CD8- murine T lymphocyte precursors .</sentence>
+
+<question str="What does il-2 mediate?">
+<label>correct</label>
+<answer>Transcriptional control of the IL-5 gene IL-5 synthesis</answer>
+<sentence id="0155:0">Transcriptional control of the IL-5 gene by human helper T cells : IL-5 synthesis is regulated independently from IL-2 or IL-4 synthesis .</sentence>
+
+<question str="What does il-2 mediate?">
+<label>correct</label>
+<answer>the cellular distribution of Aiolos</answer>
+<sentence id="0195:3">Indirect immunofluorescence shows that IL-2 controls the cellular distribution of Aiolos and induces its tyrosine phosphorylation , required for dissociation from Ras .</sentence>
+
+<question str="What does il-2 mediate?">
+<label>correct</label>
+<answer>transcription</answer>
+<sentence id="0783:1">Interleukin-1 and interleukin-2 control transcription via distinct cis-acting elements .</sentence>
+
+<question str="What does il-2 mediate?">
+<label>correct</label>
+<answer>transcription of gene different</answer>
+<sentence id="0650:2">The exact mechanism by which IL-2 regulates transcription of different genes is presently unknown .</sentence>
+
+<question str="What does il-13 phosphorylate?">
+<label>correct</label>
+<answer>IL-4R p140</answer>
+<sentence id="1139:6">In addition , IL-13 phosphorylated insulin response substrate-1 , IL-4R p140 , JAK1 , and Tyk2 , but not JAK3 kinase .</sentence>
+
+<question str="What does il-13 phosphorylate?">
+<label>correct</label>
+<answer>JAK1</answer>
+<sentence id="1139:6">In addition , IL-13 phosphorylated insulin response substrate-1 , IL-4R p140 , JAK1 , and Tyk2 , but not JAK3 kinase .</sentence>
+
+<question str="What does il-13 phosphorylate?">
+<label>correct</label>
+<answer>Tyk2</answer>
+<sentence id="1139:6">In addition , IL-13 phosphorylated insulin response substrate-1 , IL-4R p140 , JAK1 , and Tyk2 , but not JAK3 kinase .</sentence>
+
+<question str="What does il-13 phosphorylate?">
+<label>correct</label>
+<answer>insulin response substrate-1</answer>
+<sentence id="1139:6">In addition , IL-13 phosphorylated insulin response substrate-1 , IL-4R p140 , JAK1 , and Tyk2 , but not JAK3 kinase .</sentence>
+
+<question str="What does cytokine play?">
+<label>correct</label>
+<answer>a critical role</answer>
+<sentence id="1529:1">The cytokines interleukin ( IL ) -4 and IL-13 play a critical role in inducing Cepsilon germline transcripts and IgE isotype switching in human B cells .</sentence>
+
+<question str="What does cytokine play?">
+<label>correct</label>
+<answer>a crucial role</answer>
+<sentence id="1490:1">Interleukin-12 ( IL-12 ) , a heterodimeric cytokine produced by activated monocytes and dendritic cells , plays a crucial role in regulating interferon ( IFN ) -gamma production and in the generation of IFN-gamma-producing T helper 1 ( Th1 ) cells .</sentence>
+
+<question str="What does cytokine play?">
+<label>correct</label>
+<answer>a prominent role</answer>
+<sentence id="1884:2">This pro-inflammatory cytokine plays a prominent role in the development of Th1 cell-mediated immune responses .</sentence>
+
+<question str="What does il-2 prevent?">
+<label>correct</label>
+<answer>IL-2 deprivation apoptosis</answer>
+<sentence id="1582:3">We found that IL-2 , interferon-alpha ( IFN-alpha ) , and IFN-beta inhibited IL-2 deprivation apoptosis in Th0 , Th1 , and Th2 clones .</sentence>
+
+<question str="What does il-2 prevent?">
+<label>correct</label>
+<answer>the DEX-mediated IkappaBalpha induction</answer>
+<sentence id="1741:4">Interestingly , the DEX-mediated IkappaBalpha induction was completely inhibited by IL-2 , but not IL-4 , in Th1 cells , while the reverse profile was seen in Th2 cells .</sentence>
+
+<question str="What does il-2 prevent?">
+<label>wrong: negation/syntax error</label>
+<answer>the functional synergy</answer>
+<sentence id="0089:7">A specific inhibitor of p38 MAP kinase completely inhibits the serine phosphorylation of STAT1 and STAT3 induced by IL-12 and IL-2 and abrogates the functional synergy between IL-12 and IL-2 without affecting STAT tyrosine phosphorylation .</sentence>
+
+<question str="What does il-2 prevent?">
+<label>correct</label>
+<answer>this induction of cell death</answer>
+<sentence id="1741:1">We previously reported that dexamethasone ( DEX ) , a synthetic glucocorticoid , causes apoptosis in mature Th cell lines , and that this induction of cell death is prevented by specific cytokines , namely , by IL-2 in Th1 cells and by IL-4 in Th2 cells .</sentence>
+
+<question str="What does cytokine provide?">
+<label>correct</label>
+<answer>a pertinent model</answer>
+<sentence id="1459:3">Cytokines control growth , differentiation , death , and function of cells of lymphocytic , hemopoietic systems , and together with nerve cells provide a pertinent model to study intercellular communications and intercellular signal networks .</sentence>
+
+<question str="What does s49 .1 reduce?">
+<label>wrong: negation/syntax error</label>
+<answer>the expression level of the SRG3 protein</answer>
+<sentence id="1524:10">The expression of anti-sense RNA to SRG3 mRNA in a thymoma cell line , S49.1 , reduced the expression level of the SRG3 protein , and decreased the apoptotic cell death induced by glucocorticoids .</sentence>
+
+<question str="What does ap-1 regulate?">
+<label>correct</label>
+<answer>LPS induction of collagenase transcription</answer>
+<sentence id="1152:8">These data indicate that , in contrast to most LPS effects , AP-1 , but not nuclear factor-kappaB , mediates LPS induction of collagenase transcription in macrophagelike cells .</sentence>
+
+<question str="What does ap-1 regulate?">
+<label>correct</label>
+<answer>The expression of gene QR</answer>
+<sentence id="1118:3">The expression of the QR gene is regulated by the transcription factor AP-1 .</sentence>
+
+<question str="What does ap-1 regulate?">
+<label>correct</label>
+<answer>Transcriptional induction of collagenase-1</answer>
+<sentence id="1481:0">Transcriptional induction of collagenase-1 in differentiated monocyte-like ( U937 ) cells is regulated by AP-1 and an upstream C\/EBP-beta site .</sentence>
+
+<question str="What does glucocorticoid regulate?">
+<label>correct</label>
+<answer>IFN alpha production</answer>
+<sentence id="1219:2">As glucocorticoids regulate interferon-alpha ( IFN alpha ) production , we hypothesized that IFN alpha , a cytokine produced predominantly by monocytes in AIDS , should be increased in cortisol-resistant AIDS , attributing the lack of cortisol inhibition to IFN alpha production .</sentence>
+
+<question str="What does glucocorticoid regulate?">
+<label>correct</label>
+<answer>IL-10 secretion</answer>
+<sentence id="0259:11">We conclude that glucocorticoids differentially modulate TNFalpha and IL-10 secretion by human monocytes in a LPS dose-dependent fashion and that the sensitivity of these cells to glucocorticoids is altered by TNFalpha or IL-10 pretreatment ; TNFalpha blocks their effects , whereas IL-10 acts synergistically with glucocorticoids .</sentence>
+
+<question str="What does glucocorticoid regulate?">
+<label>correct</label>
+<answer>TNFalpha secretion</answer>
+<sentence id="0259:11">We conclude that glucocorticoids differentially modulate TNFalpha and IL-10 secretion by human monocytes in a LPS dose-dependent fashion and that the sensitivity of these cells to glucocorticoids is altered by TNFalpha or IL-10 pretreatment ; TNFalpha blocks their effects , whereas IL-10 acts synergistically with glucocorticoids .</sentence>
+
+<question str="What does glucocorticoid regulate?">
+<label>correct: partial</label>
+<answer>effects</answer>
+<sentence id="0069:4">Glucocorticoids are mediating their effects after binding to an intracellular receptor belonging to the steroid receptor superfamily : the glucocorticoid receptor ( GR ) .</sentence>
+
+<question str="What does glucocorticoid regulate?">
+<label>correct</label>
+<answer>interferon-alpha production</answer>
+<sentence id="1219:2">As glucocorticoids regulate interferon-alpha ( IFN alpha ) production , we hypothesized that IFN alpha , a cytokine produced predominantly by monocytes in AIDS , should be increased in cortisol-resistant AIDS , attributing the lack of cortisol inhibition to IFN alpha production .</sentence>
+
+<question str="What does glucocorticoid regulate?">
+<label>correct</label>
+<answer>the expression of CD11\/CD18 integrins</answer>
+<sentence id="1596:2">The aim of the present study was to investigate whether glucocorticoids also regulate the expression of L-selectin and CD11\/CD18 integrins on human neutrophil granulocytes .</sentence>
+
+<question str="What does glucocorticoid regulate?">
+<label>correct</label>
+<answer>the expression of L-selectin integrins</answer>
+<sentence id="1596:2">The aim of the present study was to investigate whether glucocorticoids also regulate the expression of L-selectin and CD11\/CD18 integrins on human neutrophil granulocytes .</sentence>
+
+<question str="What does ifn-gamma regulate?">
+<label>correct: partial</label>
+<answer>suppressive effects</answer>
+<sentence id="1750:10">However , suppression of IL-1R gene expression by IFN-gamma and IL-10 was associated with decreased tyrosine phosphorylation and nuclear translocation of the IL-4\/IL-13-inducible transcription factor , Stat6 , suggesting a potential mechanism by which IFN-gamma and IL-10 may mediate their suppressive effects .</sentence>
+
+<question str="What does ifn-gamma regulate?">
+<label>correct</label>
+<answer>the expression of several cytokines</answer>
+<sentence id="1180:1">Interferon-gamma ( IFN-gamma ) modulates the expression of several cytokines by human monocytes at the transcriptional level .</sentence>
+
+<question str="What does il-10 regulate?">
+<label>correct: partial</label>
+<answer>IFNalpha-induced gene expression</answer>
+<sentence id="0007:3">Because monocytes and macrophages are important mediators of Th1-type responses , such as delayed-type hypersensitivity , we sought to determine if IL-10 could directly mediate inhibition of IFNgamma- and IFNalpha-induced gene expression in these cells .</sentence>
+
+<question str="What does il-10 regulate?">
+<label>correct</label>
+<answer>inhibition of IFNgamma</answer>
+<sentence id="0007:3">Because monocytes and macrophages are important mediators of Th1-type responses , such as delayed-type hypersensitivity , we sought to determine if IL-10 could directly mediate inhibition of IFNgamma- and IFNalpha-induced gene expression in these cells .</sentence>
+
+<question str="What does il-10 regulate?">
+<label>correct</label>
+<answer>suppressive effects</answer>
+<sentence id="1750:10">However , suppression of IL-1R gene expression by IFN-gamma and IL-10 was associated with decreased tyrosine phosphorylation and nuclear translocation of the IL-4\/IL-13-inducible transcription factor , Stat6 , suggesting a potential mechanism by which IFN-gamma and IL-10 may mediate their suppressive effects .</sentence>
+
+<question str="What does ltb4 regulate?">
+<label>correct</label>
+<answer>the production of different cytokines</answer>
+<sentence id="0302:10">These results indicate that LTB4 may regulate the production of different cytokines by modulating the yield and\/or the function of transcription factors such as AP-1-binding proto-oncogene products .</sentence>
+
+<question str="What does ltb4 regulate?">
+<label>correct</label>
+<answer>transactivation of a heterologous promoter construct</answer>
+<sentence id="0307:7">In addition , LTB4 mediated transactivation of a heterologous promoter construct containing the NF-chi B or the NF-IL6 enhancer , but not the AP-1 enhancer .</sentence>
+
+<question str="What does tnf-alpha require?">
+<label>correct</label>
+<answer>binding of the immune complex</answer>
+<sentence id="1563:8">Fab fragment of anti-E. chaffeensis immunoglobulin G complexed with E. chaffeensis did not induce any of these three cytokines , indicating that ehrlichial binding is required for IL-1beta mRNA expression and that binding of the immune complex to the Fc gamma receptor is required for TNF-alpha and IL-6 mRNA expression and enhanced IL-1beta mRNA expression .</sentence>
+
+<question str="What does jurkat cell reveal?">
+<label>correct</label>
+<answer>a decrease</answer>
+<sentence id="1653:6">Jurkat T cells pretreated with NH2Cl ( 20-70 microM ) showed a decrease in the expression of the interleukin-2 receptor alpha chain following PMA stimulation .</sentence>
+
+<question str="What does binding site show?">
+<label>correct</label>
+<answer>a characteristic competitive binding profile</answer>
+<sentence id="0959:4">The binding sites fulfil the required criteria for specific steroid binding sites however differ somewhat from the classic androgen receptors from genital skin fibroblast : in fertile adult males ( n = 20 ) the binding sites showed ( 1 ) a high affinity for testosterone ( 1.32 +\/- 0.49 nM ; mean +\/- SD ) , ( 2 ) a saturable capacity ( 184 +\/- 52 binding sites per cell ; mean +\/- SD ) , and ( 3 ) a characteristic competitive binding profile for other steroid hormones ( relative binding affinities : testosterone = dihydrotestosterone &gt; 17 beta-estradiol &gt; progesterone , whereas aldosterone , 17-hydroxy-progesterone and cortisol did not compete appreciably ) .</sentence>
+
+<question str="What does binding site show?">
+<label>correct</label>
+<answer>a high affinity</answer>
+<sentence id="0959:4">The binding sites fulfil the required criteria for specific steroid binding sites however differ somewhat from the classic androgen receptors from genital skin fibroblast : in fertile adult males ( n = 20 ) the binding sites showed ( 1 ) a high affinity for testosterone ( 1.32 +\/- 0.49 nM ; mean +\/- SD ) , ( 2 ) a saturable capacity ( 184 +\/- 52 binding sites per cell ; mean +\/- SD ) , and ( 3 ) a characteristic competitive binding profile for other steroid hormones ( relative binding affinities : testosterone = dihydrotestosterone &gt; 17 beta-estradiol &gt; progesterone , whereas aldosterone , 17-hydroxy-progesterone and cortisol did not compete appreciably ) .</sentence>
+
+<question str="What does binding site show?">
+<label>correct</label>
+<answer>a saturable capacity</answer>
+<sentence id="0959:4">The binding sites fulfil the required criteria for specific steroid binding sites however differ somewhat from the classic androgen receptors from genital skin fibroblast : in fertile adult males ( n = 20 ) the binding sites showed ( 1 ) a high affinity for testosterone ( 1.32 +\/- 0.49 nM ; mean +\/- SD ) , ( 2 ) a saturable capacity ( 184 +\/- 52 binding sites per cell ; mean +\/- SD ) , and ( 3 ) a characteristic competitive binding profile for other steroid hormones ( relative binding affinities : testosterone = dihydrotestosterone &gt; 17 beta-estradiol &gt; progesterone , whereas aldosterone , 17-hydroxy-progesterone and cortisol did not compete appreciably ) .</sentence>
+
+<question str="What does binding site show?">
+<label>wrong: negation/syntax error</label>
+<answer>activity</answer>
+<sentence id="0749:5">In EBV-transformed B clones , the chi B site exerted the strongest inducible activity ; the NF-AT binding sites showed either no or only weak activity compared to Jurkat T cells .</sentence>
+
+<question str="What does binding site show?">
+<label>correct</label>
+<answer>little conservation</answer>
+<sentence id="1592:5">Binding sites at the core region show little conservation with consensus sites .</sentence>
+
+<question str="What does binding site show?">
+<label>correct</label>
+<answer>some sequence similarity</answer>
+<sentence id="1168:7">Because the binding site showed some sequence similarity with the nuclear factor of activated T cells ( NFAT ) binding site , we compared the kinetics of induction of the two binding complexes and the molecular masses of the two proteins .</sentence>
+
+<question str="What does bone marrow cell show?">
+<label>correct</label>
+<answer>an altered B-cell maturation pattern</answer>
+<sentence id="0494:8">In fact , transgenic bone marrow cells cocultured with a bone marrow-derived stromal cell line revealed an altered B-cell maturation pattern .</sentence>
+
+<question str="What does cdna show?">
+<label>correct</label>
+<answer>a conserved C-terminal domain</answer>
+<sentence id="1308:3">The cDNA encoding hTAFII105 reveals a highly conserved C-terminal domain shared by hTAFII130 and oTAFII110 , while the N-terminal coactivator domain has diverged significantly .</sentence>
+
+<question str="What does control show?">
+<label>correct</label>
+<answer>a moderate correlation</answer>
+<sentence id="0191:8">While controls showed a moderate correlation between binding affinity of the GR in lymphocytes and regulatory function at the hypothalamic level , the patients did not .</sentence>
+
+<question str="What does hl-60 cell show?">
+<label>correct</label>
+<answer>the same differentiation response</answer>
+<sentence id="1777:9">Furthermore , HL-60 cells transduced with a bcl-2 expression vector showed the same differentiation response to retinoids as did parental HL-60 cells even though apoptosis was inhibited in these bcl-2-transduced cells , suggesting that differentiation and apoptosis are regulated independently in myeloid leukemic cells .</sentence>
+
+<question str="What does hl-60 cell show?">
+<label>correct</label>
+<answer>translocation of PKC activity</answer>
+<sentence id="1030:10">Although HL-60 and HL-60\/vinc\/R cells demonstrated translocation of PKC activity , this subcellular redistribution was undetectable in HL-60\/vinc cells .</sentence>
+
+<question str="What does il-4 show?">
+<label>wrong: negation/syntax error</label>
+<answer>any effect</answer>
+<sentence id="1244:12">Furthermore , neither IL-10 nor IL-4 showed any effect on I-kappa B mRNA expression as determined by Northern experiments .</sentence>
+
+<question str="What does il-4 show?">
+<label>correct</label>
+<answer>little inhibitory effect</answer>
+<sentence id="0779:8">IL-4 , another cytokine that inhibits cytokine mRNA accumulation in monocytes , shows little inhibitory effect on LPS-induced NF kappa B activation .</sentence>
+
+<question str="What does neutrophil show?">
+<label>correct</label>
+<answer>a decrease of a 47-kDa protein</answer>
+<sentence id="1653:5">The NH2Cl-treated neutrophils showed a decrease in both PKC activity and PMA-induced phosphorylation of a 47-kDa protein , which corresponds to the cytosolic factor of NADPH oxidase , p47 ( phox ) .</sentence>
+
+<question str="What does neutrophil show?">
+<label>correct</label>
+<answer>a marked decrease</answer>
+<sentence id="1653:3">Neutrophils pretreated with NH2Cl ( 30-50 microM ) showed a marked decrease in the respiratory burst activity induced by phorbol 12-myristate 13-acetate ( PMA ) , which is a potent PKC activator .</sentence>
+
+<question str="What does patient show?">
+<label>correct</label>
+<answer>IL-10</answer>
+<sentence id="1651:8">AIDS-C patients showed low IL-2 and high IL-4 , IL-10 , and IgE concentratios ; conversely , AIDS-GR patients showed high IL-2 and low IL-4 and IgE concentrations .</sentence>
+
+<question str="What does patient show?">
+<label>correct</label>
+<answer>IgE concentrations</answer>
+<sentence id="1651:8">AIDS-C patients showed low IL-2 and high IL-4 , IL-10 , and IgE concentratios ; conversely , AIDS-GR patients showed high IL-2 and low IL-4 and IgE concentrations .</sentence>
+
+<question str="What does patient show?">
+<label>correct: partial</label>
+<answer>IgE concentratios</answer>
+<sentence id="1651:8">AIDS-C patients showed low IL-2 and high IL-4 , IL-10 , and IgE concentratios ; conversely , AIDS-GR patients showed high IL-2 and low IL-4 and IgE concentrations .</sentence>
+
+<question str="What does patient show?">
+<label>correct</label>
+<answer>a morning-to-afternoon decline</answer>
+<sentence id="0501:3">RESULTS : Both the patients and the normal comparison subjects showed a morning-to-afternoon decline in glucocorticoid receptor concentrations , paralleling the normal diurnal decline in cortisol levels .</sentence>
+
+<question str="What does patient show?">
+<label>correct</label>
+<answer>an improvement</answer>
+<sentence id="1114:5">All asthmatic patients showed an improvement in their FEV1 values after corticosteroid treatment ( per cent of predicted value 68.28 +\/- 4.93 versus 95.57 +\/- 6.41 , P &lt; 0.02 ) , and a significant decrease for glucocorticoid receptor mRNA expression ( P &lt; 0.02 ) was observed in their monocytes .</sentence>
+
+<question str="What does patient show?">
+<label>correct</label>
+<answer>elevated antibody titers</answer>
+<sentence id="1356:9">While the sera of EBV-negative individuals ( 0\/3 ) or healthy carriers ( 0\/33 ) did not contain detectable levels of antibodies , patients with mononucleosis ( 5\/18 ) , chronic EBV infection ( 2\/7 ) , EBV reactivation ( 7\/20 ) and human immunodeficiency virus infection ( 5\/24 ) showed elevated antibody titres against the enzyme .</sentence>
+
+<question str="What does patient show?">
+<label>correct</label>
+<answer>elevated circulating levels of cortisol</answer>
+<sentence id="1179:4">Patients with HIV infections often show elevated circulating levels of cortisol , suggesting some misfunction in the regulatory systems that maintain the levels of this critical hormone .</sentence>
+
+<question str="What does patient show?">
+<label>correct: partial</label>
+<answer>high IL-2</answer>
+<sentence id="1651:8">AIDS-C patients showed low IL-2 and high IL-4 , IL-10 , and IgE concentratios ; conversely , AIDS-GR patients showed high IL-2 and low IL-4 and IgE concentrations .</sentence>
+
+<question str="What does patient show?">
+<label>correct: partial</label>
+<answer>high IL-4</answer>
+<sentence id="1651:8">AIDS-C patients showed low IL-2 and high IL-4 , IL-10 , and IgE concentratios ; conversely , AIDS-GR patients showed high IL-2 and low IL-4 and IgE concentrations .</sentence>
+
+<question str="What does patient show?">
+<label>correct</label>
+<answer>higher NF-kappaB binding activity</answer>
+<sentence id="0016:4">Patients with diabetic nephropathy showed higher NF-kappaB binding activity in Electrophoretic Mobility Shift Assays and stronger immunohistological staining for activated NF-kappaBp65 than patients without renal complications .</sentence>
+
+<question str="What does patient show?">
+<label>correct</label>
+<answer>insufficient suppression of serum cortisol concentrations</answer>
+<sentence id="0298:9">All patients showed insufficient suppression of serum cortisol concentrations in the overnight 1-mg dexamethasone test .</sentence>
+
+<question str="What does patient show?">
+<label>correct</label>
+<answer>low IL-2</answer>
+<sentence id="1651:8">AIDS-C patients showed low IL-2 and high IL-4 , IL-10 , and IgE concentratios ; conversely , AIDS-GR patients showed high IL-2 and low IL-4 and IgE concentrations .</sentence>
+
+<question str="What does patient show?">
+<label>correct</label>
+<answer>low IL-4</answer>
+<sentence id="1651:8">AIDS-C patients showed low IL-2 and high IL-4 , IL-10 , and IgE concentratios ; conversely , AIDS-GR patients showed high IL-2 and low IL-4 and IgE concentrations .</sentence>
+
+<question str="What does patient show?">
+<label>correct</label>
+<answer>lower concentration</answer>
+<sentence id="0556:5">Patients without phosphate supplementation showed significantly lower concentration ( 21.7 +\/- 5.1 fmol\/mg protein , mean +\/- SEM ) compared to the normal controls ( 60.7 +\/- 4.0 ) .</sentence>
+
+<question str="What does patient show?">
+<label>correct</label>
+<answer>monoclonal PMNCs</answer>
+<sentence id="0012:5">All three RARS patients showed monoclonal PMNCs .</sentence>
+
+<question str="What does patient show?">
+<label>wrong: negation/syntax error</label>
+<answer>no hypergammaglobulinemia</answer>
+<sentence id="0381:8">Stronger c-myc mRNA expression was detected in labial salivary glands of patients with longer disease duration ( p less than or equal to 0.002 ) and more intense T lymphocyte infiltrates ( p less than 0.05 ) although these patients revealed no hypergammaglobulinemia .</sentence>
+
+<question str="What does patient show?">
+<label>wrong: negation/syntax error</label>
+<answer>no significant improvements</answer>
+<sentence id="0477:3">The resistant patients showed no significant improvements in airflow limitation .</sentence>
+
+<question str="What does patient show?">
+<label>correct</label>
+<answer>partial resistance</answer>
+<sentence id="0925:3">Lymphocytes of patients with rheumatoid arthritis ( RA ) have diminished receptor density ; thus , patients with RA should show partial resistance to glucocorticoids .</sentence>
+
+<question str="What does peripheral lymphocyte show?">
+<label>correct</label>
+<answer>a pronounced deficiency</answer>
+<sentence id="1289:1">Peripheral blood lymphocytes ( PBL ) and alloreactive T cell lines of two male infants born to consanguinous parents and presenting with severe combined immunodeficiency ( SCID ) showed a pronounced deficiency in T cell activation .</sentence>
+
+<question str="What does ifn-gamma stimulate?">
+<label>correct</label>
+<answer>Purified peripheral eosinophils</answer>
+<sentence id="0119:4">METHODS : Purified peripheral eosinophils were stimulated with IFN-gamma at 37 degrees C for 1-60 min .</sentence>
+
+<question str="What does monocyte stimulate?">
+<label>wrong: negation/syntax error</label>
+<answer>CD40 responses</answer>
+<sentence id="1717:4">G28-5 sFv was a more potent agonist than G28-5 IgG and was able to stimulate CD40 responses by B cells and monocytes .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>B-cell activation</answer>
+<sentence id="0418:1">Cyclosporin A and FK506 inhibit T- and B-cell activation and other processes essential to an effective immune response .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>CD95L transcription</answer>
+<sentence id="1791:9">Our data also show that the immunosuppressive agent cyclosporin A down-regulates CD95L transcription by inhibiting the function of this positive regulatory element</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct: partial</label>
+<answer>G0S2</answer>
+<sentence id="1719:0">Cyclosporin A inhibits early mRNA expression of G0\/G1 switch gene 2 ( G0S2 ) in cultured human blood mononuclear cells .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>IL-2 gene transcription</answer>
+<sentence id="1067:2">We asked whether dexamethasone ( Dex ) and cyclosporin A ( CsA ) inhibit IL-2 gene transcription by interfering with the activity of nuclear proteins that bind to the IL-2 promoter .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>Inducible nuclear factor binding</answer>
+<sentence id="0563:0">Inducible nuclear factor binding to the kappa B elements of the human immunodeficiency virus enhancer in T cells can be blocked by cyclosporin A in a signal-dependent manner .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>NFAT activation</answer>
+<sentence id="1147:3">With these clones , we demonstrated that NFAT activation induced by phorbol 12-myristate 13-acetate and ionomycin was inhibited by both cyclosporin A ( CsA ) ( IC50 = 8 nM ) and FK506 ( IC50 = 160 pM ) , presumably by inhibition of calcineurin activity .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>Oct-2 mRNA induction</answer>
+<sentence id="0384:6">Oct-2 mRNA induction during antigen-driven T-cell activation was blocked by cyclosporin A , as well as by protein synthesis inhibitors .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct: partial</label>
+<answer>T</answer>
+<sentence id="0418:1">Cyclosporin A and FK506 inhibit T- and B-cell activation and other processes essential to an effective immune response .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>The activation</answer>
+<sentence id="1076:5">The activation by p59fyn plus PMA was blocked by EGTA and by the immunosuppressant drug cyclosporin A .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>The activation of calcineurin of NF-ATc</answer>
+<sentence id="0850:4">The activation of calcineurin and the nuclear import of NF-ATc can both be blocked by cyclosporin A or FK506 in complex with their respective immunophilins .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>The activation the nuclear import of NF-ATc</answer>
+<sentence id="0850:4">The activation of calcineurin and the nuclear import of NF-ATc can both be blocked by cyclosporin A or FK506 in complex with their respective immunophilins .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>The appearance of the CMAT binding complex</answer>
+<sentence id="1168:11">The appearance of the CMAT binding complex was inhibited by both cyclosporin A and rapamycin .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>The shift</answer>
+<sentence id="0278:7">The shift from complex I to complex II seen only in SCM-1-producer T cell lines upon activation was completely suppressed by cyclosporin A .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>a calcium-dependent signal</answer>
+<sentence id="0643:1">The immunosuppressant drug cyclosporin A blocks a calcium-dependent signal from the T-cell receptor ( TCR ) that normally leads to T-cell activation .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>early events</answer>
+<sentence id="0824:9">Cyclosporin A impaired not only early and late , but also immediate events ; however , addition of TNF-alpha prevented all inhibition .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>early mRNA expression of gene G0\/G1 switch 2</answer>
+<sentence id="1719:0">Cyclosporin A inhibits early mRNA expression of G0\/G1 switch gene 2 ( G0S2 ) in cultured human blood mononuclear cells .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>expression of egr-2</answer>
+<sentence id="1974:6">As with egr-3 , expression of egr-2 was blocked by cyclosporin A .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct: partial</label>
+<answer>expression of gene</answer>
+<sentence id="1051:1">Few known genes ( IL-2 , members of the IL-8 family , interferon-gamma ) are induced in T cells only through the combined effect of phorbol myristic acetate ( PMA ) and a Ca(2+)-ionophore , and expression of only these genes can be fully suppressed by Cyclosporin A ( CyA ) .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct: partial</label>
+<answer>function</answer>
+<sentence id="1215:3">When expressed in Jurkat T cells , recombinant NFAT1 is regulated , as expected , by the calmodulin-dependent phosphatase calcineurin , and its function is inhibited by the immunosuppressive agent cyclosporin A ( CsA ) .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>immediate events</answer>
+<sentence id="0824:9">Cyclosporin A impaired not only early and late , but also immediate events ; however , addition of TNF-alpha prevented all inhibition .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>wrong: negation/syntax error</label>
+<answer>inhibiting</answer>
+<sentence id="1791:9">Our data also show that the immunosuppressive agent cyclosporin A down-regulates CD95L transcription by inhibiting the function of this positive regulatory element</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct: coref</label>
+<answer>it</answer>
+<sentence id="1915:9">While the activation of the IL-2 promoter and an NFAT-driven minimal promoter by Tpl-2 was fully blocked by the dominant negative mutant NFAT delta418 , it was only partially blocked by the calcineurin inhibitor cyclosporin A suggesting that the Tpl-2-mediated NFAT activation is under the control of a combination of calcineurin-dependent and independent pathways .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>late events</answer>
+<sentence id="0824:9">Cyclosporin A impaired not only early and late , but also immediate events ; however , addition of TNF-alpha prevented all inhibition .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>monocyte tissue factor activation</answer>
+<sentence id="1715:0">Cyclosporin A inhibits monocyte tissue factor activation in cardiac transplant recipients .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>other processes essential</answer>
+<sentence id="0418:1">Cyclosporin A and FK506 inhibit T- and B-cell activation and other processes essential to an effective immune response .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>the activation-induced changes of phosphoproteins</answer>
+<sentence id="1302:6">Finally , the activation-induced changes in one set of phosphoproteins were dramatically inhibited by cyclosporin A .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>the induction of NF-MATp35</answer>
+<sentence id="1158:9">Similar to its effect on IL-2 production , cyclosporin A inhibited the induction of NF-MATp35 .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>the production of IL-2</answer>
+<sentence id="0323:3">Cyclosporin A ( CsA ) and FK506 inhibit the production of IL-2 in T lymphocytes at the level of gene transcription .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>the synergistic activation of JNK</answer>
+<sentence id="0988:5">Similar to its effect on IL-2 induction , cyclosporin A ( CsA ) inhibited the synergistic activation of JNK , and a competitive inhibitor of Jun phosphorylation by JNK inhibited IL-2 promoter activation .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>the synergistic induction of IL-8 expression</answer>
+<sentence id="0934:5">Furthermore , cyclosporin A , but not rapamycin , blocked the synergistic induction of IL-8 expression achieved with anti-CD3 and anti-CD28 costimulation .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>transcription</answer>
+<sentence id="0414:3">Using constructs in which mRNA production controlled by a specific transcription factor could be readily measured we found that both cyclosporin A and FK506 completely inhibited transcription activated by NF-AT , NFIL2 A , NFIL2 B and partially inhibited transcription activated by NF kappa B .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct: partial</label>
+<answer>transcriptional activation</answer>
+<sentence id="0414:4">Cyclosporin A and FK506 inhibited only transcriptional activation that was dependent on Ca2+ mobilization .</sentence>
+
+<question str="What does cyclosporin a suppress?">
+<label>correct</label>
+<answer>translocation of the cytoplasmic component</answer>
+<sentence id="0418:7">FK506 and cyclosporin A block translocation of the cytoplasmic component without affecting synthesis of the nuclear subunit .</sentence>
+
+<question str="What does forskolin suppress?">
+<label>correct</label>
+<answer>PKC downstream events</answer>
+<sentence id="1263:5">Nevertheless , forskolin also inhibits PKC downstream events , such as c-jun expression , which is critical for the activation process of T cells .</sentence>
+
+<question str="What does forskolin suppress?">
+<label>correct: partial</label>
+<answer>TG</answer>
+<sentence id="0718:7">PMA- but not TG-induced IL-2R alpha is inhibited by the PKC inhibitor H7 , whereas TG- but not PMA-induced IL-2R alpha was inhibited by cholera toxin , forskolin and 1,9-dideoxy forskolin .</sentence>
+
+<question str="What does forskolin suppress?">
+<label>correct</label>
+<answer>TNFalpha factor expression</answer>
+<sentence id="1237:3">Both forskolin and dibutyryl cAMP , which elevate intracellular cAMP by independent mechanisms , inhibited TNFalpha and tissue factor expression at the level of transcription .</sentence>
+
+<question str="What does forskolin suppress?">
+<label>correct</label>
+<answer>anti-CD3-induced shift</answer>
+<sentence id="1263:3">We found that the adenylate cyclase activator , forskolin , inhibits anti-CD3-induced shift in Lck electrophoretic mobility , suggesting an intervention at the TCR-coupled phosphoinositide turnover that precedes the activation of PKC .</sentence>
+
+<question str="What does forskolin suppress?">
+<label>correct</label>
+<answer>tissue factor expression</answer>
+<sentence id="1237:3">Both forskolin and dibutyryl cAMP , which elevate intracellular cAMP by independent mechanisms , inhibited TNFalpha and tissue factor expression at the level of transcription .</sentence>
