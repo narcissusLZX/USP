@@ -67,12 +67,15 @@ class Occurrence():
         return ret
     
     def getNowSpan(self):
-        ret = self.token
+        ret = (self.token,[self.pos[1], self.pos[1]])
         for args in self.sonArgType2Arg.values():
             for arg in args:
                 son = arg.son
                 if (son.label == self.label):
-                    ret += "->"+son.getNowSon()
+                    son_result = son.getNowSon()
+                    ret[0] += "->"+son_result[0]
+                    ret[1][0] = min(ret[1][0], son_result[1][0])
+                    ret[1][1] = max(ret[1][1], son_result[1][1])
         return ret
 
     def getTop(self):
@@ -80,3 +83,30 @@ class Occurrence():
             return self
         else:
             return self.dataset.idx2occ[self.label].getTop()
+
+    def sumFeatureVector(self):
+        ret = self.featureVector
+        for args in self.sonArgType2Arg.values():
+            for arg in args:
+                son = arg.son
+                if (son.label == self.label):
+                    ret += son.sumFeatureVector()
+        return ret
+
+    def getFeatureVector(self):
+        if self.dataset.dynamic_features:
+            ret = self.sumFeatureVector()
+            ret = ret / ret.sum()
+            return ret
+        else:
+            return self.featureVector
+    
+    def qry(self, token, argType):
+        sonArgs = self.getNowSon()
+        ret = []
+        if (self.token == token):
+            for arg in sonArgs:
+                if (arg.argType == argType):
+                    ret.append(arg.son.getNowSpan())
+        for arg in sonArgs:
+            ret.extend(arg.son.qry(token, argType))

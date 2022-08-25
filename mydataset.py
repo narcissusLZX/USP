@@ -1,6 +1,7 @@
 import random
 import numpy as np
 import os
+import faiss
 
 from cluster import Cluster
 from occurrence import Occurrence
@@ -17,6 +18,7 @@ class Mydataset():
         self.idx2occ = {}
         self.pos2occ = {}  #pos->occ
         self.parameters = parameters
+        self.idx2root = {}
 
         self.argIdx = 0
         self.idx2arg = {}
@@ -29,7 +31,12 @@ class Mydataset():
         self.TokPair2FaSon = {}
         self.proposal = ""
 
+        self.evalStart = 0
+        self.evalAns = []
+
         self.n_argType = 0
+        self.faiss_index = []#todo
+        self.dynamic_features = parameters["DF"]
 
         self.Lprob = 0.
         if (self.parameters["init"]):
@@ -56,18 +63,8 @@ class Mydataset():
 
         return ret
 
-    
-    def loaddata(self):
-        path = self.parameters["path"]
-        '''
-        数据格式：
-        连续若干行为一个句子的输入，句子间空行(严格1行)隔开
-        .tok 依次保存各个词
-        .dep 依次给出依赖关系
-            一行的格式为：关系 主体-位置 客体-位置，位置从1开始计数
-            如： det FKBP51-14 the-12
-        '''
-        #读入tok
+    def readin(self, path):
+        idx = self.n_sentence
         with open(path+".tok", "r", encoding='utf-8') as f:
             self.sentences.append([])
             for line in f.readlines():
@@ -89,7 +86,6 @@ class Mydataset():
 
         #dep
         with open(path+".dep", "r", encoding='utf-8') as f:
-            idx = 0
             for line in f.readlines():
                 a = line.strip().split()
                 if (len(a)==0):
@@ -100,6 +96,7 @@ class Mydataset():
                     continue
                 dep, fa, so = a
                 if (dep == 'root'):
+                    self.idx2root[idx] = so
                     continue
                 fa_pos = fa.split("-")[-1]
                 son_pos = so.split("-")[-1]
@@ -126,6 +123,31 @@ class Mydataset():
                     self.TokPair2FaSon[tokPair] = []
                 self.TokPair2FaSon[tokPair].append([fa, son])
 
+
+    def loaddata(self):
+        path = self.parameters["path"]
+        '''
+        数据格式：
+        连续若干行为一个句子的输入，句子间空行(严格1行)隔开
+        .tok 依次保存各个词
+        .dep 依次给出依赖关系
+            一行的格式为：关系 主体-位置 客体-位置，位置从1开始计数
+            如： det FKBP51-14 the-12
+        '''
+        self.readin(path)
+        #读入tok
+        self.evalStart = self.n_sentence
+        if (self.parameters["eval"]):
+            eval_path = self.parameters["eval_path"]
+            self.readin(eval_path)
+            self.n_eval = self.n_sentence - self.evalStart
+            with open(eval_path+".ans", "r", encoding="utf-8") as f:
+                for line in f.readlines():
+                    self.evalAns.append(line.strip())
+        
+        if self.parameters["Distributed"]:
+            # todo
+            return
 
 
 
@@ -172,40 +194,45 @@ class Mydataset():
             TokPair.extend(fason)
         return TokPair[random.randint(0,len(TokPair)-1)]
 
-    def GetFeatureVector(self, cluster:Cluster):
+    def GetFeatureVector(self, cluster:Cluster): #cluster中所有occ的feature_vector平均值
         ret = []
         for occs in cluster.Span2Occurr.values():
             for occ in occs:
-                ret.append(occ.featureVector)
+                ret.append(occ.getFeatureVector())
         return np.mean(ret)
 
-    def CalcSimilarity(self, cluster1:Cluster, cluster2:Cluster):
+    def CalcSimilarity(self, cluster1:Cluster, cluster2:Cluster): 
         if cluster1.idx == cluster2.idx:
             return 0.0
         else:
             #todo
-            vector1 = self.GetFeatureVector(cluster1)
-            vector2 = self.GetFeatureVector(cluster2)
+            vector1 = self.GetFeatureVector(cluster1) #动态计算
+            vector2 = self.GetFeatureVector(cluster2) #
             cos_sim = np.dot(vector1, vector2) / np.linalg.norm(vector1) / np.linalg.norm(vector2)
             return cos_sim
 
 
     def getClusterbyClusterSimilarity(self, Cluster1:Cluster):
-        clusters = list(set(self.idx2cluster.values()))
-        clusters.remove(Cluster1)
-        prob = [self.CalcSimilarity(cluster, Cluster1) for cluster in clusters]
+        if self.parameters["Distributed"]:
+            #todo
 
-        scores = np.array(prob)
-        scores = np.exp(scores) / np.sum(np.exp(scores))
+            return 
+        else:
+            clusters = list(set(self.idx2cluster.values()))
+            clusters.remove(Cluster1)
+            prob = [self.CalcSimilarity(cluster, Cluster1) for cluster in clusters]
 
-        selectProb = random.random()
-        sum = 0.0
-        for i in range(len(scores)):
-            sum += scores[i]
-            if (sum > selectProb):
-                return clusters[i]
-        
-        return clusters[-1]
+            scores = np.array(prob)
+            scores = np.exp(scores) / np.sum(np.exp(scores))
+
+            selectProb = random.random()
+            sum = 0.0
+            for i in range(len(scores)):
+                sum += scores[i]
+                if (sum > selectProb):
+                    return clusters[i]
+
+            return clusters[-1]
 
     def update(self, clusters):
         #print(clusters)
@@ -245,5 +272,21 @@ class Mydataset():
                 cluster = Cluster(a)
                 self.newClusteridx(cluster)
                 
+    def qry(self, idx, tgt_idx):
+        what_pos = self.pos2hash([idx, 1])
+        occ = self.pos2occ[what_pos]
+        occ = occ.getTop()
+        faArg = occ.faArg
+        
+        tgt_occ = self.idx2root[tgt_idx]
+        result = tgt_occ.qry(faArg.father.token, faArg.argType)
+        ans = []
+        correct_cnt = 0
+        for span in result:
+            bounds = span[1]
+            ans.append(self.sentences[bounds[0]-1:bounds[1]])
+            if (ans[-1] == self.evalAns[idx-self.evalStart]):
+                correct_cnt += 1
+        return ans, correct_cnt
 
         
