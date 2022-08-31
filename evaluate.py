@@ -2,10 +2,13 @@ from mydataset import Mydataset
 import numpy as np
 
 class Evaluation():
-    def __init__(self, parameters) -> None:
+    def __init__(self, parameters, dataset = None) -> None:
         self.parameters = parameters
-        self.parameters["init"] = False
-        self.dataset = Mydataset(self.parameters)
+        if (dataset == None):
+            self.parameters["init"] = False
+            self.dataset = Mydataset(self.parameters)
+        else:
+            self.dataset = dataset
         self.getMatch()
         self.evaluate()
         self.n_match = 0

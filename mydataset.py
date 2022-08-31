@@ -41,7 +41,8 @@ class Mydataset():
         self.Lprob = 0.
         if (self.parameters["init"]):
             self.loaddata()
-            self.precomputeVector()
+            if (not self.parameters["ExtVector"]):
+                self.precomputeVector()
         else:
             self.load()
 
@@ -64,7 +65,7 @@ class Mydataset():
         return ret
 
     def readin(self, path):
-        idx = self.n_sentence
+        idx, idx2 = self.n_sentence, self.n_sentence
         with open(path+".tok", "r", encoding='utf-8') as f:
             self.sentences.append([])
             for line in f.readlines():
@@ -122,6 +123,15 @@ class Mydataset():
                 if tokPair not in self.TokPair2FaSon:
                     self.TokPair2FaSon[tokPair] = []
                 self.TokPair2FaSon[tokPair].append([fa, son])
+            
+        if self.parameters["ExtVector"]:
+            tmp_read = np.load(path+".npz", allow_pickle = True)
+            for i in range(idx2, self.n_sentence):
+                arr = tmp_read['arr_0'][i-idx2]
+                if (arr.shape[0] != len(self.sentences[i])):
+                    for j in range(len(self.sentences[i])):
+                        occ = self.pos2occ(self.pos2hash(i, j+1))
+                        occ.featureVector = arr[j]
 
 
     def loaddata(self):

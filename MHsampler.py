@@ -6,7 +6,8 @@ from mydataset import Mydataset
 from cluster import Cluster
 from occurrence import Occurrence
 from argument import Argument
-
+from evaluate import Evaluation
+from spanbert.pretraining.fairseq import data
 
 
 def LogCalcCompoundBinomial(success_num, fail_num, parameters):
@@ -350,7 +351,8 @@ def Parameter():
     #todo
     par = {"path":"./dataset/geniaquarter", "gen_0":[0.01, 0.001], "gen_1":[0.01, 0.001], "soncluster_alpha":0.5, "sonarg_alpha":0.75, \
         "ClusterDistrConc":1.5, \
-         "n_sentences":10000, "seed":7, "model_path":"./model/", "init":True, "Distributed":False, "DF":True}
+         "n_sentences":10000, "seed":7, "model_path":"./model/", "init":True, "Distributed":False, "DF":True, \
+            "ExtVector":False,  "VectorDim":768}
     return par
 
 def main():
@@ -365,7 +367,8 @@ def main():
             print("Step {} done".format(i))
         #dataset.check()
     
-    dataset.store()
+    eval = Evaluation(dataset)
+    #dataset.store()
 
 if __name__ == '__main__':
     main()
