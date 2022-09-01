@@ -1,5 +1,6 @@
 from sys import getwindowsversion
 import numpy as np
+import math
 
 class Occurrence():
     '''
@@ -91,6 +92,18 @@ class Occurrence():
                 son = arg.son
                 if (son.label == self.label):
                     ret += son.sumFeatureVector()
+        return ret
+
+    def PhraseLprob(self):
+        ret = 0.
+        for args in self.sonArgType2Arg.values():
+            for arg in args:
+                son = arg.son
+                if (son.label == self.label):
+                    ret += math.log(len(self.dataset.TokPair2FaSon[self.token+","+son.token]) / self.dataset.pair_cnt)
+                    ret -= math.log(len(self.dataset.tok2occ[son.token])*len(self.dataset.tok2occ[self.token]))
+                    ret += son.PhraseLprob()
+
         return ret
 
     def getFeatureVector(self):

@@ -93,6 +93,14 @@ def CalcProb(dataset:Mydataset, newClusters):
 
     Lprob += Lprob2
 
+    Lprob_phrase = 0.
+    if (dataset.proposal == "compose") or (dataset.proposal == "decompose"):
+        for cluster in newClusters:
+            occs = cluster.GetAllOcc()
+            for occ in occs:
+                Lprob_phrase += occ.PhraseLprob()
+
+    Lprob += Lprob_phrase
 
     return Lprob
 
@@ -353,12 +361,13 @@ def Parameter(args):
     par = {"path":args.data_path, "gen_0":args.gen_first_eta, "gen_1":args.gen_more_eta, "soncluster_alpha":args.cluster_alpha, "sonarg_alpha":args.arg_alpha, \
         "ClusterDistrConc":args.ClusterDistrConc, \
          "n_sentences":10000, "seed":args.seed, "model_path":args.output_path, "init":args.init, "Distributed":False, "DF":args.Df, \
-            "ExtVector":args.ExtVector,  "VectorDim":args.VectorDim}
+            "ExtVector":args.ExtVector,  "VectorDim":args.VectorDim, \
+                "eval":args.eval, "eval_path":args.eval_path,"eval_ans":args.eval_ans}
     return par
 
 def main(args):
     Max_epoch, success_cnt = args.n_epoch, 0
-    
+
     parameters = Parameter(args)
     random.seed(parameters["seed"])
     dataset = Mydataset(parameters)
@@ -374,8 +383,8 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_path", default="./dataset/geniaquarter", type=str, required=True)
-    parser.add_argument("--output_path", default="./dataset", type=str, required=True)
+    parser.add_argument("--data_path", default="./dataset/geniaquarter", type=str)
+    parser.add_argument("--output_path", default="./dataset", type=str)
     parser.add_argument("--seed", default=7, type=int,
                         help="Random seed.")
     parser.add_argument("--Df", action="store_true", help="Dynamically adjust feature vectors of occurrences?")
@@ -389,5 +398,8 @@ if __name__ == '__main__':
     parser.add_argument("--ClusterDistrConc", default=1.5, type=float)
     parser.add_argument("--VectorDim", default=768, type=int)
     parser.add_argument("--init", action="store_true", help="Initiallize dataset?")
+    parser.add_argument("--eval", action="store_true", help="Evaluation?")
+    parser.add_argument("--eval_path", default=None, type=str)
+    parser.add_argument("--eval_ans", action="store_true", help="Match ans?")
     args = parser.parse_args()
     main(args)

@@ -1,7 +1,6 @@
 import random
 import numpy as np
 import os
-import faiss
 
 from cluster import Cluster
 from occurrence import Occurrence
@@ -19,6 +18,7 @@ class Mydataset():
         self.pos2occ = {}  #pos->occ
         self.parameters = parameters
         self.idx2root = {}
+        self.tok2occ = {}
 
         self.argIdx = 0
         self.idx2arg = {}
@@ -29,6 +29,7 @@ class Mydataset():
         self.sentences = []
         self.argType2Arg = {}   
         self.TokPair2FaSon = {}
+        self.pair_cnt = 0
         self.proposal = ""
 
         self.evalStart = 0
@@ -80,6 +81,9 @@ class Mydataset():
                         self.word2cluster[tok] = Cluster(self)
                     occ = Occurrence(tok, self, [self.n_sentence, len(self.sentences[self.n_sentence])], self.word2cluster[tok].idx)
                     self.word2cluster[tok].ins(occ)
+                    if tok not in self.tok2occ:
+                        self.tok2occ[tok] = []
+                    self.tok2occ[tok].append(occ)
 
             if (len(self.sentences[self.n_sentence])==0):
                 self.n_sentence -= 1
@@ -151,10 +155,14 @@ class Mydataset():
             eval_path = self.parameters["eval_path"]
             self.readin(eval_path)
             self.n_eval = self.n_sentence - self.evalStart
-            with open(eval_path+".ans", "r", encoding="utf-8") as f:
-                for line in f.readlines():
-                    self.evalAns.append(line.strip())
-        
+            if self.parameters["eval_ans"]:
+                with open(eval_path+".ans", "r", encoding="utf-8") as f:
+                    for line in f.readlines():
+                        self.evalAns.append(line.strip())
+
+        for fasons in self.TokPair2FaSon.values():
+            self.pair_cnt += len(fasons)
+            
         if self.parameters["Distributed"]:
             # todo
             return
@@ -192,6 +200,9 @@ class Mydataset():
 
     def removeCluster(self, cluster:Cluster):
         idx = cluster.idx
+        if (idx not in self.idx2cluster):
+            print("warning")
+            return
         self.idx2cluster.pop(idx)
         
     def getRandomCluster(self):
@@ -295,8 +306,9 @@ class Mydataset():
         for span in result:
             bounds = span[1]
             ans.append(self.sentences[bounds[0]-1:bounds[1]])
-            if (ans[-1] == self.evalAns[idx-self.evalStart]):
-                correct_cnt += 1
+            if (self.parameters["eval_ans"]):
+                if (ans[-1] == self.evalAns[idx-self.evalStart]):
+                    correct_cnt += 1
         return ans, correct_cnt
 
         
