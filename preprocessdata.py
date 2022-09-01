@@ -34,28 +34,29 @@ for file in files:
         break
 '''
 
-'''
 
-path = "./genia/merge.out"
+
+path = "./dataset/questions.txt"
 snowballStemmer = nltk.stem.SnowballStemmer('english')
 
 output_path = "./dataset/"
-f_tok = open(output_path+"genia.tok", "w", encoding="utf-8")
-f_merge = open(output_path+"genia.cleanmerge", "w", encoding="utf-8")
+f_tok = open(output_path+"question.tok", "w", encoding="utf-8")
+#f_merge = open(output_path+"question.cleanmerge", "w", encoding="utf-8")
 
 cnt = 0
 
 with open(path, "r", encoding="utf-8") as f:
     for line in f.readlines():
         a = line.strip().split(" ")
-        if (a[-1] != '.'):
-            a.append('.')
+        a[-1] = a[-1][:-1]
+        if (a[-1] != '?'):
+            a.append('?')
         for word in a:
             f_tok.writelines(snowballStemmer.stem(word)+"\n")
-            if (word == '.'):
+            if (word == '?'):
                 cnt += 1
                 f_tok.writelines("\n")
-        f_merge.writelines((" ").join(a)+"\n")
+        #f_merge.writelines((" ").join(a)+"\n")
 
 print(cnt)
 '''
@@ -73,3 +74,4 @@ with open(path, "r", encoding="utf-8") as f:
         b = a[1].split(",")
         c = ",".join(b[1:])
         f_dep.write(a[0]+" "+b[0]+" "+c.strip()[:-1]+"\n")
+'''

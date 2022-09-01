@@ -1,0 +1,154 @@
+nsubj reported-4 We-1
+aux reported-4 have-2
+advmod reported-4 previously-3
+root ROOT-0 reported-4
+mark defective-17 that-5
+det lymphocytes-8 the-6
+compound lymphocytes-8 T-7
+nsubj defective-17 lymphocytes-8
+case child-11 of-9
+det child-11 a-10
+nmod lymphocytes-8 child-11
+case immunodeficiency-15 with-12
+amod immunodeficiency-15 severe-13
+amod immunodeficiency-15 combined-14
+nmod child-11 immunodeficiency-15
+cop defective-17 are-16
+ccomp reported-4 defective-17
+case transcription-20 in-18
+det transcription-20 the-19
+obl defective-17 transcription-20
+case genes-24 of-21
+amod genes-24 several-22
+compound genes-24 lymphokine-23
+nmod transcription-20 genes-24
+nsubj include-26 that-25
+acl:relcl genes-24 include-26
+obj include-26 IL2-27
+conj IL2-27 IL3-29
+conj IL2-27 IL4-31
+cc IL5-34 and-33
+conj IL2-27 IL5-34
+nsubj encode-37 which-36
+acl:relcl IL2-27 encode-37
+obj encode-37 interleukins-38
+nummod interleukins-38 2-39
+nummod interleukins-38 3-41
+nummod interleukins-38 4-43
+cc IL-2-48 and-45
+nummod IL-2-48 5-46
+conj interleukins-38 IL-2-48
+dep IL-2-48 -3-50
+conj -3-50 -4-52
+cc -5-55 and-54
+conj -3-50 -5-55
+
+case contrast-2 In-1
+obl abnormal-37 contrast-2
+det binding-5 the-4
+nsubj abnormal-37 binding-5
+case factor-9 of-6
+det factor-9 the-7
+amod factor-9 nuclear-8
+nmod binding-5 factor-9
+case cells-13 of-10
+amod cells-13 activated-11
+compound cells-13 T-12
+nmod factor-9 cells-13
+dep cells-13 NF-AT-15
+case element-20 to-17
+nmod:poss element-20 its-18
+compound element-20 response-19
+nmod binding-5 element-20
+case enhancer-24 in-21
+det enhancer-24 the-22
+compound enhancer-24 IL2-23
+nmod element-20 enhancer-24
+cc element-30 and-25
+case element-30 to-26
+det element-30 an-27
+amod element-30 NF-AT-like-28
+compound element-30 response-29
+conj binding-5 element-30
+acl element-30 present-31
+case enhancer-35 in-32
+det enhancer-35 the-33
+compound enhancer-35 IL4-34
+obl present-31 enhancer-35
+cop abnormal-37 was-36
+root ROOT-0 abnormal-37
+
+root ROOT-0 However-1
+mark requires-6 while-3
+compound expression-5 IL2-4
+nsubj requires-6 expression-5
+advcl  -2, requires-6
+det contribution-8 the-7
+obj requires-6 contribution-8
+mark report-18 of-9
+ccomp report-18 C
+cc signals-15 and-11
+compound kinase-13 protein-12
+compound signals-15 kinase-13
+compound signals-15 C-dependent-14
+conj Ca 
+nsubj report-18 we-17
+acl contribution-8 report-18
+mark diminished-30 that-19
+nsubj:pass diminished-30 activation-20
+case transcription-24 of-21
+amod transcription-24 human-22
+compound transcription-24 IL4-23
+nmod activation-20 transcription-24
+case pathway-28 through-25
+det pathway-28 the-26
+amod pathway-28 C
+nmod activation-20 pathway-28
+aux:pass diminished-30 is-29
+ccomp report-18 diminished-30
+case stimulation-35 by-31
+compound C-34 protein-32
+compound C-34 kinase-33
+compound stimulation-35 C-34
+obl diminished-30 stimulation-35
+case cells-39 in-36
+compound cells-39 Jurkat-37
+compound cells-39 T-38
+nmod stimulation-35 cells-39
+
+advmod(mediates-14, Thus-1)
+punct(mediates-14, ,-2)
+nsubj(mediates-14, competition-3)
+case(activators-8, between-4)
+nummod(activators-8, two-5)
+amod(activators-8, general-6)
+amod(activators-8, transcriptional-7)
+nmod(competition-3, activators-8)
+punct(activators-8, ,-9)
+appos(activators-8, RelA-10)
+cc(NF-ATp-12, and-11)
+conj(RelA-10, NF-ATp-12)
+punct(activators-8, ,-13)
+root(ROOT-0, mediates-14)
+det(effect-17, the-15)
+amod(effect-17, inhibitory-16)
+obj(mediates-14, effect-17)
+case(stimulation-22, of-18)
+compound(C-21, protein-19)
+compound(C-21, kinase-20)
+compound(stimulation-22, C-21)
+nmod(effect-17, stimulation-22)
+case(expression-25, on-23)
+compound(expression-25, IL4-24)
+nmod(effect-17, expression-25)
+cc(contribute-28, and-26)
+aux(contribute-28, may-27)
+conj(mediates-14, contribute-28)
+case(expression-32, to-29)
+amod(expression-32, differential-30)
+compound(expression-32, gene-31)
+obl(contribute-28, expression-32)
+case(cells-35, in-33)
+compound(cells-35, TH-34)
+nmod(expression-32, cells-35)
+punct(mediates-14, .-36)

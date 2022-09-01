@@ -1,13 +1,14 @@
 import random
 import math
 import copy
+import argparse
+from xmlrpc.client import Boolean
 
 from mydataset import Mydataset
 from cluster import Cluster
 from occurrence import Occurrence
 from argument import Argument
 from evaluate import Evaluation
-from spanbert.pretraining.fairseq import data
 
 
 def LogCalcCompoundBinomial(success_num, fail_num, parameters):
@@ -347,17 +348,18 @@ def onestep(idx, dataset):
         #dataset.check()
         return False
 
-def Parameter():
+def Parameter(args):
     #todo
-    par = {"path":"./dataset/geniaquarter", "gen_0":[0.01, 0.001], "gen_1":[0.01, 0.001], "soncluster_alpha":0.5, "sonarg_alpha":0.75, \
-        "ClusterDistrConc":1.5, \
-         "n_sentences":10000, "seed":7, "model_path":"./model/", "init":True, "Distributed":False, "DF":True, \
-            "ExtVector":False,  "VectorDim":768}
+    par = {"path":args.data_path, "gen_0":args.gen_first_eta, "gen_1":args.gen_more_eta, "soncluster_alpha":args.cluster_alpha, "sonarg_alpha":args.arg_alpha, \
+        "ClusterDistrConc":args.ClusterDistrConc, \
+         "n_sentences":10000, "seed":args.seed, "model_path":args.output_path, "init":args.init, "Distributed":False, "DF":args.Df, \
+            "ExtVector":args.ExtVector,  "VectorDim":args.VectorDim}
     return par
 
-def main():
-    Max_epoch, success_cnt = 1500000, 0
-    parameters = Parameter()
+def main(args):
+    Max_epoch, success_cnt = args.n_epoch, 0
+    
+    parameters = Parameter(args)
     random.seed(parameters["seed"])
     dataset = Mydataset(parameters)
     for i in range(Max_epoch):
@@ -371,4 +373,21 @@ def main():
     #dataset.store()
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--data_path", default="./dataset/geniaquarter", type=str, required=True)
+    parser.add_argument("--output_path", default="./dataset", type=str, required=True)
+    parser.add_argument("--seed", default=7, type=int,
+                        help="Random seed.")
+    parser.add_argument("--Df", action="store_true", help="Dynamically adjust feature vectors of occurrences?")
+    parser.add_argument("--ExtVector", action="store_true", help="Extern precomputed feature vectors?")
+    parser.add_argument("--gen_first_eta", nargs='+', default=[0.01, 0.001], type=float, help="Parameters of generating first argument")
+    parser.add_argument("--gen_more_eta", nargs='+', default=[0.01, 0.001], type=float,
+                        help="Parameters of generating more arguments")
+    parser.add_argument("--cluster_alpha", default=0.5, type=float)
+    parser.add_argument("--arg_alpha", default=0.75, type=float)
+    parser.add_argument("--n_epoch", default=1500000, type=int)
+    parser.add_argument("--ClusterDistrConc", default=1.5, type=float)
+    parser.add_argument("--VectorDim", default=768, type=int)
+    parser.add_argument("--init", action="store_true", help="Initiallize dataset?")
+    args = parser.parse_args()
+    main(args)
