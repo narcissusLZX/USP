@@ -2,7 +2,7 @@ import random
 import math
 import copy
 import argparse
-from xmlrpc.client import Boolean
+import numpy as np
 
 from mydataset import Mydataset
 from cluster import Cluster
@@ -98,7 +98,23 @@ def CalcProb(dataset:Mydataset, newClusters):
         for cluster in newClusters:
             occs = cluster.GetAllOcc()
             for occ in occs:
-                Lprob_phrase += occ.PhraseLprob()
+                if (dataset.parameters["Distributed"]):
+                    vector = occ.getFeatureVector()
+                    norm1 = np.linalg.norm(vector)
+                    if (dataset.parameters["Faiss"]):
+                        #todo
+                        Lprob_phrase += dataset.
+                        vector = 1
+                    else:
+                        cnt = 0
+                        for other_occ in dataset.idx2occ.values():
+                            other_vector = other_occ.getFeatureVector()
+                            cos_sim = vector.dot(other_vector) / norm1 / np.linalg.norm(other_vector)
+                            if (cos_sim >= dataset.parameters["sim_threshold"]):
+                                cnt += 1
+                        Lprob_phrase = math.log(cnt) - math.log(len(dataset.idx2occ))
+                else:
+                    Lprob_phrase += occ.PhraseLprob()
 
     Lprob += Lprob_phrase
 
@@ -284,16 +300,26 @@ def accept(hyp, dataset:Mydataset):
         tokPair = occ1.token+","+occ2.token
         idx = 0
         for pair in dataset.TokPair2FaSon[tokPair]:
+            if (dataset.parameters["Faiss"]):
+                dataset.faiss_remove(pair[0])
+                dataset.faiss_remove(pair[1])
             Compose(pair[0], pair[1], hyp["new"][0], dataset)
             idx += 1
+            if (dataset.parameters["Faiss"]):
+                dataset.faiss_insert(pair[0])
         dataset.update(hyp["old"] + hyp["new"])
     elif dataset.proposal == "decompose":
         occ1, occ2 = hyp["occ"]
         tokPair = occ1.token+","+occ2.token
         idx = 0
         for pair in dataset.TokPair2FaSon[tokPair]: #对所有同样的父子节点对都要进行操作
+            if (dataset.parameters["Faiss"]):
+                dataset.faiss_remove(pair[0])
             Decompose(pair[0], pair[1], hyp["new"][0], hyp["new"][1], dataset)
             idx += 1
+            if (dataset.parameters["Faiss"]):
+                dataset.faiss_insert(pair[0])
+                dataset.faiss_insert(pair[1])
         dataset.update(hyp["old"] +hyp["new"])
     return
 
