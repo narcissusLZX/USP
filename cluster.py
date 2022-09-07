@@ -1,4 +1,3 @@
-import scipy as sp
 from occurrence import Occurrence
     
 

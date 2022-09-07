@@ -43,15 +43,16 @@ class Mydataset():
             self.loaddata()
             if (self.parameters["ExtVector"]):
                 self.loadVector()
-
+            
             self.precomputeVector()
             if self.parameters["Faiss"]:
                 self.faiss_quantizer = faiss.IndexFlatIP(self.parameters["VectorDim"])
-                self.span_index = faiss.IndexIVFFlat(self.faiss_quantizer, self.parameters["VectorDim"], 100, faiss.METRIC_INNER_PRODUCT) 
+                self.span_index = faiss.IndexIVFFlat(self.faiss_quantizer, self.parameters["VectorDim"], 8, faiss.METRIC_INNER_PRODUCT) 
                 data = [occ.featureVector for occ in self.idx2occ.values()]
                 data = np.array(data).astype('float32')
+                print(data.shape, self.parameters["VectorDim"])
                 self.span_index.train(data)
-                ids = np.arrange(len(self.idx2occ)).astype('int64')
+                ids = np.arange(len(self.idx2occ)).astype('int64')
                 self.span_index.add_with_ids(data, ids)
                 '''
                 self.faiss_quantizer_cluster = faiss.IndexFlatIP(self.parameters["VectorDim"])
@@ -113,8 +114,9 @@ class Mydataset():
                     self.tok2occ[tok].append(occ)
 
             if (len(self.sentences[self.n_sentence])==0):
-                self.n_sentence -= 1
                 self.sentences.pop()
+            else:
+                self.n_sentence+=1
 
         #dep
         with open(path+".dep", "r", encoding='utf-8') as f:
@@ -197,7 +199,7 @@ class Mydataset():
 
 
     def precomputeVector(self):
-        self.parameters["VectorDim"] += self.n_argType
+        self.parameters["VectorDim"] += self.n_argType*2
         for occ in self.idx2occ.values():
             occ.precomputeVector(self.n_argType)
 
@@ -262,26 +264,28 @@ class Mydataset():
 
 
     def getClusterbyClusterSimilarity(self, Cluster1:Cluster):
+        '''
         if self.parameters["Faiss"]:
             #todo
-
+            clusters = 
             return 
         else:
-            clusters = list(set(self.idx2cluster.values()))
-            clusters.remove(Cluster1)
-            prob = [self.CalcSimilarity(cluster, Cluster1) for cluster in clusters]
+            '''
+        clusters = list(set(self.idx2cluster.values()))
+        clusters.remove(Cluster1)
+        prob = [self.CalcSimilarity(cluster, Cluster1) for cluster in clusters]
 
-            scores = np.array(prob)
-            scores = np.exp(scores) / np.sum(np.exp(scores))
+        scores = np.array(prob)
+        scores = np.exp(scores) / np.sum(np.exp(scores))
 
-            selectProb = random.random()
-            sum = 0.0
-            for i in range(len(scores)):
-                sum += scores[i]
-                if (sum > selectProb):
-                    return clusters[i]
+        selectProb = random.random()
+        sum = 0.0
+        for i in range(len(scores)):
+            sum += scores[i]
+            if (sum > selectProb):
+                return clusters[i]
 
-            return clusters[-1]
+        return clusters[-1]
 
     def update(self, clusters):
         #print(clusters)

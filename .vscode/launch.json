@@ -10,7 +10,8 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args":["--data_path", "./dataset/exp_data", "--Df", "--init"],
+            "args":["--data_path", "./dataset/exp_data", "--Df", "--init", "--Faiss",
+                "--eval", "--eval_path", "./dataset/exp_question"],
             "justMyCode": true
         }
     ]

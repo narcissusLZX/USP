@@ -386,8 +386,8 @@ def Parameter(args):
     par = {"path":args.data_path, "gen_0":args.gen_first_eta, "gen_1":args.gen_more_eta, "soncluster_alpha":args.cluster_alpha, "sonarg_alpha":args.arg_alpha, \
         "ClusterDistrConc":args.ClusterDistrConc, \
          "n_sentences":10000, "seed":args.seed, "model_path":args.output_path, "init":args.init, "Distributed":False, "DF":args.Df, \
-            "ExtVector":args.ExtVector,  "VectorDim":args.VectorDim, \
-                "eval":args.eval, "eval_path":args.eval_path,"eval_ans":args.eval_ans}
+            "ExtVector":args.ExtVector,  "VectorDim":args.VectorDim, "Faiss":args.Faiss, \
+                "eval":args.eval, "eval_path":args.eval_path,"eval_ans":args.eval_ans, "eval_threshold":args.eval_threshold}
     return par
 
 def main(args):
@@ -405,15 +405,15 @@ def main(args):
             print("Converge after {} steps.".format(i))
             break
         #dataset.check()
-    
-    eval = Evaluation(dataset)
+    if dataset.parameters["eval"]:
+        eval = Evaluation(dataset.parameters, dataset)
     #dataset.store()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--data_path", default="./dataset/geniaquarter", type=str)
     parser.add_argument("--output_path", default="./dataset", type=str)
-    parser.add_argument("--seed", default=7, type=int,
+    parser.add_argument("--seed", default=42, type=int,
                         help="Random seed.")
     parser.add_argument("--Df", action="store_true", help="Dynamically adjust feature vectors of occurrences?")
     parser.add_argument("--ExtVector", action="store_true", help="Extern precomputed feature vectors?")
@@ -429,5 +429,7 @@ if __name__ == '__main__':
     parser.add_argument("--eval", action="store_true", help="Evaluation?")
     parser.add_argument("--eval_path", default=None, type=str)
     parser.add_argument("--eval_ans", action="store_true", help="Match ans?")
+    parser.add_argument("--Faiss", action="store_true")
+    parser.add_argument("--eval_threshold", default=0.8, type=float)
     args = parser.parse_args()
     main(args)
