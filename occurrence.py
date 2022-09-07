@@ -16,15 +16,16 @@ class Occurrence():
         self.sonArgType2Arg = {}  #ArgType->Arg List
         self.faArg = None
         self.idx = dataset.newOccurenceidx(self)
-        self.featureVector = [0]
+        self.featureVector = np.array([])
         self.label = self.idx
 
     def precomputeVector(self, n_argType):
-        self.featureVector = np.zeros(2*n_argType)
+        featureVector = np.zeros(2*n_argType)
         if self.faArg != None:
-            self.featureVector[self.dataset.argtype2idx[self.faArg.argType]-1] += 1
+            featureVector[self.dataset.argtype2idx[self.faArg.argType]-1] += 1
         for argType, arg in self.sonArgType2Arg.items():
-            self.featureVector[self.dataset.argtype2idx[argType]+n_argType-1] += len(arg)
+            featureVector[self.dataset.argtype2idx[argType]+n_argType-1] += len(arg)
+        self.featureVector.concatenate(featureVector)
 
     def addSonArg(self, arg):
         if arg.argType not in self.sonArgType2Arg:

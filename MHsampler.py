@@ -103,8 +103,7 @@ def CalcProb(dataset:Mydataset, newClusters):
                     norm1 = np.linalg.norm(vector)
                     if (dataset.parameters["Faiss"]):
                         #todo
-                        Lprob_phrase += dataset.
-                        vector = 1
+                        Lprob_phrase += dataset.faiss_calcLprob(vector)
                     else:
                         cnt = 0
                         for other_occ in dataset.idx2occ.values():
@@ -112,7 +111,7 @@ def CalcProb(dataset:Mydataset, newClusters):
                             cos_sim = vector.dot(other_vector) / norm1 / np.linalg.norm(other_vector)
                             if (cos_sim >= dataset.parameters["sim_threshold"]):
                                 cnt += 1
-                        Lprob_phrase = math.log(cnt) - math.log(len(dataset.idx2occ))
+                        Lprob_phrase += math.log(cnt) - math.log(len(dataset.idx2occ))
                 else:
                     Lprob_phrase += occ.PhraseLprob()
 
@@ -402,6 +401,9 @@ def main(args):
             success_cnt += 1
         if (i % 1000 == 0):
             print("Step {} done".format(i))
+        if (success_cnt * 10 < i):
+            print("Converge after {} steps.".format(i))
+            break
         #dataset.check()
     
     eval = Evaluation(dataset)
@@ -422,7 +424,7 @@ if __name__ == '__main__':
     parser.add_argument("--arg_alpha", default=0.75, type=float)
     parser.add_argument("--n_epoch", default=1500000, type=int)
     parser.add_argument("--ClusterDistrConc", default=1.5, type=float)
-    parser.add_argument("--VectorDim", default=768, type=int)
+    parser.add_argument("--VectorDim", default=0, type=int)
     parser.add_argument("--init", action="store_true", help="Initiallize dataset?")
     parser.add_argument("--eval", action="store_true", help="Evaluation?")
     parser.add_argument("--eval_path", default=None, type=str)

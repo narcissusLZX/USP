@@ -39,11 +39,12 @@ class Mydataset():
         self.n_argType = 0
         self.dynamic_features = parameters["DF"]
 
-        self.Lprob = 0.
         if (self.parameters["init"]):
             self.loaddata()
-            if (not self.parameters["ExtVector"]):
-                self.precomputeVector()
+            if (self.parameters["ExtVector"]):
+                self.loadVector()
+
+            self.precomputeVector()
             if self.parameters["Faiss"]:
                 self.faiss_quantizer = faiss.IndexFlatIP(self.parameters["VectorDim"])
                 self.span_index = faiss.IndexIVFFlat(self.faiss_quantizer, self.parameters["VectorDim"], 100, faiss.METRIC_INNER_PRODUCT) 
@@ -196,6 +197,7 @@ class Mydataset():
 
 
     def precomputeVector(self):
+        self.parameters["VectorDim"] += self.n_argType
         for occ in self.idx2occ.values():
             occ.precomputeVector(self.n_argType)
 
@@ -298,6 +300,14 @@ class Mydataset():
     def faiss_remove(self, occ:Occurrence):
         occ = occ.getTop()
         self.span_index.remove_ids(np.array([occ.idx]).astype('int64'))
+
+    def faiss_calcLprob(self, vector, K=20):
+        D, I = self.span_index.search(np.array(vector).astype("float32"), K)
+        ret = 0
+        for distance in D:
+            if (distance >= self.parameters["sim_threshold"]):
+                ret += 1
+        return ret
     
     def faiss_insert(self, occ:Occurrence):
         occ = occ.getTop()
