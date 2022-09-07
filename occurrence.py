@@ -109,7 +109,7 @@ class Occurrence():
     def getFeatureVector(self):
         if self.dataset.dynamic_features:
             ret = self.sumFeatureVector()
-            ret = ret / ret.sum()
+            ret = ret / np.linalg.norm(ret)
             return ret
         else:
             return self.featureVector

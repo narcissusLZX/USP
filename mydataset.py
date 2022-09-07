@@ -1,6 +1,7 @@
 import random
 import numpy as np
 import os
+import faiss
 
 from cluster import Cluster
 from occurrence import Occurrence
@@ -36,7 +37,6 @@ class Mydataset():
         self.evalAns = []
 
         self.n_argType = 0
-        self.faiss_index = []#todo
         self.dynamic_features = parameters["DF"]
 
         self.Lprob = 0.
@@ -44,6 +44,28 @@ class Mydataset():
             self.loaddata()
             if (not self.parameters["ExtVector"]):
                 self.precomputeVector()
+            if self.parameters["Faiss"]:
+                self.faiss_quantizer = faiss.IndexFlatIP(self.parameters["VectorDim"])
+                self.span_index = faiss.IndexIVFFlat(self.faiss_quantizer, self.parameters["VectorDim"], 100, faiss.METRIC_INNER_PRODUCT) 
+                data = [occ.featureVector for occ in self.idx2occ.values()]
+                data = np.array(data).astype('float32')
+                self.span_index.train(data)
+                ids = np.arrange(len(self.idx2occ)).astype('int64')
+                self.span_index.add_with_ids(data, ids)
+                '''
+                self.faiss_quantizer_cluster = faiss.IndexFlatIP(self.parameters["VectorDim"])
+                self.cluster_index = faiss.IndexIVFFlat(self.faiss_quantizer_cluster, self.parameters["VectorDim"], 100, faiss.METRIC_INNER_PRODUCT)
+                data = []
+                for cluster in self.idx2cluster.values():
+                    vector = self.GetFeatureVector(cluster)
+                    vector = self.normalize(vector)
+                    data.append(vector)
+                data = np.array(data).astype('float32')
+                ids = np.arrage(len(self.idx2cluster)).astype('int64')
+                self.cluster_index.train(data)
+                self.cluster_index.add_with_ids(data, ids)
+                
+                '''
         else:
             self.load()
 
@@ -64,6 +86,10 @@ class Mydataset():
         '''
 
         return ret
+
+    def normalize(self, vector):
+        vector = np.array(vector).astype('float32')
+        return vector / np.linalg.norm(vector)
 
     def readin(self, path):
         idx, idx2 = self.n_sentence, self.n_sentence
@@ -234,7 +260,7 @@ class Mydataset():
 
 
     def getClusterbyClusterSimilarity(self, Cluster1:Cluster):
-        if self.parameters["Distributed"]:
+        if self.parameters["Faiss"]:
             #todo
 
             return 
@@ -269,6 +295,14 @@ class Mydataset():
             if (len(cluster.Span2Occurr) == 0):
                 print(idx)
 
+    def faiss_remove(self, occ:Occurrence):
+        occ = occ.getTop()
+        self.span_index.remove_ids(np.array([occ.idx]).astype('int64'))
+    
+    def faiss_insert(self, occ:Occurrence):
+        occ = occ.getTop()
+        vector = occ.getFeatureVector()
+        self.span_index.add_with_ids(np.array([vector]).astype('float32'), np.array([occ.idx]).astype('int64'))
         
     def store(self):
         path = self.parameters["model_path"]
@@ -280,6 +314,7 @@ class Mydataset():
                 f.write(self)
 
     def load(self):
+        #todo
         path = self.parameters["model_path"]
         if not os.path.exists(path):
             print("Load Model Error!")
@@ -303,7 +338,7 @@ class Mydataset():
         result = tgt_occ.qry(faArg.father.token, faArg.argType)
         ans = []
         correct_cnt = 0
-        for span in result:
+        for span in result: 
             bounds = span[1]
             ans.append(self.sentences[bounds[0]-1:bounds[1]])
             if (self.parameters["eval_ans"]):
