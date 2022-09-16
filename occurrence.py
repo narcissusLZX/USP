@@ -8,21 +8,56 @@ class Occurrence():
         clusteridx:类别序号
         pos: 出现位置[x,y]第x个样本第y个位置
     '''
-    def __init__(self, token, dataset, pos=[-1,-1], clusteridx = 0):
+    def __init__(self, token, dataset, idx = -1, pos=[-1,-1], clusteridx = 0):
         self.dataset = dataset
         self.token = token
         self.clusteridx = clusteridx
         self.pos = pos
         self.sonArgType2Arg = {}  #ArgType->Arg List
         self.faArg = None
-        self.idx = dataset.newOccurenceidx(self)
-        self.featureVector = np.zeros(self.dataset.parameters["VectorDim"])
+        if (idx == -1):
+            self.idx = dataset.newOccurrenceidx(self)
+        else:
+            self.idx = idx
+        self.featureVector = np.zeros(self.dataset.args.VectorDim)
         self.label = self.idx
+    
+    def store(self):
+        data = {}
+        data["token"] = self.token
+        data["clusteridx"] = self.clusteridx
+        if (self.faArg == None):
+            data["faArg"] = -1
+        else:
+            data["faArg"] = self.faArg.idx
+        data["pos"] = self.pos
+        data["idx"] = self.idx
+        data["label"] = self.label
+        data["featureVector"] = self.featureVector.tolist() #另外保存？
+        data["sonArgType2Arg"] = {}
+        for ArgType, Args in self.sonArgType2Arg.items():
+            data["sonArgType2Arg"][ArgType] = [arg.idx for arg in Args]
+        return data
+    
+    def load(self, data):
+        self.clusteridx = int(data["clusteridx"])
+        if (int(data["faArg"]) == -1):
+            self.faArg = None
+        else:
+            self.faArg = self.dataset.idx2arg[int(data["faArg"])]
+        self.token = data["token"]
+        self.pos = data["pos"] #check
+        self.label = int(data["label"])
+        self.featureVector = np.array(data["featureVector"])
+        for ArgType, arg_idxs in data["sonArgType2Arg"].items():
+            self.sonArgType2Arg[ArgType] = [self.dataset.idx2arg[int(arg_idx)] for arg_idx in arg_idxs]
 
     def precomputeVector(self, n_argType):
-        featureVector = np.zeros(2*n_argType)
+        featureVector = np.zeros(2*n_argType+1)
         if self.faArg != None:
             featureVector[self.dataset.argtype2idx[self.faArg.argType]-1] += 1
+        else:
+            featureVector[2*n_argType] = 1
         for argType, arg in self.sonArgType2Arg.items():
             featureVector[self.dataset.argtype2idx[argType]+n_argType-1] += len(arg)
         self.featureVector = np.concatenate((self.featureVector, featureVector), axis=0)
@@ -110,6 +145,8 @@ class Occurrence():
     def getFeatureVector(self):
         if self.dataset.dynamic_features:
             ret = self.sumFeatureVector()
+            if (np.linalg.norm(ret) == 0):
+                print("here")
             ret = ret / np.linalg.norm(ret)
             return ret
         else:

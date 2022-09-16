@@ -1,6 +1,6 @@
 import random
 import math
-import copy
+from tqdm import tqdm
 import argparse
 import numpy as np
 
@@ -34,7 +34,7 @@ def extract(listinlist):
             ret.extend(x)
         else:
             ret.append(x)
-    return ret
+    return list(set(ret))
 
 def CalcProb(dataset:Mydataset, newClusters):
     newClusters = extract(newClusters)
@@ -57,15 +57,15 @@ def CalcProb(dataset:Mydataset, newClusters):
                 SonArgtype = [dataset.idx2arg[x].argType for x in SonArgAfterCompose]
                 if argType in SonArgtype:
                     t_diff += 1
-            LprobNum += LogCalcCompoundBinomial(t_diff, t_occ-t_diff, dataset.parameters["gen_0"])
-            LprobNum += LogCalcCompoundBinomial(t_arg-t_diff, t_diff, dataset.parameters["gen_1"])
+            LprobNum += LogCalcCompoundBinomial(t_diff, t_occ-t_diff, dataset.args.gen_first_eta)
+            LprobNum += LogCalcCompoundBinomial(t_arg-t_diff, t_diff, dataset.args.gen_more_eta)
     Lprob += LprobNum
 
     Lprob1 = 0.
     for cluster in newClusters:
         SonClusters = cluster.GetSonCluster()
         for sonCluster, num in SonClusters.items():
-            Lprob1 += math.lgamma(num-dataset.parameters["soncluster_alpha"])-math.lgamma(1-dataset.parameters["soncluster_alpha"])
+            Lprob1 += math.lgamma(num-dataset.args.cluster_alpha)-math.lgamma(1-dataset.args.cluster_alpha)
 
     Lprob += Lprob1
 
@@ -78,7 +78,7 @@ def CalcProb(dataset:Mydataset, newClusters):
             SonArgs.extend(SonArgAfterCompose)
         SonArgCount = List2Countdict(SonArgs)
         for argType in SonArgCount.keys():
-            Lprob2 += math.lgamma(dataset.parameters["ClusterDistrConc"])
+            Lprob2 += math.lgamma(dataset.args.ClusterDistrConc)
             SonCluster = []
             for occ in occs:
                 if argType not in occ.sonArgType2Arg:
@@ -89,7 +89,7 @@ def CalcProb(dataset:Mydataset, newClusters):
                     SonCluster.append(cluster_idx)
             SonClusterCount = List2Countdict(SonCluster)
             for clusteridx, num in SonClusterCount.items():
-                Lprob2 += math.lgamma(num-dataset.parameters["sonarg_alpha"])-math.lgamma(1-dataset.parameters["sonarg_alpha"])
+                Lprob2 += math.lgamma(num-dataset.args.arg_alpha)-math.lgamma(1-dataset.args.arg_alpha)
 
     Lprob += Lprob2
 
@@ -98,10 +98,10 @@ def CalcProb(dataset:Mydataset, newClusters):
         for cluster in newClusters:
             occs = cluster.GetAllOcc()
             for occ in occs:
-                if (dataset.parameters["Distributed"]):
+                if (dataset.args.Distributed):
                     vector = occ.getFeatureVector()
                     norm1 = np.linalg.norm(vector)
-                    if (dataset.parameters["Faiss"]):
+                    if (dataset.args.Faiss):
                         #todo
                         Lprob_phrase += dataset.faiss_calcLprob(vector)
                     else:
@@ -109,7 +109,7 @@ def CalcProb(dataset:Mydataset, newClusters):
                         for other_occ in dataset.idx2occ.values():
                             other_vector = other_occ.getFeatureVector()
                             cos_sim = vector.dot(other_vector) / norm1 / np.linalg.norm(other_vector)
-                            if (cos_sim >= dataset.parameters["sim_threshold"]):
+                            if (cos_sim >= dataset.args.sim_threshold):
                                 cnt += 1
                         Lprob_phrase += math.log(cnt) - math.log(len(dataset.idx2occ))
                 else:
@@ -121,7 +121,7 @@ def CalcProb(dataset:Mydataset, newClusters):
 
 
 
-#不会多状态并存，也即每次保存的为proposal的状态，若reject要复原
+#不会多状态并存，在resume时会还原，所以accept要更新
 
 #compose后应该是新的类还是同父结点的类？ 目前是新的类
 
@@ -141,6 +141,7 @@ def Merge(cluster1:Cluster, cluster2:Cluster, mergeCluster:Cluster): #merge (clu
 
 def generate_merge(Cluster1:Cluster, dataset:Mydataset):
 
+    #print("Merge")
     dataset.proposal = "merge"
    
     Cluster2 = dataset.getClusterbyClusterSimilarity(Cluster1)
@@ -159,7 +160,8 @@ def generate_merge(Cluster1:Cluster, dataset:Mydataset):
 def generate_split(oldcluster:Cluster, dataset:Mydataset): #需提前判定oldcluster内的数量>1
 
     dataset.proposal = "split"
-
+    
+    #print("Split")
     def createSplit(cluster:Cluster):
         Spans = list(cluster.Span2Occurr.keys())
         span1, span2 = random.sample(Spans, 2)
@@ -269,16 +271,20 @@ def generate_composedecompose(dataset:Mydataset):
     occ1, occ2 = dataset.getRandomPair()
 
     if (occ1.label == occ2.label):
+        
+        #print("Decompose")
         cluster1, cluster2, oldClusters = createDecompose(occ1, occ2, dataset)
         dataset.proposal = "decompose"
         return {"new":[cluster1, cluster2], "old":oldClusters, "occ":[occ1, occ2]}
     else:
+        #print("Compose")
         dataset.proposal = "compose"
         oldClusters, newCluster = createCompose(occ1, occ2, dataset)
         return {"new":[newCluster], "old":oldClusters, "occ":[occ1, occ2]}
 
 def accept(hyp, dataset:Mydataset):
-    print("Accepet "+dataset.proposal)
+    #print("Accepet "+dataset.proposal)
+    #dataset.faiss_cluster_remove(extract(hyp["new"]+hyp["old"]))
     if dataset.proposal == "merge":
         Merge(hyp["old"][0], hyp["old"][1], hyp["new"][0])
         dataset.removeCluster(hyp["old"][0])
@@ -299,31 +305,30 @@ def accept(hyp, dataset:Mydataset):
         tokPair = occ1.token+","+occ2.token
         idx = 0
         for pair in dataset.TokPair2FaSon[tokPair]:
-            if (dataset.parameters["Faiss"]):
+            if (dataset.args.Faiss):
                 dataset.faiss_remove(pair[0])
                 dataset.faiss_remove(pair[1])
             Compose(pair[0], pair[1], hyp["new"][0], dataset)
             idx += 1
-            if (dataset.parameters["Faiss"]):
+            if (dataset.args.Faiss):
                 dataset.faiss_insert(pair[0])
-        dataset.update(hyp["old"] + hyp["new"])
     elif dataset.proposal == "decompose":
         occ1, occ2 = hyp["occ"]
         tokPair = occ1.token+","+occ2.token
         idx = 0
         for pair in dataset.TokPair2FaSon[tokPair]: #对所有同样的父子节点对都要进行操作
-            if (dataset.parameters["Faiss"]):
+            if (dataset.args.Faiss):
                 dataset.faiss_remove(pair[0])
             Decompose(pair[0], pair[1], hyp["new"][0], hyp["new"][1], dataset)
             idx += 1
-            if (dataset.parameters["Faiss"]):
+            if (dataset.args.Faiss):
                 dataset.faiss_insert(pair[0])
                 dataset.faiss_insert(pair[1])
-        dataset.update(hyp["old"] +hyp["new"])
+    dataset.update(extract(hyp["old"] +hyp["new"]))
     return
 
 def reject(hyp, dataset:Mydataset):
-    dataset.update(hyp["new"]+ hyp["old"])
+    dataset.update(extract(hyp["new"]+ hyp["old"]))
 
     return 
 
@@ -361,8 +366,11 @@ def CalcAcceptRatio(hyp, dataset):
     NewLprob = CalcProb(dataset, hyp["new"])
     resume(hyp, dataset)
     OldLprob = CalcProb(dataset, hyp["old"])
+    if (NewLprob > OldLprob):
+        return 1
+    if (NewLprob - OldLprob < -20):
+        return 20
     return math.exp(NewLprob-OldLprob)
-
 
 def onestep(idx, dataset):
     rd = random.random()
@@ -381,33 +389,25 @@ def onestep(idx, dataset):
         #dataset.check()
         return False
 
-def Parameter(args):
-    #todo
-    par = {"path":args.data_path, "gen_0":args.gen_first_eta, "gen_1":args.gen_more_eta, "soncluster_alpha":args.cluster_alpha, "sonarg_alpha":args.arg_alpha, \
-        "ClusterDistrConc":args.ClusterDistrConc, \
-         "n_sentences":10000, "seed":args.seed, "model_path":args.output_path, "init":args.init, "Distributed":False, "DF":args.Df, \
-            "ExtVector":args.ExtVector,  "VectorDim":args.VectorDim, "Faiss":args.Faiss, \
-                "eval":args.eval, "eval_path":args.eval_path,"eval_ans":args.eval_ans, "eval_threshold":args.eval_threshold}
-    return par
-
 def main(args):
     Max_epoch, success_cnt = args.n_epoch, 0
 
-    parameters = Parameter(args)
-    random.seed(parameters["seed"])
-    dataset = Mydataset(parameters)
-    for i in range(Max_epoch):
+    random.seed(args.seed)
+    dataset = Mydataset(args)
+    for i in tqdm(range(args.start_epoch, Max_epoch)):
         if (onestep(i, dataset)):
             success_cnt += 1
-        if (i % 1000 == 0):
-            print("Step {} done".format(i))
-        if (success_cnt * 10 < i):
+        #if (i % 1000 == 0):
+            #print("Step {} done".format(i))
+        if (success_cnt * 10 < (i-args.start_epoch)):
             print("Converge after {} steps.".format(i))
             break
+        if ((i+1) % args.save_per_epoch == 0):
+            dataset.store(args.model_path+str(i)+".json")
         #dataset.check()
-    if dataset.parameters["eval"]:
-        eval = Evaluation(dataset.parameters, dataset)
-    #dataset.store()
+    if dataset.args.eval:
+        eval = Evaluation(dataset.args, dataset)
+    dataset.store(args.model_path+"final.json")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -431,5 +431,11 @@ if __name__ == '__main__':
     parser.add_argument("--eval_ans", action="store_true", help="Match ans?")
     parser.add_argument("--Faiss", action="store_true")
     parser.add_argument("--eval_threshold", default=0.8, type=float)
+    parser.add_argument("--model_path", default="./model/", type=str)
+    parser.add_argument("--save_per_epoch", default=10000, type=int)
+    parser.add_argument("--load_model_path", type=str)
+    parser.add_argument("--start_epoch", default=0, type=int)
+    parser.add_argument("--sim_threshold", default=0.8, type=float)
+    parser.add_argument("--Distributed", action="store_true")
     args = parser.parse_args()
     main(args)

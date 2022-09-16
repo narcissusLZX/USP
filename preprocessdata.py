@@ -1,7 +1,7 @@
 import os
 import glob
 import nltk
-
+ 
 '''
 path = "./genia/"
 files = glob.glob(os.path.join(path, "*.dep"))
@@ -35,6 +35,7 @@ for file in files:
 '''
 
 
+'''
 
 path = "./dataset/questions.txt"
 snowballStemmer = nltk.stem.SnowballStemmer('english')
@@ -71,7 +72,8 @@ with open(path, "r", encoding="utf-8") as f:
             continue
         if (a[0] == "punct"):
             continue
-        b = a[1].split(",")
-        c = ",".join(b[1:])
+        a[1] = "(".join(a[1:])
+        b = a[1].split(", ")
+        c = ", ".join(b[1:])
         f_dep.write(a[0]+" "+b[0]+" "+c.strip()[:-1]+"\n")
-'''
+       

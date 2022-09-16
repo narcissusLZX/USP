@@ -16,11 +16,16 @@ class Cluster():
         self.idx = idx
         return
 
-    def __str__(self):
-        ret = "span:"
-        for span, occ in self.Span2Occurr.items():
-            ret += span+","
-        return ret
+    def store(self):
+        data = {"idx":self.idx, "Span2Occurr":{}}
+        for span, occs in self.Span2Occurr.items():
+            occs_idx = [occ.idx for occ in occs]
+            data["Span2Occurr"][span] = occs_idx
+        return data
+
+    def load(self, data):
+        for span, occs_idx in data["Span2Occurr"].items():
+            self.Span2Occurr[span] = [self.dataset.idx2occ[int(occ_idx)] for occ_idx in occs_idx]
 
     def GetAllOcc(self): #返回Occurrence列表
         ret = []
