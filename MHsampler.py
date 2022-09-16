@@ -1,5 +1,6 @@
 import random
 import math
+from turtle import title
 from tqdm import tqdm
 import argparse
 import numpy as np
@@ -43,11 +44,8 @@ def CalcProb(dataset:Mydataset, newClusters):
     for cluster in newClusters:
         occs = cluster.GetAllOcc()
         t_occ = len(occs)
-        SonArgs = []
-        for occ in occs:
-            SonArgAfterCompose = occ.getTop().getNowSon()
-            SonArgs.extend(SonArgAfterCompose)
-        SonArgs = [dataset.idx2arg[x].argType for x in SonArgs]
+        SonArgs = cluster.GetSonArgs()
+        SonArgs = [dataset.idx2arg[idx].argType for idx in SonArgs]
         SonArgCount = List2Countdict(SonArgs)
 
         for argType, t_arg in SonArgCount.items():
@@ -61,13 +59,79 @@ def CalcProb(dataset:Mydataset, newClusters):
             LprobNum += LogCalcCompoundBinomial(t_arg-t_diff, t_diff, dataset.args.gen_more_eta)
     Lprob += LprobNum
 
-    Lprob1 = 0.
+    LprobOut1 = 0.
+    for cluster in newClusters:
+        SonClusters = cluster.GetSonCluster()
+        for sonCluster in SonClusters:
+            if sonCluster in newClusters:
+                continue
+            occs = sonCluster.GetAllOcc()
+            faArgType = set([occ.faArg.argType for occ in occs if occ.faArg != None])
+            LprobOut1 += math.lgamma(len(faArgType)-dataset.args.arg_alpha)-math.lgamma(1-dataset.args.arg_alpha)
+
+    LprobInto1 = 0.
+    
+    intoChildrenBefore = len(dataset.idx2cluster) - len(newClusters)
+    for cluster in newClusters:
+        occs = cluster.GetAllOcc()
+        faArgType = set([occ.faArg.argType for occ in occs if occ.faArg != None])
+        LprobInto1 += math.log(dataset.args.SuperConc + intoChildrenBefore * dataset.args.arg_alpha)
+        LprobInto1 += math.lgamma(len(faArgType) - dataset.args.arg_alpha) - math.lgamma(1-dataset.args.arg_alpha)
+        intoChildrenBefore += 1
+    	
+    Lprob += LprobInto1 - math.lgamma(dataset.n_argType + dataset.args.SuperConc)
+
+    LprobOut2 = 0.
+    for cluster in newClusters:
+        SonArgs = cluster.GetSonArgs()
+        SonArgType2Cluster = {}
+        for sonarg in SonArgs:
+            if (sonarg not in SonArgType2Cluster):
+                SonArgType2Cluster[sonarg] = []
+            SonArgType2Cluster[sonarg].append(sonarg.son.clusteridx)
+        SonArgTypes = [SonArg.argType for SonArg in SonArgs]
+        SonArgCount = List2Countdict(SonArgTypes)
+        for argType, num in SonArgCount.items():
+            LprobOut2 += math.lgamma(dataset.args.cluster_Conc)
+            ChildrenBefore = len(set(SonArgType2Cluster[argType]))
+		
+            #boolean isConjArg = _isConjArg(at, hyp)
+				
+			for soncluster in at.childClustersDelta(hypForDelta)) {
+					
+					//  if cc = some of the new clusters -- skip
+					boolean contained = false;
+					for (Cluster currC : clusters) {
+						if (currC.equals(cc)) {
+							contained = true;
+						}
+					}
+					if (contained) {
+						continue;
+					}
+
+					
+					if (at.getOccurNum(hyp, cc) > 0) {
+						lprobOut2 += Math.log(mp.getClusterDistrConc() + childrenBefore * mp.getClusterDistrPyDiscount());
+						lprobOut2 += Stats.lgamma(at.getOccurNum(hyp, cc) - mp.getClusterDistrPyDiscount()); //argument type的狄利克雷过程概率
+						lprobOut2 -= clLgammaDiscount;
+						childrenBefore++;
+						if (isConjArg && cc.equals(at.getClusterLabel())) {
+							lprobOut2 -= mp.getSelfConjunctionWeight() * at.getOccurNum(hyp, cc);
+						}  
+					}
+				}	
+				lprobOut2 -= Stats.lgamma(mp.getArgFormConc() + atOccurNum);
+			}
+		}
+
+
     for cluster in newClusters:
         SonClusters = cluster.GetSonCluster()
         for sonCluster, num in SonClusters.items():
-            Lprob1 += math.lgamma(num-dataset.args.cluster_alpha)-math.lgamma(1-dataset.args.cluster_alpha)
+            LprobOut1 += math.lgamma(num-dataset.args.cluster_alpha)-math.lgamma(1-dataset.args.cluster_alpha)
 
-    Lprob += Lprob1
+    Lprob += LprobOut1
 
     Lprob2 = 0.
     for cluster in newClusters:
@@ -417,11 +481,7 @@ if __name__ == '__main__':
                         help="Random seed.")
     parser.add_argument("--Df", action="store_true", help="Dynamically adjust feature vectors of occurrences?")
     parser.add_argument("--ExtVector", action="store_true", help="Extern precomputed feature vectors?")
-    parser.add_argument("--gen_first_eta", nargs='+', default=[0.01, 0.001], type=float, help="Parameters of generating first argument")
-    parser.add_argument("--gen_more_eta", nargs='+', default=[0.01, 0.001], type=float,
-                        help="Parameters of generating more arguments")
-    parser.add_argument("--cluster_alpha", default=0.5, type=float)
-    parser.add_argument("--arg_alpha", default=0.75, type=float)
+
     parser.add_argument("--n_epoch", default=1500000, type=int)
     parser.add_argument("--ClusterDistrConc", default=1.5, type=float)
     parser.add_argument("--VectorDim", default=0, type=int)
@@ -437,5 +497,13 @@ if __name__ == '__main__':
     parser.add_argument("--start_epoch", default=0, type=int)
     parser.add_argument("--sim_threshold", default=0.8, type=float)
     parser.add_argument("--Distributed", action="store_true")
+    model_args = parser.add_argument_group(title="Parameters of model")
+    model_args.add_argument("--superConc", default=591, type=float, help="gamma. Larger the value: larger total number of clusters, smaller the clusters.")
+    model_args.add_argument("--cluster_Conc", default=1.5, type=float)
+    model_args.add_argument("--gen_first_eta", nargs='+', default=[0.01, 0.001], type=float, help="Parameters of generating first argument")
+    model_args.add_argument("--gen_more_eta", nargs='+', default=[0.01, 0.001], type=float,
+                        help="Parameters of generating more arguments")
+    model_args.add_argument("--cluster_alpha", default=0.5, type=float)
+    model_args.add_argument("--arg_alpha", default=0.5, type=float)
     args = parser.parse_args()
     main(args)

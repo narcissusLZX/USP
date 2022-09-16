@@ -45,6 +45,14 @@ class Cluster():
                 else:
                     ret[son.clusteridx] = 0
         return ret
+
+    def GetSonArgs(self): #返回子Arg list
+        SonArgs = []
+        occs = self.GetAllOcc()
+        for occ in occs:
+            SonArgAfterCompose = occ.getTop().getNowSon()
+            SonArgs.extend(SonArgAfterCompose)
+        return SonArgs
  
     def ins(self, Occ:Occurrence): #会在这里更改Occ的cluster
         span = Occ.token
