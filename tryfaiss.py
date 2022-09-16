@@ -3,15 +3,15 @@ import numpy as np
 
 d = 768  # 维数
  
-data = [[0]*d for _ in range(500)]
+data = [[0]*d for _ in range(500000)]
 for i in range(500):
     data[i][i] = 1
 data = np.array(data).astype('float32')
 # centers = int(8 * math.sqrt(len(data)))
-ids = np.arange(2000, 2500).astype('int64')
+ids = np.arange(500000).astype('int64')
  
  
- 
+
 nlist = 100
 m = 8
 
@@ -20,8 +20,14 @@ quantizer = faiss.IndexFlatIP(d)  # 内部的索引方式依然不变
 # index = faiss.IndexIVFPQ(quantizer, d, nlist, m, 8)  # PQ方式，每个向量都被编码为8个字节大小
 index = faiss.IndexIVFFlat(quantizer, d, nlist, faiss.METRIC_INNER_PRODUCT)  # 这个索引支持add_with_ids
 index.train(data)
-print(data)
 index.add_with_ids(data,ids)
+
+print("start")
+query_vector = np.array([[0]+[3]+[0]*766]).astype('float32')
+dis, ind = index.search(query_vector, 10)
+print(ind)
+#print(data)
+'''
 print(index.is_trained)
  
 # index.nprobe = 10  # 选择n个维诺空间进行索引,
@@ -69,3 +75,4 @@ query_vector = np.array([[1] * 768]).astype('float32')
 dis, ind = index.search(query_vector, 1)
 print(f'\n全1向量的最近的向量id为{ind}')
 print(dis)
+''' 

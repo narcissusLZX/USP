@@ -10,8 +10,8 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args":["--data_path", "./dataset/exp_data", "--Df", "--init", "--Faiss",
-                "--eval", "--eval_path", "./dataset/exp_question"],
+            "args":["--data_path", "./dataset/exp_data", "--Df", "--Faiss", "--start_epoch", "0", "--init", "--Distributed",
+                "--eval", "--eval_path", "./dataset/exp_question", "--n_epoch", "1500000", "--load_model_path", "./model/99.json"],
             "justMyCode": true
         }
     ]
