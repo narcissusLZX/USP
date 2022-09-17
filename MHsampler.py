@@ -93,39 +93,33 @@ def CalcProb(dataset:Mydataset, newClusters):
         SonArgCount = List2Countdict(SonArgTypes)
         for argType, num in SonArgCount.items():
             LprobOut2 += math.lgamma(dataset.args.cluster_Conc)
-            ChildrenBefore = len(set(SonArgType2Cluster[argType]))
-		
-            #boolean isConjArg = _isConjArg(at, hyp)
-				
-			for soncluster in at.childClustersDelta(hypForDelta)) {
-					
-					//  if cc = some of the new clusters -- skip
-					boolean contained = false;
-					for (Cluster currC : clusters) {
-						if (currC.equals(cc)) {
-							contained = true;
-						}
-					}
-					if (contained) {
-						continue;
-					}
+            SonClusters = List2Countdict(SonArgType2Cluster[argType])
+            ChildrenBefore = len(SonClusters)
+		    #isConjArg = _isConjArg(at, hyp)
+            for soncluster, clusternum in SonClusters.items():
+                if soncluster in newClusters:
+                    continue
+                LprobOut2 += math.log(dataset.args.cluster_Conc+ChildrenBefore*dataset.args.cluster_alpha)
+                LprobOut2 += math.lgamma(clusternum-dataset.args.cluster_alpha)-math.lgamma(1-dataset.args.cluster_alpha)
+                ChildrenBefore += 1
+                '''
+                if (isConjArg and soncluster.)
+                '''
+            LprobOut2 -= math.lgamma(dataset.args.arg_Conc + num)
 
-					
-					if (at.getOccurNum(hyp, cc) > 0) {
-						lprobOut2 += Math.log(mp.getClusterDistrConc() + childrenBefore * mp.getClusterDistrPyDiscount());
-						lprobOut2 += Stats.lgamma(at.getOccurNum(hyp, cc) - mp.getClusterDistrPyDiscount()); //argument type的狄利克雷过程概率
-						lprobOut2 -= clLgammaDiscount;
-						childrenBefore++;
-						if (isConjArg && cc.equals(at.getClusterLabel())) {
-							lprobOut2 -= mp.getSelfConjunctionWeight() * at.getOccurNum(hyp, cc);
-						}  
-					}
-				}	
-				lprobOut2 -= Stats.lgamma(mp.getArgFormConc() + atOccurNum);
-			}
-		}
+    LprobInto2 = 0.
+    for cluster in newClusters:
+        occs = cluster.GetAllOcc()
+        faArgType = [occ.faArg.argType for occ in occs if occ.faArg != None]
+        faArgCount = List2Countdict(faArgType)
+        for argType, argNum in faArgCount.items():
+            #ChildrenBefore = dataset.argType2cnt[argType] - argNum
+            #isConj = 
+            #LprobInto2 += math.log(dataset.args.cluster_Conc+ChildrenBefore*dataset.args.cluster_alpha)
+            LprobInto2 += math.lgamma(argNum-dataset.args.cluster_alpha)-math.lgamma(1-dataset.args.cluster_alpha)
+            LprobInto2 += math.lgamma(dataset.args.cluster_Conc+dataset.argType2cnt[argType]-argNum) - math.lgamma(dataset.args.cluster_Conc+dataset.argType2cnt[argType])
 
-
+    '''
     for cluster in newClusters:
         SonClusters = cluster.GetSonCluster()
         for sonCluster, num in SonClusters.items():
@@ -157,6 +151,7 @@ def CalcProb(dataset:Mydataset, newClusters):
 
     Lprob += Lprob2
 
+    '''
     Lprob_phrase = 0.
     if (dataset.proposal == "compose") or (dataset.proposal == "decompose"):
         for cluster in newClusters:
@@ -500,10 +495,11 @@ if __name__ == '__main__':
     model_args = parser.add_argument_group(title="Parameters of model")
     model_args.add_argument("--superConc", default=591, type=float, help="gamma. Larger the value: larger total number of clusters, smaller the clusters.")
     model_args.add_argument("--cluster_Conc", default=1.5, type=float)
+    model_args.add_argument("--arg_Conc", default=0.001, type=float)
     model_args.add_argument("--gen_first_eta", nargs='+', default=[0.01, 0.001], type=float, help="Parameters of generating first argument")
     model_args.add_argument("--gen_more_eta", nargs='+', default=[0.01, 0.001], type=float,
                         help="Parameters of generating more arguments")
-    model_args.add_argument("--cluster_alpha", default=0.5, type=float)
+    model_args.add_argument("--cluster_alpha", default=0.75, type=float)
     model_args.add_argument("--arg_alpha", default=0.5, type=float)
     args = parser.parse_args()
     main(args)

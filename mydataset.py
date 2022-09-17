@@ -29,7 +29,8 @@ class Mydataset():
         random.seed(args.seed)
         self.n_sentence = 0
         self.sentences = []
-        self.argType2Arg = {}   
+        self.argType2Arg = {}
+        self.argType2cnt = {}   
         self.TokPair2FaSon = {}
         self.pair_cnt = 0
         self.proposal = ""
@@ -75,6 +76,7 @@ class Mydataset():
         self.occIdx = int(data["occIdx"])
         self.clusterIdx = int(data["clusterIdx"])
         self.vector_dim = data["vector_dim"]
+        self.argType2cnt = data["argType2cnt"]
 
         for idx, clustidx in data["idx2cluster"].items():
             self.idx2cluster[int(idx)] = Cluster(self, int(clustidx))
@@ -191,6 +193,9 @@ class Mydataset():
                 arg = Argument(self, fa, son, dep)
                 fa.addSonArg(arg)
                 son.addFaArg(arg)
+                if dep not in self.argType2cnt:
+                    self.argType2cnt[dep] = 0
+                self.argType2cnt[dep] += 1
                 if dep not in self.argType2Arg:
                     self.argType2Arg[dep] = []
                 self.argType2Arg[dep].append(arg)
@@ -407,6 +412,7 @@ class Mydataset():
         data["idx2arg"] = self.transform2idx(self.idx2arg)
         data["idx2root"] = self.transform2idx(self.idx2root)
         data["argtype2idx"] = self.argtype2idx
+        data["argType2cnt"] = self.argType2cnt
         #data["argType2Arg"] = self.transform2idx(self.argType2Arg)
         for k, v in self.__dict__.items():
             if isinstance(v, dict):
