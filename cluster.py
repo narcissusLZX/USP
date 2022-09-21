@@ -33,17 +33,20 @@ class Cluster():
             ret.extend(self.Span2Occurr[Span])
         return ret
     
-    def GetSonCluster(self): #返回dict={cluteridx:clusternum}
-        ret = {}
+    def GetSonCluster(self): #返回clusterlist
+        ret = []
         occs = self.GetAllOcc()
         for occ in occs:
             SonArgs = occ.getNowSon()
             for argidx in SonArgs:
                 son = self.dataset.idx2arg[argidx].son
+                ret.append(self.dataset.idx2cluster[son.clusteridx])
+                '''
                 if (son.clusteridx in ret):
                     ret[son.clusteridx] += 1
                 else:
                     ret[son.clusteridx] = 0
+                '''
         return ret
 
     def GetSonArgs(self): #返回子Arg list

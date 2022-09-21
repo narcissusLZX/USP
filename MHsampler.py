@@ -75,20 +75,21 @@ def CalcProb(dataset:Mydataset, newClusters):
     for cluster in newClusters:
         occs = cluster.GetAllOcc()
         faArgType = set([occ.faArg.argType for occ in occs if occ.faArg != None])
-        LprobInto1 += math.log(dataset.args.SuperConc + intoChildrenBefore * dataset.args.arg_alpha)
+        LprobInto1 += math.log(dataset.args.superConc + intoChildrenBefore * dataset.args.arg_alpha)
         LprobInto1 += math.lgamma(len(faArgType) - dataset.args.arg_alpha) - math.lgamma(1-dataset.args.arg_alpha)
         intoChildrenBefore += 1
     	
-    Lprob += LprobInto1 - math.lgamma(dataset.n_argType + dataset.args.SuperConc)
+    Lprob += LprobInto1 - math.lgamma(dataset.n_argType + dataset.args.superConc)
 
     LprobOut2 = 0.
     for cluster in newClusters:
         SonArgs = cluster.GetSonArgs()
+        SonArgs = [dataset.idx2arg[idx] for idx in SonArgs]
         SonArgType2Cluster = {}
         for sonarg in SonArgs:
-            if (sonarg not in SonArgType2Cluster):
-                SonArgType2Cluster[sonarg] = []
-            SonArgType2Cluster[sonarg].append(sonarg.son.clusteridx)
+            if (sonarg.argType not in SonArgType2Cluster):
+                SonArgType2Cluster[sonarg.argType] = []
+            SonArgType2Cluster[sonarg.argType].append(sonarg.son.clusteridx)
         SonArgTypes = [SonArg.argType for SonArg in SonArgs]
         SonArgCount = List2Countdict(SonArgTypes)
         for argType, num in SonArgCount.items():
@@ -464,9 +465,9 @@ def main(args):
         if ((i+1) % args.save_per_epoch == 0):
             dataset.store(args.model_path+str(i)+".json")
         #dataset.check()
+    dataset.store(args.model_path+"final.json")
     if dataset.args.eval:
         eval = Evaluation(dataset.args, dataset)
-    dataset.store(args.model_path+"final.json")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

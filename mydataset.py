@@ -17,7 +17,7 @@ class Mydataset():
 
         self.occIdx = 0
         self.idx2occ = {}
-        self.pos2occ = {}  #pos->occ
+        self.pos2occ = {}  #pos->occ key:"sentenceIdx(start from 0),tokenidx(start from 1)"
         self.args = args
         self.idx2root = {}
         self.tok2occ = {}
@@ -45,8 +45,6 @@ class Mydataset():
 
         if (self.args.init):
             self.loaddata()
-            if (self.args.ExtVector):
-                self.loadVector()
             
             self.precomputeVector()
             if self.args.Faiss:
@@ -70,6 +68,7 @@ class Mydataset():
         self.n_sentence = int(data["n_sentence"])
         self.n_eval = int(data["n_eval"])
         self.evalAns = data["evalAns"]
+        self.evalStart = data["evalStart"]
         self.argtype2idx = map(lambda x:int(x), data["argtype2idx"])
         self.pair_cnt = int(data["pair_cnt"])
         self.argIdx = int(data["argIdx"])
@@ -77,6 +76,9 @@ class Mydataset():
         self.clusterIdx = int(data["clusterIdx"])
         self.vector_dim = data["vector_dim"]
         self.argType2cnt = data["argType2cnt"]
+        print("Load sentences")
+        print(data["sentences"])
+        self.sentences = data["sentences"]
 
         for idx, clustidx in data["idx2cluster"].items():
             self.idx2cluster[int(idx)] = Cluster(self, int(clustidx))
@@ -97,6 +99,13 @@ class Mydataset():
 
         for tokpair, fason_idxs in data["TokPair2FaSon"].items():
             self.TokPair2FaSon[tokpair] = [[self.idx2occ[int(pair[0])], self.idx2occ[int(pair[1])]] for pair in fason_idxs]
+
+        self.tok2occ = {}
+        for idx, occ in self.idx2occ.items():
+            token = occ.token
+            if token not in self.tok2occ:
+                self.tok2occ[token] = []
+            self.tok2occ[token].append(occ)
 
         if self.args.Faiss:
             self.buildFaiss()
@@ -210,9 +219,13 @@ class Mydataset():
             for i in range(idx2, self.n_sentence):
                 arr = tmp_read['arr_0'][i-idx2]
                 if (arr.shape[0] != len(self.sentences[i])):
-                    for j in range(len(self.sentences[i])):
-                        occ = self.pos2occ(self.pos2hash(i, j+1))
-                        occ.featureVector = arr[j]
+                    print("Warning: Shape not equal")
+                    print(arr.shape, self.sentences[i])
+                print(i, arr.shape)
+                occ = self.idx2occ[1]
+                for j in range(arr.shape[0]):
+                    #occ = self.pos2occ[self.pos2hash([i, j+1])]
+                    occ.featureVector = arr[j]
 
 
     def loaddata(self):

@@ -1,4 +1,3 @@
-from sys import getwindowsversion
 import numpy as np
 import math
 
@@ -154,6 +153,7 @@ class Occurrence():
     
     def qry(self, token, argType):
         sonArgs = self.getNowSon()
+        sonArgs = [self.dataset.idx2arg[idx] for idx in sonArgs]
         ret = []
         if (self.token == token):
             for arg in sonArgs:
@@ -161,3 +161,4 @@ class Occurrence():
                     ret.append(arg.son.getNowSpan())
         for arg in sonArgs:
             ret.extend(arg.son.qry(token, argType))
+        return ret
