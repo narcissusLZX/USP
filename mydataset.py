@@ -7,6 +7,7 @@ import faiss
 from cluster import Cluster
 from occurrence import Occurrence
 from argument import Argument
+from stats import Stats
 
 
 class Mydataset():
@@ -45,11 +46,11 @@ class Mydataset():
 
         if (self.args.init):
             self.loaddata()
-            
             self.precomputeVector()
             if self.args.Faiss:
                 self.buildFaiss()
-                
+            if not self.args.Df:
+                self.stats = Stats(self)
         else:
             self.load(self.args.load_model_path)
         print("n_sentence:", self.n_sentence)
@@ -76,9 +77,9 @@ class Mydataset():
         self.clusterIdx = int(data["clusterIdx"])
         self.vector_dim = data["vector_dim"]
         self.argType2cnt = data["argType2cnt"]
-        print("Load sentences")
-        print(data["sentences"])
-        self.sentences = data["sentences"]
+        #print("Load sentences")
+        #print(data["sentences"])
+        #self.sentences = data["sentences"]
 
         for idx, clustidx in data["idx2cluster"].items():
             self.idx2cluster[int(idx)] = Cluster(self, int(clustidx))
@@ -303,6 +304,10 @@ class Mydataset():
         clusters = list(self.idx2cluster.values())
         return clusters[random.randint(0,len(clusters)-1)]
 
+    def getRandomOcc(self):
+        idx = random.randint(0, len(self.idx2occ)-1)
+        return self.idx2occ[idx]
+
     def getRandomPair(self):
         TokPair = []
         for fason in self.TokPair2FaSon.values():
@@ -367,14 +372,16 @@ class Mydataset():
 
     def update(self, clusters):
         #print(clusters)
-        self.faiss_cluster_remove(clusters)
+        if self.args.Faiss and self.args.Df:
+            self.faiss_cluster_remove(clusters)
         new_clusters = []
         for cluster in clusters:
             if len(cluster.Span2Occurr) == 0:
                 self.removeCluster(cluster)
             else:
                 new_clusters.append(cluster)
-        self.faiss_cluster_insert(new_clusters)
+        if self.args.Faiss and self.args.Df:
+            self.faiss_cluster_insert(new_clusters)
 
     def check(self):
         for idx, cluster in self.idx2cluster.items():
@@ -459,14 +466,16 @@ class Mydataset():
         occ = self.pos2occ[what_pos]
         occ = occ.getTop()
         faArg = occ.faArg
+        if (faArg == None):
+            return [],0
         
         tgt_occ = self.idx2root[tgt_idx]
-        result = tgt_occ.qry(faArg.father.token, faArg.argType)
+        result = tgt_occ.qry(faArg.father, faArg.argType)
         ans = []
         correct_cnt = 0
         for span in result: 
             bounds = span[1]
-            ans.append(self.sentences[bounds[0]-1:bounds[1]])
+            ans.append([bounds[0]-1,bounds[1]])
             if (self.args.eval_ans):
                 if (ans[-1] == self.evalAns[idx-self.evalStart]):
                     correct_cnt += 1

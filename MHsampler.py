@@ -158,7 +158,7 @@ def CalcProb(dataset:Mydataset, newClusters):
         for cluster in newClusters:
             occs = cluster.GetAllOcc()
             for occ in occs:
-                if (dataset.args.Distributed):
+                if (dataset.args.Distributed and dataset.args.Df):
                     vector = occ.getFeatureVector()
                     norm1 = np.linalg.norm(vector)
                     if (dataset.args.Faiss):
@@ -270,6 +270,22 @@ def generate_split(oldcluster:Cluster, dataset:Mydataset): #需提前判定oldcl
     return {"new":[cluster1, cluster2], "old":[oldcluster], "occ":[cluster1.GetAllOcc(), cluster2.GetAllOcc()]}
 
 def generate_mergesplit(dataset:Mydataset):
+    if (not dataset.args.Df):
+        Occ1 = dataset.getRandomOcc()
+        Occ2 = dataset.stats.getOcc(Occ1.idx)
+        if (Occ1.clusteridx == Occ2.clusteridx):
+            dataset.proposal = "merge"
+            Cluster1 = dataset.idx2cluster[Occ1.clusteridx]
+            Cluster2 = dataset.idx2cluster[Occ2.clusteridx]
+            occ_1 = Cluster1.GetAllOcc()
+            occ_2 = Cluster2.GetAllOcc()
+
+            newCluster = Cluster(dataset, idx=-1)
+            Merge(Cluster1, Cluster2, newCluster)
+            return {"new":[newCluster], "old":[Cluster1, Cluster2], "occ":[occ_1, occ_2]}
+        else:
+            return generate_split(dataset.idx2cluster[Occ1.clusteridx], dataset)
+
     Cluster1 = dataset.getRandomCluster()
     rd = random.random()
     if ((rd < 0.5) or (len(Cluster1.Span2Occurr) == 1)) and (not len(dataset.idx2cluster) == 1):
@@ -463,7 +479,8 @@ def main(args):
             print("Converge after {} steps.".format(i))
             break
         if ((i+1) % args.save_per_epoch == 0):
-            dataset.store(args.model_path+str(i)+".json")
+            dataset.store(args.model_path+str(i+1)+".json")
+            print("Accept Rate:", success_cnt / (i+1))
         #dataset.check()
     dataset.store(args.model_path+"final.json")
     if dataset.args.eval:

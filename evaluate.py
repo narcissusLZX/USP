@@ -15,6 +15,8 @@ class Evaluation():
         self.readin(self.args.data_path)
         self.evalStart = self.n_sentence
         self.readin(self.args.eval_path)
+        print(self.n_sentence, self.evalStart)
+        #print(self.sentences[self.n_sentence-1], self.sentences[self.evalStart])
         self.getMatch()
         self.evaluate()
         self.n_match = 0
@@ -33,12 +35,13 @@ class Evaluation():
                     self.sentences[self.n_sentence].append(tok)
                     occidx += 1
                     self.dataset.pos2occ[self.dataset.pos2hash([self.n_sentence,len(self.sentences[self.n_sentence])])] = self.dataset.idx2occ[occidx]
-        self.n_sentence += 1
+        #self.n_sentence += 1
 
     def cos_sim(self, v1, v2):
-        return np.dot(v1, v2) / np.linalg.norm(v1) / np.linalg.norm(v2)
+        return np.dot(v1, v2)
 
     def getMatch(self):
+        print("Matching Questions and Sentences ...")
         size = len(self.dataset.idx2cluster)
         clusters = list(self.dataset.idx2cluster.keys())
         print(self.n_sentence, size)
@@ -51,25 +54,44 @@ class Evaluation():
                 if (occ.label != occ.idx):
                     continue
                 vectors[idx][clusters.index(occ.clusteridx)] += 1
+            vectors[idx] /= np.linalg.norm(vectors[idx])
         
-        bound = self.evalStart
-        self.match = [[] for _ in range(self.n_sentence-bound)]
+        self.match = [[] for _ in range(self.n_sentence-self.evalStart)]
+        print(self.n_sentence, self.evalStart)
+        
+        questions = vectors[self.evalStart:]
+        sentences = vectors[:self.evalStart]
+        #sentences = vectors[:100]
+        co = questions.dot(sentences.T)
+        for idx in range(questions.shape[0]):
+            for s_idx in range(sentences.shape[0]):
+                if (co[idx][s_idx] > self.args.eval_threshold):
+                    self.match[idx].append(s_idx)
+
+        '''
         for idx in range(bound, self.n_sentence):
             for idx2 in range(bound):
                 cos = self.cos_sim(vectors[idx2], vectors[idx])
                 #print(self.sentences[idx], self.sentences[idx2], cos)
                 if (cos>= self.args.eval_threshold):
                     self.match[idx-bound].append(idx2)
-
+                    
+        '''
+        print(self.match[577])
+        print(self.sentences[577+self.seval_start], self.sentences[6523])
+        print(co[577][2082:2085], co[577][6522:6525])
+        print("Match Done.")
 
     def evaluate(self):
-        bound = self.dataset.evalStart
+        bound = self.evalStart
         ans_cnt, correct_cnt = 0, 0
-        for idx in range(bound, self.dataset.n_sentence):
+        for idx in range(bound, self.n_sentence):
+            #print(self.sentences[idx])
             for idx2 in self.match[idx-bound]:
                 ans = self.dataset.qry(idx, idx2)
                 if (len(ans[0]) > 0):
-                    print(self.dataset.sentences[idx], ans[0])
+                    ans_string = [self.sentences[idx2][pair[0]:pair[1]] for pair in ans[0]]
+                    print(self.sentences[idx], ans_string, idx, idx2)
                 ans_cnt += len(ans[0])
                 correct_cnt += ans[1]
         if (ans_cnt == 0):

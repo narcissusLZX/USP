@@ -7,3 +7,6 @@ merge.out
 merge.txt
 stanford-parser-python-r22186/
 vectors/
+spanbert/
+genia/
+dataset/

@@ -60,6 +60,7 @@ class Occurrence():
         for argType, arg in self.sonArgType2Arg.items():
             featureVector[self.dataset.argtype2idx[argType]+n_argType-1] += len(arg)
         self.featureVector = np.concatenate((self.featureVector, featureVector), axis=0)
+        self.featureVector /= np.linalg.norm(self.featureVector)
 
     def addSonArg(self, arg):
         if arg.argType not in self.sonArgType2Arg:
@@ -103,12 +104,13 @@ class Occurrence():
         return ret
     
     def getNowSpan(self):
-        ret = (self.token,[self.pos[1], self.pos[1]])
+        ret = [self.token,[self.pos[1], self.pos[1]]]
         for args in self.sonArgType2Arg.values():
             for arg in args:
                 son = arg.son
                 if (son.label == self.label):
                     son_result = son.getNowSon()
+                    print(son_result)
                     ret[0] += "->"+son_result[0]
                     ret[1][0] = min(ret[1][0], son_result[1][0])
                     ret[1][1] = max(ret[1][1], son_result[1][1])
@@ -151,14 +153,16 @@ class Occurrence():
         else:
             return self.featureVector
     
-    def qry(self, token, argType):
+    def qry(self, father, argType):
         sonArgs = self.getNowSon()
         sonArgs = [self.dataset.idx2arg[idx] for idx in sonArgs]
         ret = []
-        if (self.token == token):
-            for arg in sonArgs:
-                if (arg.argType == argType):
-                    ret.append(arg.son.getNowSpan())
+        if (self.label == self.idx):
+            if self.clusteridx == father.clusteridx:
+                for arg in sonArgs:
+                    if (arg.argType == argType):
+                        ret.append(arg.son.getNowSpan())
+        #print(sonArgs)
         for arg in sonArgs:
-            ret.extend(arg.son.qry(token, argType))
+            ret.extend(arg.son.qry(father, argType))
         return ret
