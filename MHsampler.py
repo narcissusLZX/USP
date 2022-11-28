@@ -487,6 +487,7 @@ def main(args):
         eval = Evaluation(dataset.args, dataset)
 
 if __name__ == '__main__':
+    #this is a polysemous version
     parser = argparse.ArgumentParser()
     parser.add_argument("--data_path", default="./dataset/geniaquarter", type=str)
     parser.add_argument("--output_path", default="./dataset", type=str)
