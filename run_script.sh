@@ -1,0 +1,1 @@
+python MHsampler.py --data_path ./dataset/genia --Df --Faiss --init --eval --ExtVector --VectorDim 768 --eval_path ./dataset/question --output_path ./model_ext

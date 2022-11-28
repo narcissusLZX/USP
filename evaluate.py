@@ -18,7 +18,7 @@ class Evaluation():
         print(self.n_sentence, self.evalStart)
         #print(self.sentences[self.n_sentence-1], self.sentences[self.evalStart])
         self.getMatch()
-        self.evaluate()
+        #self.evaluate()
         self.n_match = 0
 
     def readin(self, path):
@@ -46,6 +46,7 @@ class Evaluation():
         clusters = list(self.dataset.idx2cluster.keys())
         print(self.n_sentence, size)
         #print(self.sentences)
+        '''
         vectors = np.zeros((self.n_sentence, size))
         for idx in range(self.n_sentence):
             #print(idx)
@@ -67,19 +68,31 @@ class Evaluation():
             for s_idx in range(sentences.shape[0]):
                 if (co[idx][s_idx] > self.args.eval_threshold):
                     self.match[idx].append(s_idx)
+        '''
 
-        '''
-        for idx in range(bound, self.n_sentence):
-            for idx2 in range(bound):
-                cos = self.cos_sim(vectors[idx2], vectors[idx])
-                #print(self.sentences[idx], self.sentences[idx2], cos)
-                if (cos>= self.args.eval_threshold):
-                    self.match[idx-bound].append(idx2)
-                    
-        '''
-        print(self.match[577])
-        print(self.sentences[577+self.seval_start], self.sentences[6523])
-        print(co[577][2082:2085], co[577][6522:6525])
+        #print(self.match[577])
+        ans = self.dataset.qry(577+self.evalStart, 6530)
+        print(ans[0])
+        print(self.sentences[577+self.evalStart], self.sentences[2084], self.sentences[6530])
+        question_ids = [577]
+        sentence_ids = [2084, 6530]
+        vectors = np.zeros((len(question_ids)+len(sentence_ids), size))
+        vector_idx = 0
+        for idx in question_ids+sentence_ids:
+            for tok_idx in range(len(self.sentences[idx])):
+                occ = self.dataset.pos2occ[self.dataset.pos2hash([idx, tok_idx+1])]
+                if (occ.label != occ.idx):
+                    continue
+                vectors[vector_idx][clusters.index(occ.clusteridx)] += 1
+            vectors[vector_idx] /= np.linalg.norm(vectors[vector_idx])
+            vector_idx += 1
+        
+        questions = vectors[:len(question_ids)]
+        sentences = vectors[len(question_ids):]
+        #sentences = vectors[:100]
+        co = questions.dot(sentences.T)
+        print(co)
+        #print(co[577][2082:2085], co[577][6522:6525])
         print("Match Done.")
 
     def evaluate(self):

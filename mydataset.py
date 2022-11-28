@@ -148,6 +148,7 @@ class Mydataset():
 
     def readin(self, path):
         idx, idx2 = self.n_sentence, self.n_sentence
+        occ_idx = self.occIdx+1
         with open(path+".tok", "r", encoding='utf-8') as f:
             self.sentences.append([])
             for line in f.readlines():
@@ -216,18 +217,39 @@ class Mydataset():
                 self.TokPair2FaSon[tokPair].append([fa, son])
             
         if self.args.ExtVector:
+
+
             tmp_read = np.load(path+".npz", allow_pickle = True)
+            '''
             for i in range(idx2, self.n_sentence):
                 arr = tmp_read['arr_0'][i-idx2]
-                if (arr.shape[0] != len(self.sentences[i])):
+                if (arr.shape[0] != len(self.sentences[i]) or arr.shape[1] != self.args.VectorDim):
                     print("Warning: Shape not equal")
                     print(arr.shape, self.sentences[i])
                 print(i, arr.shape)
-                occ = self.idx2occ[1]
+            
+            '''
+            Vecs = np.concatenate(tmp_read['arr_0'], axis=0)
+            print(Vecs.shape, self.occIdx)
+
+            '''
+            for i in range(idx2, self.n_sentence):
+
+                occ = self.idx2occ[i]
                 for j in range(arr.shape[0]):
                     #occ = self.pos2occ[self.pos2hash([i, j+1])]
                     occ.featureVector = arr[j]
+                    
+            '''
 
+            #whitening
+            if not self.args.notWhitening:
+                Vecs = self.whitening(Vecs)
+                self.vector_dim = self.args.n_components
+
+            for idx in range(occ_idx, self.occIdx+1):
+                self.idx2occ[idx].featureVector = Vecs[idx-occ_idx]
+                
 
     def loaddata(self):
         print("Loading Data ...")
@@ -420,6 +442,13 @@ class Mydataset():
         for idx, obj in old_dict.items():
             newdict[idx] = obj.idx
         return newdict
+
+    def whitening(self, vecs):
+        mu = vecs.mean(axis=0)
+        cov = np.cov(vecs.T)
+        u, s, vh = np.linalg.svd(cov)
+        W = np.dot(u, np.diag(1 / np.sqrt(s)))
+        return (vecs - mu).dot(W[:, :self.args.n_components])
 
     def store(self, path): #不保存faiss
         print("Storing Model ...")
