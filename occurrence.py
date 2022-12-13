@@ -51,7 +51,7 @@ class Occurrence():
         for ArgType, arg_idxs in data["sonArgType2Arg"].items():
             self.sonArgType2Arg[ArgType] = [self.dataset.idx2arg[int(arg_idx)] for arg_idx in arg_idxs]
 
-    def precomputeVector(self, n_argType):
+    def precomputeVector(self, n_argType, scale_factor):
         featureVector = np.zeros(2*n_argType+1)
         if self.faArg != None:
             featureVector[self.dataset.argtype2idx[self.faArg.argType]-1] += 1
@@ -59,8 +59,9 @@ class Occurrence():
             featureVector[2*n_argType] = 1
         for argType, arg in self.sonArgType2Arg.items():
             featureVector[self.dataset.argtype2idx[argType]+n_argType-1] += len(arg)
-        self.featureVector = np.concatenate((self.featureVector, featureVector), axis=0)
-        self.featureVector /= np.linalg.norm(self.featureVector)
+        featureVector /= np.linalg.norm(featureVector)
+        self.featureVector = np.concatenate((scale_factor*self.featureVector, (1-scale_factor)*featureVector), axis=0)
+
 
     def addSonArg(self, arg):
         if arg.argType not in self.sonArgType2Arg:

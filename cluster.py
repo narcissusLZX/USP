@@ -5,7 +5,7 @@ class Cluster():
     def __init__(self, dataset, idx = -1): #idx==-1:新建类
 
         self.dataset = dataset
-        self.Span2Occurr = {} #span(string)->occurrenceList
+        self.idx2Occ = {} #Occidx->Occ
 
         '''
         self.SonCluster2Num = {} # clusteridx->2num 每次采样后要重新更新？
@@ -17,21 +17,15 @@ class Cluster():
         return
 
     def store(self):
-        data = {"idx":self.idx, "Span2Occurr":{}}
-        for span, occs in self.Span2Occurr.items():
-            occs_idx = [occ.idx for occ in occs]
-            data["Span2Occurr"][span] = occs_idx
-        return data
+        #todo
+        return
 
     def load(self, data):
-        for span, occs_idx in data["Span2Occurr"].items():
-            self.Span2Occurr[span] = [self.dataset.idx2occ[int(occ_idx)] for occ_idx in occs_idx]
+        #todo
+        return
 
     def GetAllOcc(self): #返回Occurrence列表
-        ret = []
-        for Span in self.Span2Occurr.keys():
-            ret.extend(self.Span2Occurr[Span])
-        return ret
+        return list(self.idx2Occ.values())
     
     def GetSonCluster(self): #返回clusterlist
         ret = []
@@ -58,11 +52,7 @@ class Cluster():
         return SonArgs
  
     def ins(self, Occ:Occurrence): #会在这里更改Occ的cluster
-        span = Occ.token
-        if (span not in self.Span2Occurr):
-            self.Span2Occurr[span] = []
-        self.Span2Occurr[span].append(Occ)
-
+        self.idx2occ[Occ.idx] = Occ
         '''
         for argType, args in Occ.sonArgType2Arg.items():
             for arg in args:
@@ -80,13 +70,7 @@ class Cluster():
         Occ.clusteridx = self.idx
     
     def remove(self, Occ:Occurrence):
-        span = Occ.token
-        if (span not in self.Span2Occurr ) or (Occ not in self.Span2Occurr[span]):
-            print("Warning: Remove Occurrence "+Occ.token+" in Cluster "+str(self.idx))
-            return
-        self.Span2Occurr[span].remove(Occ)
-        if (len(self.Span2Occurr[span])==0):
-            self.Span2Occurr.pop(span)
+        self.idx2Occ.pop(Occ.idx)
 
         '''
         for argType, arg in Occ.sonArgType2Arg.items():

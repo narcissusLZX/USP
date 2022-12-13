@@ -10,6 +10,7 @@ from argument import Argument
 from stats import Stats
 
 
+
 class Mydataset():
     def __init__(self, args):
         self.clusterIdx = 0
@@ -46,18 +47,15 @@ class Mydataset():
 
         if (self.args.init):
             self.loaddata()
-            self.precomputeVector()
-            if self.args.Faiss:
-                self.buildFaiss()
-            if not self.args.Df:
-                self.stats = Stats(self)
+            self.preprocess()
+            
         else:
-            self.load(self.args.load_model_path)
+            self.loadfromfile(self.args.load_model_path)
         print("n_sentence:", self.n_sentence)
         print("n_test_sentence:", self.n_eval)
         print("n_occurrence:", len(self.idx2occ))
 
-    def load(self, path):
+    def loadfromfile(self, path):
         if not os.path.exists(path):
             print("Load Model Error!")
             return
@@ -110,6 +108,37 @@ class Mydataset():
 
         if self.args.Faiss:
             self.buildFaiss()
+    
+    def preprocess(self):
+        print("Start preprocessing data ...")
+        self.precomputeVector()
+        if self.args.Faiss:
+            self.buildFaiss()
+        if not self.args.Df:
+            self.stats = Stats(self)
+        data = [occ.featureVector for occ in self.idx2occ.values()]
+        data = np.array(data)
+        cos_sim = np.dot(data, data.T)
+        index = np.where(cos_sim > self.args.sim_threshold)
+        #check
+
+        fa = [i for i in range(len(data))]
+        def getfa(x):
+            if fa[x] != x:
+                fa[x] = getfa(fa[x])
+            return fa[x]
+        for idx1, idx2 in range(index):
+            fa[getfa(idx1)] = getfa(idx2)
+        
+        for idx in range(len(data)):
+            if getfa(idx) == idx:
+                nc = Cluster(self)
+                self.idx2occ[idx].clusteridx = nc.idx
+        for idx in range(len(data)):
+            Occ = self.idx2occ[idx]
+            Occ.clusteridx = self.idx2occ[getfa(idx)].clusteridx
+            self.idx2cluster[Occ.clusteridx].ins(Occ)
+
 
     def buildFaiss(self):
         print("Building Faiss Index ...")
@@ -159,13 +188,7 @@ class Mydataset():
                         self.sentences.append([])
                 else:
                     self.sentences[self.n_sentence].append(tok)
-                    if tok not in self.word2cluster:
-                        self.word2cluster[tok] = Cluster(self)
-                    occ = Occurrence(tok, self, -1, [self.n_sentence, len(self.sentences[self.n_sentence])], self.word2cluster[tok].idx)
-                    self.word2cluster[tok].ins(occ)
-                    if tok not in self.tok2occ:
-                        self.tok2occ[tok] = []
-                    self.tok2occ[tok].append(occ)
+                    occ = Occurrence(tok, self, -1, [self.n_sentence, len(self.sentences[self.n_sentence])], 0)
 
             if (len(self.sentences[self.n_sentence])==0):
                 self.sentences.pop()
@@ -217,7 +240,6 @@ class Mydataset():
                 self.TokPair2FaSon[tokPair].append([fa, son])
             
         if self.args.ExtVector:
-
 
             tmp_read = np.load(path+".npz", allow_pickle = True)
             '''
@@ -279,16 +301,13 @@ class Mydataset():
             self.pair_cnt += len(fasons)
             
         print("Load Data done.")
-        if self.args.Distributed:
-            # todo
-            return
 
 
 
     def precomputeVector(self):
         self.vector_dim += self.n_argType*2+1
         for occ in self.idx2occ.values():
-            occ.precomputeVector(self.n_argType)
+            occ.precomputeVector(self.n_argType, self.args.distributed_scale)
 
     def pos2hash(self, pos):
         return str(pos[0])+","+str(pos[1])
@@ -496,7 +515,7 @@ class Mydataset():
         occ = occ.getTop()
         faArg = occ.faArg
         if (faArg == None):
-            return [],0
+            return [], 0
         
         tgt_occ = self.idx2root[tgt_idx]
         result = tgt_occ.qry(faArg.father, faArg.argType)

@@ -120,39 +120,6 @@ def CalcProb(dataset:Mydataset, newClusters):
             LprobInto2 += math.lgamma(argNum-dataset.args.cluster_alpha)-math.lgamma(1-dataset.args.cluster_alpha)
             LprobInto2 += math.lgamma(dataset.args.cluster_Conc+dataset.argType2cnt[argType]-argNum) - math.lgamma(dataset.args.cluster_Conc+dataset.argType2cnt[argType])
 
-    '''
-    for cluster in newClusters:
-        SonClusters = cluster.GetSonCluster()
-        for sonCluster, num in SonClusters.items():
-            LprobOut1 += math.lgamma(num-dataset.args.cluster_alpha)-math.lgamma(1-dataset.args.cluster_alpha)
-
-    Lprob += LprobOut1
-
-    Lprob2 = 0.
-    for cluster in newClusters:
-        SonArgs = []
-        occs = cluster.GetAllOcc()
-        for occ in occs:
-            SonArgAfterCompose = occ.getTop().getNowSon()
-            SonArgs.extend(SonArgAfterCompose)
-        SonArgCount = List2Countdict(SonArgs)
-        for argType in SonArgCount.keys():
-            Lprob2 += math.lgamma(dataset.args.ClusterDistrConc)
-            SonCluster = []
-            for occ in occs:
-                if argType not in occ.sonArgType2Arg:
-                    continue
-                for arg in occ.sonArgType2Arg[argType]:
-                    son = arg.son
-                    cluster_idx = dataset.idx2occ[son.label].clusteridx
-                    SonCluster.append(cluster_idx)
-            SonClusterCount = List2Countdict(SonCluster)
-            for clusteridx, num in SonClusterCount.items():
-                Lprob2 += math.lgamma(num-dataset.args.arg_alpha)-math.lgamma(1-dataset.args.arg_alpha)
-
-    Lprob += Lprob2
-
-    '''
     Lprob_phrase = 0.
     if (dataset.proposal == "compose") or (dataset.proposal == "decompose"):
         for cluster in newClusters:
@@ -186,18 +153,13 @@ def CalcProb(dataset:Mydataset, newClusters):
 #compose后应该是新的类还是同父结点的类？ 目前是新的类
 
 def Merge(cluster1:Cluster, cluster2:Cluster, mergeCluster:Cluster): #merge (cluster1 & cluster2) into mergeCluster
-    spans = list(cluster1.Span2Occurr.keys())
-    for span in spans:
-        occs = list(cluster1.Span2Occurr[span])
-        for occ in occs:
-            cluster1.remove(occ)
-            mergeCluster.ins(occ)
-    spans = list(cluster2.Span2Occurr.keys())
-    for span in spans:
-        occs = list(cluster2.Span2Occurr[span])
-        for occ in occs:
-            cluster2.remove(occ)
-            mergeCluster.ins(occ)
+    for idx, occ in cluster1.idx2Occ.items():
+        cluster1.remove(occ)
+        mergeCluster.ins(occ)
+    
+    for idx, occ in cluster2.idx2Occ.items():
+        cluster2.remove(occ)
+        mergeCluster.ins(occ)
 
 def generate_merge(Cluster1:Cluster, dataset:Mydataset):
 
@@ -223,45 +185,29 @@ def generate_split(oldcluster:Cluster, dataset:Mydataset): #需提前判定oldcl
     
     #print("Split")
     def createSplit(cluster:Cluster):
-        Spans = list(cluster.Span2Occurr.keys())
-        span1, span2 = random.sample(Spans, 2)
-        cluster1 = Cluster(dataset, idx=-1)
-        cluster2 = Cluster(dataset, idx=-1)
-        newClusterMap = {}
+        Occs = cluster.idx2Occ.values()
+        occ1, occ2 = random.sample(Occs, 2)
+        cluster1, cluster2 = Cluster(dataset), Cluster(dataset)
+        cluster.remove(occ1)
+        cluster1.ins(occ1)
+        cluster.remove(occ2)
+        cluster2.ins(occ2)
         
-        occs = list(cluster.Span2Occurr[span1])
-        for occ in occs:
-            cluster.remove(occ)
-            cluster1.ins(occ)
-
-        occs = list(cluster.Span2Occurr[span2])
-        for occ in occs:
-            cluster.remove(occ)
-            cluster2.ins(occ)
-
-        for span in Spans: #将每个span划分到两个新类中的一个
-            if (span == span1) or (span == span2):
+        #too slow?
+        for occ in Occs:
+            if (occ.idx == occ1.idx or occ.idx == occ2.idx):
                 continue
-
-            occs = list(cluster.Span2Occurr[span])
             
-            for occ in occs: 
-                cluster.remove(occ)
-                cluster1.ins(occ)
+            cluster.remove(occ)
+            cluster1.ins(occ) 
             Lprob1 = CalcProb(dataset, [cluster1, cluster2])
-
-            for occ in occs:
-                cluster1.remove(occ)
-                cluster2.ins(occ)
+            cluster1.remove(occ)
+            cluster2.ins(occ)
             Lprob2 = CalcProb(dataset, [cluster1, cluster2])
 
             if (Lprob1 > Lprob2):
-                for occ in occs:
-                    cluster2.remove(occ)
-                    cluster1.ins(occ)
-                newClusterMap[span] = 0
-            else:
-                newClusterMap[span] = 1
+                cluster2.remove(occ)
+                cluster1.ins(occ)
         return cluster1, cluster2
 
 
@@ -288,7 +234,7 @@ def generate_mergesplit(dataset:Mydataset):
 
     Cluster1 = dataset.getRandomCluster()
     rd = random.random()
-    if ((rd < 0.5) or (len(Cluster1.Span2Occurr) == 1)) and (not len(dataset.idx2cluster) == 1):
+    if ((rd < 0.5) or (len(Cluster1.idx2occ) == 1)) and (not len(dataset.idx2cluster) == 1):
         return generate_merge(Cluster1, dataset)
     else:
         return generate_split(Cluster1, dataset)
@@ -436,12 +382,22 @@ def resume(hyp, dataset:Mydataset):
             Compose(pair[0], pair[1], hyp["old"][idx], dataset)
             idx += 1
 
+def CalcComposeLprob(dataset, hyp):
+    for 
+    return
 
-
-def CalcAcceptRatio(hyp, dataset):
+def CalcAcceptRatio(hyp, dataset:Mydataset):
     NewLprob = CalcProb(dataset, hyp["new"])
     resume(hyp, dataset)
     OldLprob = CalcProb(dataset, hyp["old"])
+    if dataset.proposal == "compose":
+        backwardLprob = CalcComposeLprob(dataset, hyp)
+    elif dataset.proposal == "decompose":
+        backwardLprob = CalcDecomposeLprob(dataset, hyp)
+    elif dataset.proposal == "merge":
+        backwardLprob = OldLprob
+    else:
+        backwardLprob = 0.
     if (NewLprob > OldLprob):
         return 1
     if (NewLprob - OldLprob < -20):
