@@ -494,7 +494,6 @@ if __name__ == '__main__':
                         help="Random seed.")
     
     parser.add_argument("--n_epoch", default=1500000, type=int)
-    parser.add_argument("--ClusterDistrConc", default=1.5, type=float)
     parser.add_argument("--init", action="store_true", help="Initiallize dataset?")
     parser.add_argument("--eval", action="store_true", help="Evaluation?")
     parser.add_argument("--eval_path", default=None, type=str)
