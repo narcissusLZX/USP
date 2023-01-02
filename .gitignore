@@ -10,3 +10,5 @@ vectors/
 spanbert/
 genia/
 dataset/
+__pycache__/
+model_ext/
