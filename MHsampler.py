@@ -10,6 +10,7 @@ from cluster import Cluster
 from occurrence import Occurrence
 from argument import Argument
 from evaluate import Evaluation
+from stats import alias_sample
 
 
 def LogCalcCompoundBinomial(success_num, fail_num, parameters):
@@ -218,7 +219,7 @@ def generate_split(oldcluster:Cluster, dataset:Mydataset): #需提前判定oldcl
 def generate_mergesplit(dataset:Mydataset):
     if (not dataset.args.Df):
         Occ1 = dataset.getRandomOcc()
-        Occ2 = dataset.stats.getOcc(Occ1.idx)
+        Occ2 = alias_sample(dataset.stats.alias_distribution[Occ1.idx])
         if (Occ1.clusteridx == Occ2.clusteridx):
             dataset.proposal = "merge"
             Cluster1 = dataset.idx2cluster[Occ1.clusteridx]
@@ -326,6 +327,7 @@ def accept(hyp, dataset:Mydataset):
         occ1, occ2 = hyp["occ"]
         tokPair = occ1.token+","+occ2.token
         idx = 0
+        dataset.pair_composed_cnt += len(dataset.TokPair2FaSon[tokPair])
         for pair in dataset.TokPair2FaSon[tokPair]:
             if (dataset.args.Faiss):
                 dataset.faiss_remove(pair[0])
@@ -338,6 +340,7 @@ def accept(hyp, dataset:Mydataset):
         occ1, occ2 = hyp["occ"]
         tokPair = occ1.token+","+occ2.token
         idx = 0
+        dataset.pair_composed_cnt -= len(dataset.TokPair2FaSon[tokPair])
         for pair in dataset.TokPair2FaSon[tokPair]: #对所有同样的父子节点对都要进行操作
             if (dataset.args.Faiss):
                 dataset.faiss_remove(pair[0])
@@ -382,22 +385,29 @@ def resume(hyp, dataset:Mydataset):
             Compose(pair[0], pair[1], hyp["old"][idx], dataset)
             idx += 1
 
-def CalcComposeLprob(dataset, hyp):
-    for 
-    return
-
 def CalcAcceptRatio(hyp, dataset:Mydataset):
     NewLprob = CalcProb(dataset, hyp["new"])
     resume(hyp, dataset)
     OldLprob = CalcProb(dataset, hyp["old"])
+    #transLprob : Log(P(old|new) / P(new|old))
     if dataset.proposal == "compose":
-        backwardLprob = CalcComposeLprob(dataset, hyp)
+        occ1, occ2 = hyp["occ"]
+        tokPair = occ1.token+","+occ2.token
+        pair_cnt = len(dataset.TokPair2FaSon[tokPair]) 
+        #transLprob = pair_cnt / (dataset.pair_composed_cnt+pair_cnt)
+        #transLprob /= pair_cnt / (dataset.pair_cnt-dataset.pair_composed_cnt)
+        transLprob = math.log((dataset.pair_cnt-dataset.pair_composed_cnt) / (dataset.pair_composed_cnt+pair_cnt))
     elif dataset.proposal == "decompose":
-        backwardLprob = CalcDecomposeLprob(dataset, hyp)
+        occ1, occ2 = hyp["occ"]
+        tokPair = occ1.token+","+occ2.token
+        pair_cnt = len(dataset.TokPair2FaSon[tokPair]) 
+        #transLpob = pair_cnt / (dataset.pair_cnt-dataset.pair_composed_cnt+pair_cnt)
+        #transLprob /= pair_cnt / dataset.pair_composed_cnt
+        transLprob = math.log((dataset.pair_composed_cnt) / (dataset.pair_cnt-dataset.pair_composed_cnt+pair_cnt))
     elif dataset.proposal == "merge":
-        backwardLprob = OldLprob
+        transLprob = split()
     else:
-        backwardLprob = 0.
+        transLprob = -split()
     if (NewLprob > OldLprob):
         return 1
     if (NewLprob - OldLprob < -20):

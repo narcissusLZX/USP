@@ -7,7 +7,7 @@ import faiss
 from cluster import Cluster
 from occurrence import Occurrence
 from argument import Argument
-from stats import Stats
+from stats import Stats, alias_sample
 
 
 
@@ -35,6 +35,7 @@ class Mydataset():
         self.argType2cnt = {}   
         self.TokPair2FaSon = {}
         self.pair_cnt = 0
+        self.pair_composed_cnt = 0 # update when accept
         self.proposal = ""
 
         self.evalStart = 0
@@ -374,6 +375,10 @@ class Mydataset():
 
 
     def getClusterbyClusterSimilarity(self, Cluster1:Cluster):
+        if not self.args.DF:
+            occ = Cluster1.GetRandomOcc()
+            occ_ret = alias_sample(self.stats.alias_distribution[occ.idx])
+            return self.idx2cluster[occ_ret.clusteridx]
         if self.args.Faiss:
             #todo
             #print(len(self.idx2occ), len(self.idx2cluster))
@@ -394,7 +399,7 @@ class Mydataset():
                     prob.append(d_min)
             clusters = [self.idx2cluster[idx] for idx in clusters]
         else:
-        
+            
             clusters = list(set(self.idx2cluster.values()))
             clusters.remove(Cluster1)
             prob = [self.CalcSimilarity(cluster, Cluster1) for cluster in clusters]

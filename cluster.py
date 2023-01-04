@@ -1,5 +1,5 @@
 from occurrence import Occurrence
-    
+import numpy as np    
 
 class Cluster():
     def __init__(self, dataset, idx = -1): #idx==-1:新建类
@@ -26,6 +26,9 @@ class Cluster():
 
     def GetAllOcc(self): #返回Occurrence列表
         return list(self.idx2Occ.values())
+    
+    def GetRandomOcc(self):
+        return self.idx2Occ[np.random.randint(0, len(self.idx2Occ))]
     
     def GetSonCluster(self): #返回clusterlist
         ret = []
