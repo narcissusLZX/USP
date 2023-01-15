@@ -12,3 +12,5 @@ genia/
 dataset/
 __pycache__/
 model_ext/
+preexp.py
+preexp.out

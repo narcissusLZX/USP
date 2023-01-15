@@ -121,30 +121,40 @@ def CalcProb(dataset:Mydataset, newClusters):
             LprobInto2 += math.lgamma(argNum-dataset.args.cluster_alpha)-math.lgamma(1-dataset.args.cluster_alpha)
             LprobInto2 += math.lgamma(dataset.args.cluster_Conc+dataset.argType2cnt[argType]-argNum) - math.lgamma(dataset.args.cluster_Conc+dataset.argType2cnt[argType])
 
+    Lprob_cluster = 0.
     Lprob_phrase = 0.
-    if (dataset.proposal == "compose") or (dataset.proposal == "decompose"):
-        for cluster in newClusters:
-            occs = cluster.GetAllOcc()
-            for occ in occs:
-                if (dataset.args.Distributed and dataset.args.Df):
-                    vector = occ.getFeatureVector()
-                    norm1 = np.linalg.norm(vector)
-                    if (dataset.args.Faiss):
-                        #todo
-                        Lprob_phrase += dataset.faiss_calcLprob(vector)
-                    else:
-                        cnt = 0
-                        for other_occ in dataset.idx2occ.values():
-                            other_vector = other_occ.getFeatureVector()
-                            cos_sim = vector.dot(other_vector) / norm1 / np.linalg.norm(other_vector)
-                            if (cos_sim >= dataset.args.sim_threshold):
-                                cnt += 1
-                        Lprob_phrase += math.log(cnt) - math.log(len(dataset.idx2occ))
+    w_c = dataset.args.w_c //1e-35
+
+    for cluster in newClusters:
+        
+        occs = cluster.GetAllOcc()
+        Lprob_cluster += math.lgamma(w_c) - math.lgamma(w_c+len(occs))
+        toks = {}
+        for occ in occs:
+            if (occ.token not in toks):
+                toks[occ.token] = 0
+            toks[occ.token] += 1
+            if (dataset.args.Distributed and dataset.args.Df):
+                vector = occ.getFeatureVector()
+                norm1 = np.linalg.norm(vector)
+                if (dataset.args.Faiss):
+                    #todo
+                    Lprob_phrase += dataset.faiss_calcLprob(vector)
                 else:
-                    Lprob_phrase += occ.PhraseLprob()
+                    cnt = 0
+                    for other_occ in dataset.idx2occ.values():
+                        other_vector = other_occ.getFeatureVector()
+                        cos_sim = vector.dot(other_vector) / norm1 / np.linalg.norm(other_vector)
+                        if (cos_sim >= dataset.args.sim_threshold):
+                            cnt += 1
+                    Lprob_phrase += math.log(cnt) - math.log(len(dataset.idx2occ))
+            else:
+                Lprob_phrase += occ.PhraseLprob()
+        Lprob_cluster += len(toks)*math.log(w_c)
+        for c_token in toks.values():
+            Lprob_cluster += math.lgamma(c_token)
 
-    Lprob += Lprob_phrase
-
+    Lprob += Lprob_cluster+Lprob_phrase
     return Lprob
 
 
@@ -180,41 +190,53 @@ def generate_merge(Cluster1:Cluster, dataset:Mydataset):
     
     return {"new":[newCluster], "old":[Cluster1, Cluster2], "occ":[occ_1, occ_2]}
 
+def createSplit(dataset:Mydataset, cluster:Cluster, assigned=None): #if assigned!=None, then assign Occs according to assigned
+    Occs = cluster.idx2Occ.values()
+    if (assigned != None):
+        occ1, occ2 = assigned[0][0], assigned[1][0]
+        cluster1, cluster2 = dataset.idx2cluster[occ1.clusteridx], dataset.idx2cluster[occ2.clusteridx]
+    else:
+        occ1, occ2 = random.sample(Occs, 2)
+        cluster1, cluster2 = Cluster(dataset), Cluster(dataset)
+    cluster.remove(occ1)
+    cluster1.ins(occ1)
+    cluster.remove(occ2)
+    cluster2.ins(occ2)
+    Lprob = 0.
+    
+    #too slow?
+    for occ in Occs:
+        if (occ.idx == occ1.idx or occ.idx == occ2.idx):
+            continue
+        
+        cluster.remove(occ)
+        cluster1.ins(occ) 
+        Lprob1 = CalcProb(dataset, [cluster1, cluster2])
+        cluster1.remove(occ)
+        cluster2.ins(occ)
+        Lprob2 = CalcProb(dataset, [cluster1, cluster2])
+
+        Prob1 = math.exp(Lprob1) / (math.exp(Lprob1)+math.exp(Lprob2))
+        aProb = np.random.random()
+        if (assigned == None and aProb <= Prob1) or (assigned!=None and occ in assigned[0]):
+            cluster2.remove(occ)
+            cluster1.ins(occ)
+            Lprob += math.log(Prob1)
+        else:
+            Lprob += math.log(1-Prob1)
+    return cluster1, cluster2, Lprob
+
 def generate_split(oldcluster:Cluster, dataset:Mydataset): #需提前判定oldcluster内的数量>1
 
     dataset.proposal = "split"
     
     #print("Split")
-    def createSplit(cluster:Cluster):
-        Occs = cluster.idx2Occ.values()
-        occ1, occ2 = random.sample(Occs, 2)
-        cluster1, cluster2 = Cluster(dataset), Cluster(dataset)
-        cluster.remove(occ1)
-        cluster1.ins(occ1)
-        cluster.remove(occ2)
-        cluster2.ins(occ2)
+    
+
+
+    cluster1, cluster2, Lprob = createSplit(oldcluster)
         
-        #too slow?
-        for occ in Occs:
-            if (occ.idx == occ1.idx or occ.idx == occ2.idx):
-                continue
-            
-            cluster.remove(occ)
-            cluster1.ins(occ) 
-            Lprob1 = CalcProb(dataset, [cluster1, cluster2])
-            cluster1.remove(occ)
-            cluster2.ins(occ)
-            Lprob2 = CalcProb(dataset, [cluster1, cluster2])
-
-            if (Lprob1 > Lprob2):
-                cluster2.remove(occ)
-                cluster1.ins(occ)
-        return cluster1, cluster2
-
-
-    cluster1, cluster2 = createSplit(oldcluster)
-        
-    return {"new":[cluster1, cluster2], "old":[oldcluster], "occ":[cluster1.GetAllOcc(), cluster2.GetAllOcc()]}
+    return {"new":[cluster1, cluster2], "old":[oldcluster], "occ":[cluster1.GetAllOcc(), cluster2.GetAllOcc()], "splitTransLprob":Lprob}
 
 def generate_mergesplit(dataset:Mydataset):
     if (not dataset.args.Df):
@@ -222,6 +244,7 @@ def generate_mergesplit(dataset:Mydataset):
         Occ2 = alias_sample(dataset.stats.alias_distribution[Occ1.idx])
         if (Occ1.clusteridx == Occ2.clusteridx):
             dataset.proposal = "merge"
+
             Cluster1 = dataset.idx2cluster[Occ1.clusteridx]
             Cluster2 = dataset.idx2cluster[Occ2.clusteridx]
             occ_1 = Cluster1.GetAllOcc()
@@ -359,15 +382,7 @@ def reject(hyp, dataset:Mydataset):
 
 def resume(hyp, dataset:Mydataset):
     if dataset.proposal == "merge":
-        cluster1, cluster2 = hyp["old"]
-        occs1, occs2 = hyp["occ"]
-        cluster = hyp["new"][0]
-        for occ in occs1:
-            cluster.remove(occ)
-            cluster1.ins(occ)
-        for occ in occs2:
-            cluster.remove(occ)
-            cluster2.ins(occ)
+        cluster1, cluster2, hyp["splitTransLprob"] = createSplit(dataset, hyp["new"][0], hyp["old"])
     elif dataset.proposal == "split": 
         Merge(hyp["new"][0], hyp["new"][1], hyp["old"][0])
     elif dataset.proposal == "compose":
@@ -396,18 +411,20 @@ def CalcAcceptRatio(hyp, dataset:Mydataset):
         pair_cnt = len(dataset.TokPair2FaSon[tokPair]) 
         #transLprob = pair_cnt / (dataset.pair_composed_cnt+pair_cnt)
         #transLprob /= pair_cnt / (dataset.pair_cnt-dataset.pair_composed_cnt)
-        transLprob = math.log((dataset.pair_cnt-dataset.pair_composed_cnt) / (dataset.pair_composed_cnt+pair_cnt))
+        #transLprob = math.log((dataset.pair_cnt-dataset.pair_composed_cnt) / (dataset.pair_composed_cnt+pair_cnt))
+        transLprob = 0.
     elif dataset.proposal == "decompose":
         occ1, occ2 = hyp["occ"]
         tokPair = occ1.token+","+occ2.token
         pair_cnt = len(dataset.TokPair2FaSon[tokPair]) 
         #transLpob = pair_cnt / (dataset.pair_cnt-dataset.pair_composed_cnt+pair_cnt)
         #transLprob /= pair_cnt / dataset.pair_composed_cnt
-        transLprob = math.log((dataset.pair_composed_cnt) / (dataset.pair_cnt-dataset.pair_composed_cnt+pair_cnt))
+        #transLprob = math.log((dataset.pair_composed_cnt) / (dataset.pair_cnt-dataset.pair_composed_cnt+pair_cnt))
+        transLprob = 0.
     elif dataset.proposal == "merge":
-        transLprob = split()
+        transLprob = hyp["splitTransLprob"]
     else:
-        transLprob = -split()
+        transLprob = -hyp["spliTransLprob"]
     if (NewLprob > OldLprob):
         return 1
     if (NewLprob - OldLprob < -20):

@@ -4,8 +4,7 @@ import math
 class Occurrence():
     '''
         token: 
-        clusteridx:类别序号
-        pos: 出现位置[x,y]第x个样本第y个位置
+        pos: x-th sentence, y-th word
     '''
     def __init__(self, token, dataset, idx = -1, pos=[-1,-1], clusteridx = 0):
         self.dataset = dataset
