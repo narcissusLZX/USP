@@ -14,7 +14,7 @@ class Mydataset():
     def __init__(self, args):
         self.clusterIdx = 0
         self.idx2cluster = {} #idx->cluster
-        self.word2cluster = {} # span->clusteridx  只在读入数据时使用
+        self.word2cluster = {} # span->clusteridx  
 
         self.occIdx = 0
         self.idx2occ = {}
@@ -49,8 +49,6 @@ class Mydataset():
             self.precomputeVector()
             if self.args.Faiss:
                 self.buildFaiss()
-            if not self.args.Df:
-                self.stats = Stats(self)
         else:
             self.load(self.args.load_model_path)
         print("n_sentence:", self.n_sentence)
@@ -254,14 +252,6 @@ class Mydataset():
     def loaddata(self):
         print("Loading Data ...")
         path = self.args.data_path
-        '''
-        数据格式：
-        连续若干行为一个句子的输入，句子间空行(严格1行)隔开
-        .tok 依次保存各个词
-        .dep 依次给出依赖关系
-            一行的格式为：关系 主体-位置 客体-位置，位置从1开始计数
-            如： det FKBP51-14 the-12
-        '''
         self.readin(path)
         #读入tok
         self.evalStart = self.n_sentence
@@ -279,9 +269,6 @@ class Mydataset():
             self.pair_cnt += len(fasons)
             
         print("Load Data done.")
-        if self.args.Distributed:
-            # todo
-            return
 
 
 
@@ -336,7 +323,7 @@ class Mydataset():
             TokPair.extend(fason)
         return TokPair[random.randint(0,len(TokPair)-1)]
 
-    def GetFeatureVector(self, cluster:Cluster): #cluster中所有occ的feature_vector平均值
+    def GetFeatureVector(self, cluster:Cluster): 
         ret = []
         for occs in cluster.Span2Occurr.values():
             for occ in occs:
@@ -348,7 +335,7 @@ class Mydataset():
             return -10
         else:
             #todo
-            vector1 = self.GetFeatureVector(cluster1) #动态计算
+            vector1 = self.GetFeatureVector(cluster1) 
             vector2 = self.GetFeatureVector(cluster2) #
             cos_sim = np.dot(vector1, vector2) / np.linalg.norm(vector1) / np.linalg.norm(vector2)
             return cos_sim

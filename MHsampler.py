@@ -120,70 +120,44 @@ def CalcProb(dataset:Mydataset, newClusters):
             LprobInto2 += math.lgamma(argNum-dataset.args.cluster_alpha)-math.lgamma(1-dataset.args.cluster_alpha)
             LprobInto2 += math.lgamma(dataset.args.cluster_Conc+dataset.argType2cnt[argType]-argNum) - math.lgamma(dataset.args.cluster_Conc+dataset.argType2cnt[argType])
 
-    '''
-    for cluster in newClusters:
-        SonClusters = cluster.GetSonCluster()
-        for sonCluster, num in SonClusters.items():
-            LprobOut1 += math.lgamma(num-dataset.args.cluster_alpha)-math.lgamma(1-dataset.args.cluster_alpha)
-
-    Lprob += LprobOut1
-
-    Lprob2 = 0.
-    for cluster in newClusters:
-        SonArgs = []
-        occs = cluster.GetAllOcc()
-        for occ in occs:
-            SonArgAfterCompose = occ.getTop().getNowSon()
-            SonArgs.extend(SonArgAfterCompose)
-        SonArgCount = List2Countdict(SonArgs)
-        for argType in SonArgCount.keys():
-            Lprob2 += math.lgamma(dataset.args.ClusterDistrConc)
-            SonCluster = []
-            for occ in occs:
-                if argType not in occ.sonArgType2Arg:
-                    continue
-                for arg in occ.sonArgType2Arg[argType]:
-                    son = arg.son
-                    cluster_idx = dataset.idx2occ[son.label].clusteridx
-                    SonCluster.append(cluster_idx)
-            SonClusterCount = List2Countdict(SonCluster)
-            for clusteridx, num in SonClusterCount.items():
-                Lprob2 += math.lgamma(num-dataset.args.arg_alpha)-math.lgamma(1-dataset.args.arg_alpha)
-
-    Lprob += Lprob2
-
-    '''
+    Lprob_cluster = 0.
     Lprob_phrase = 0.
-    if (dataset.proposal == "compose") or (dataset.proposal == "decompose"):
-        for cluster in newClusters:
-            occs = cluster.GetAllOcc()
-            for occ in occs:
-                if (dataset.args.Distributed and dataset.args.Df):
-                    vector = occ.getFeatureVector()
-                    norm1 = np.linalg.norm(vector)
-                    if (dataset.args.Faiss):
-                        #todo
-                        Lprob_phrase += dataset.faiss_calcLprob(vector)
-                    else:
-                        cnt = 0
-                        for other_occ in dataset.idx2occ.values():
-                            other_vector = other_occ.getFeatureVector()
-                            cos_sim = vector.dot(other_vector) / norm1 / np.linalg.norm(other_vector)
-                            if (cos_sim >= dataset.args.sim_threshold):
-                                cnt += 1
-                        Lprob_phrase += math.log(cnt) - math.log(len(dataset.idx2occ))
+    w_c = dataset.args.w_c //1e-35
+
+    for cluster in newClusters:
+        
+        occs = cluster.GetAllOcc()
+        Lprob_cluster += math.lgamma(w_c) - math.lgamma(w_c+len(occs))
+        toks = {}
+        for occ in occs:
+            if (occ.token not in toks):
+                toks[occ.token] = 0
+            toks[occ.token] += 1
+            if (dataset.args.Df):
+                vector = occ.getFeatureVector()
+                norm1 = np.linalg.norm(vector)
+                if (dataset.args.Faiss):
+                    Lprob_phrase += dataset.faiss_calcLprob(vector)
                 else:
-                    Lprob_phrase += occ.PhraseLprob()
+                    cnt = 0
+                    for other_occ in dataset.idx2occ.values():
+                        other_vector = other_occ.getFeatureVector()
+                        cos_sim = vector.dot(other_vector) / norm1 / np.linalg.norm(other_vector)
+                        if (cos_sim >= dataset.args.sim_threshold):
+                            cnt += 1
+                    Lprob_phrase += math.log(cnt) - math.log(len(dataset.idx2occ))
+            else:
+                Lprob_phrase += occ.PhraseLprob()
+        Lprob_cluster += len(toks)*math.log(w_c)
+        for c_token in toks.values():
+            Lprob_cluster += math.lgamma(c_token)
 
-    Lprob += Lprob_phrase
-
+    Lprob += Lprob_cluster+Lprob_phrase
     return Lprob
 
 
 
-#不会多状态并存，在resume时会还原，所以accept要更新
 
-#compose后应该是新的类还是同父结点的类？ 目前是新的类
 
 def Merge(cluster1:Cluster, cluster2:Cluster, mergeCluster:Cluster): #merge (cluster1 & cluster2) into mergeCluster
     spans = list(cluster1.Span2Occurr.keys())
@@ -217,7 +191,7 @@ def generate_merge(Cluster1:Cluster, dataset:Mydataset):
     
     return {"new":[newCluster], "old":[Cluster1, Cluster2], "occ":[occ_1, occ_2]}
 
-def generate_split(oldcluster:Cluster, dataset:Mydataset): #需提前判定oldcluster内的数量>1
+def generate_split(oldcluster:Cluster, dataset:Mydataset): 
 
     dataset.proposal = "split"
     
@@ -239,7 +213,7 @@ def generate_split(oldcluster:Cluster, dataset:Mydataset): #需提前判定oldcl
             cluster.remove(occ)
             cluster2.ins(occ)
 
-        for span in Spans: #将每个span划分到两个新类中的一个
+        for span in Spans: 
             if (span == span1) or (span == span2):
                 continue
 
@@ -270,6 +244,7 @@ def generate_split(oldcluster:Cluster, dataset:Mydataset): #需提前判定oldcl
     return {"new":[cluster1, cluster2], "old":[oldcluster], "occ":[cluster1.GetAllOcc(), cluster2.GetAllOcc()]}
 
 def generate_mergesplit(dataset:Mydataset):
+    '''
     if (not dataset.args.Df):
         Occ1 = dataset.getRandomOcc()
         Occ2 = dataset.stats.getOcc(Occ1.idx)
@@ -286,6 +261,8 @@ def generate_mergesplit(dataset:Mydataset):
         else:
             return generate_split(dataset.idx2cluster[Occ1.clusteridx], dataset)
 
+    '''
+
     Cluster1 = dataset.getRandomCluster()
     rd = random.random()
     if ((rd < 0.5) or (len(Cluster1.Span2Occurr) == 1)) and (not len(dataset.idx2cluster) == 1):
@@ -299,12 +276,12 @@ def Decompose(occ1:Occurrence, occ2:Occurrence, cluster1:Cluster, cluster2:Clust
     old_cluster_idx = occ1.clusteridx
     oldCluster = dataset.idx2cluster[old_cluster_idx]
     oldCluster.remove(occ1)
-    cluster1.ins(occ1) #父节点还是原来的cluster
-    cluster2.ins(occ2) #子节点加入新的cluster
+    cluster1.ins(occ1) 
+    cluster2.ins(occ2) 
     occ2.resumelabel(occ1.label, occ2)
     return oldCluster
 
-# compose后只以根结点的属性为key出现在cluster中，自身不会出现在cluster中
+
 
 def createDecompose(occ1:Occurrence, occ2:Occurrence, dataset:Mydataset): #occ1:fater, occ2:son
     #label = occ1.label
@@ -312,7 +289,7 @@ def createDecompose(occ1:Occurrence, occ2:Occurrence, dataset:Mydataset): #occ1:
     cluster1 = Cluster(dataset, -1)
     cluster2 = Cluster(dataset, -1)
     oldClusters = []
-    for pair in dataset.TokPair2FaSon[tokPair]: #对所有同样的父子节点对都要进行操作
+    for pair in dataset.TokPair2FaSon[tokPair]: 
         oldClusters.append(Decompose(pair[0], pair[1], cluster1, cluster2, dataset))
     return cluster1, cluster2, oldClusters
 
@@ -325,7 +302,7 @@ def Compose(occ1:Occurrence, occ2:Occurrence, newCluster:Cluster, dataset:Mydata
 
     cluster1.remove(occ1)
     cluster2.remove(occ2)
-    newCluster.ins(occ1) #加入新的cluster
+    newCluster.ins(occ1) 
     
     occ2.setlabel(occ1)
 
@@ -392,7 +369,7 @@ def accept(hyp, dataset:Mydataset):
         occ1, occ2 = hyp["occ"]
         tokPair = occ1.token+","+occ2.token
         idx = 0
-        for pair in dataset.TokPair2FaSon[tokPair]: #对所有同样的父子节点对都要进行操作
+        for pair in dataset.TokPair2FaSon[tokPair]: 
             if (dataset.args.Faiss):
                 dataset.faiss_remove(pair[0])
             Decompose(pair[0], pair[1], hyp["new"][0], hyp["new"][1], dataset)
@@ -425,7 +402,7 @@ def resume(hyp, dataset:Mydataset):
         occ1, occ2 = hyp["occ"]
         tokPair = occ1.token+","+occ2.token
         idx = 0
-        for pair in dataset.TokPair2FaSon[tokPair]: #对所有同样的父子节点对都要进行操作
+        for pair in dataset.TokPair2FaSon[tokPair]: 
             Decompose(pair[0], pair[1], hyp["old"][idx][0], hyp["old"][idx][1], dataset)
             idx += 1
     else:
@@ -506,7 +483,6 @@ if __name__ == '__main__':
     parser.add_argument("--sim_threshold", default=0.8, type=float)
 
     representation_args = parser.add_argument_group(title="Args of representation")
-    representation_args.add_argument("--Distributed", action="store_true")
     representation_args.add_argument("--Faiss", action="store_true")
     representation_args.add_argument("--Df", action="store_true", help="Dynamically adjust feature vectors of occurrences?")
     representation_args.add_argument("--ExtVector", action="store_true", help="Extern precomputed feature vectors?")
@@ -524,5 +500,6 @@ if __name__ == '__main__':
                         help="Parameters of generating more arguments")
     model_args.add_argument("--cluster_alpha", default=0.75, type=float)
     model_args.add_argument("--arg_alpha", default=0.5, type=float)
+    model_args.add_argument("--w_c", default=1e-35, type=float)
     args = parser.parse_args()
     main(args)

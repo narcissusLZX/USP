@@ -2,11 +2,6 @@ import numpy as np
 import math
 
 class Occurrence():
-    '''
-        token: 
-        clusteridx:类别序号
-        pos: 出现位置[x,y]第x个样本第y个位置
-    '''
     def __init__(self, token, dataset, idx = -1, pos=[-1,-1], clusteridx = 0):
         self.dataset = dataset
         self.token = token
@@ -32,7 +27,7 @@ class Occurrence():
         data["pos"] = self.pos
         data["idx"] = self.idx
         data["label"] = self.label
-        data["featureVector"] = self.featureVector.tolist() #另外保存？
+        data["featureVector"] = self.featureVector.tolist() 
         data["sonArgType2Arg"] = {}
         for ArgType, Args in self.sonArgType2Arg.items():
             data["sonArgType2Arg"][ArgType] = [arg.idx for arg in Args]
@@ -92,7 +87,7 @@ class Occurrence():
         self.label = newtop.idx
         self.clusteridx = newtop.clusteridx
 
-    def getNowSon(self): #返回现在的Compose后的sonArg的编号
+    def getNowSon(self): 
         ret = []
         for args in self.sonArgType2Arg.values():
             for arg in args:

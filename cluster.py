@@ -2,13 +2,13 @@ from occurrence import Occurrence
     
 
 class Cluster():
-    def __init__(self, dataset, idx = -1): #idx==-1:新建类
+    def __init__(self, dataset, idx = -1): 
 
         self.dataset = dataset
         self.Span2Occurr = {} #span(string)->occurrenceList
 
         '''
-        self.SonCluster2Num = {} # clusteridx->2num 每次采样后要重新更新？
+        self.SonCluster2Num = {} 
         self.FaCluster2Num = {}
         '''
         if (idx == -1):
@@ -27,13 +27,13 @@ class Cluster():
         for span, occs_idx in data["Span2Occurr"].items():
             self.Span2Occurr[span] = [self.dataset.idx2occ[int(occ_idx)] for occ_idx in occs_idx]
 
-    def GetAllOcc(self): #返回Occurrence列表
+    def GetAllOcc(self): 
         ret = []
         for Span in self.Span2Occurr.keys():
             ret.extend(self.Span2Occurr[Span])
         return ret
     
-    def GetSonCluster(self): #返回clusterlist
+    def GetSonCluster(self): 
         ret = []
         occs = self.GetAllOcc()
         for occ in occs:
@@ -49,7 +49,7 @@ class Cluster():
                 '''
         return ret
 
-    def GetSonArgs(self): #返回子Arg list
+    def GetSonArgs(self):
         SonArgs = []
         occs = self.GetAllOcc()
         for occ in occs:
@@ -57,7 +57,7 @@ class Cluster():
             SonArgs.extend(SonArgAfterCompose)
         return SonArgs
  
-    def ins(self, Occ:Occurrence): #会在这里更改Occ的cluster
+    def ins(self, Occ:Occurrence): 
         span = Occ.token
         if (span not in self.Span2Occurr):
             self.Span2Occurr[span] = []
