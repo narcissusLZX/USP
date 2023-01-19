@@ -99,12 +99,12 @@ class Mydataset():
             if (k in data):
                 self.__dict__[k] = data[k]
         
-        for cluster in data["clusters"]:
-            self.idx2cluster[int(cluster["idx"])].load(cluster)
         for occurrence in data["occs"]:
             self.idx2occ[int(occurrence["idx"])].load(occurrence)
         for argument in data["args"]:
             self.idx2arg[int(argument["idx"])].load(argument)
+        for cluster in data["clusters"]:
+            self.idx2cluster[int(cluster["idx"])].load(cluster)
 
         for tokpair, fason_idxs in data["TokPair2FaSon"].items():
             self.TokPair2FaSon[tokpair] = [[self.idx2occ[int(pair[0])], self.idx2occ[int(pair[1])]] for pair in fason_idxs]
@@ -498,10 +498,13 @@ class Mydataset():
         #data["argType2Arg"] = self.transform2idx(self.argType2Arg)
         for k, v in self.__dict__.items():
             if isinstance(v, dict):
+                '''
                 if (k not in data):
                     print(k)
+                    
+                '''
                 continue
-            if k == "span_index" or k == "cluster_index" or k == "faiss_quantizer" or k == "faiss_quantizer_cluster":
+            if k == 'stats' or k=='args'or k == "span_index" or k == "cluster_index" or k == "faiss_quantizer" or k == "faiss_quantizer_cluster":
                 continue
             data[k] = v
         
@@ -518,7 +521,7 @@ class Mydataset():
 
 
         #path += "model.json"    
-        print(data)
+        #print(data)
         with open(path, "w", encoding="utf-8") as f:
             json.dump(data, f)
         

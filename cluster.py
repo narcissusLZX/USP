@@ -2,13 +2,13 @@ from occurrence import Occurrence
 import numpy as np    
 
 class Cluster():
-    def __init__(self, dataset, idx = -1): #idx==-1:新建类
+    def __init__(self, dataset, idx = -1): #idx==-1
 
         self.dataset = dataset
         self.idx2Occ = {} #Occidx->Occ
 
         '''
-        self.SonCluster2Num = {} # clusteridx->2num 每次采样后要重新更新？
+        self.SonCluster2Num = {} # clusteridx->2num 
         self.FaCluster2Num = {}
         '''
         if (idx == -1):
@@ -17,20 +17,26 @@ class Cluster():
         return
 
     def store(self):
-        #todo
-        return
+        ret = {'idx':self.idx, 'idx2Occ':{}}
+        for key, val in self.idx2Occ.items():
+            ret['idx2Occ'][key] = val.idx
+        return ret
 
     def load(self, data):
         #todo
+        self.idx = data['idx']
+        self.idx2Occ = {}
+        for key, val in data['idx2Occ'].items():
+            self.idx2Occ[key] = self.dataset.idx2Occ[val]
         return
 
-    def GetAllOcc(self): #返回Occurrence列表
+    def GetAllOcc(self):
         return list(self.idx2Occ.values())
     
     def GetRandomOcc(self):
         return self.idx2Occ[np.random.randint(0, len(self.idx2Occ))]
     
-    def GetSonCluster(self): #返回clusterlist
+    def GetSonCluster(self): 
         ret = []
         occs = self.GetAllOcc()
         for occ in occs:
@@ -46,7 +52,7 @@ class Cluster():
                 '''
         return ret
 
-    def GetSonArgs(self): #返回子Arg list
+    def GetSonArgs(self): 
         SonArgs = []
         occs = self.GetAllOcc()
         for occ in occs:
@@ -54,7 +60,7 @@ class Cluster():
             SonArgs.extend(SonArgAfterCompose)
         return SonArgs
  
-    def ins(self, Occ:Occurrence): #会在这里更改Occ的cluster
+    def ins(self, Occ:Occurrence): 
         self.idx2Occ[Occ.idx] = Occ
         '''
         for argType, args in Occ.sonArgType2Arg.items():

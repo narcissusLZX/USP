@@ -159,9 +159,6 @@ def CalcProb(dataset:Mydataset, newClusters):
 
 
 
-#不会多状态并存，在resume时会还原，所以accept要更新
-
-#compose后应该是新的类还是同父结点的类？ 目前是新的类
 
 def Merge(cluster1:Cluster, cluster2:Cluster, mergeCluster:Cluster): #merge (cluster1 & cluster2) into mergeCluster
     occs = list(cluster1.idx2Occ.values())
@@ -227,7 +224,7 @@ def createSplit(dataset:Mydataset, cluster:Cluster, assigned=None): #if assigned
             Lprob += math.log(1-Prob1)
     return cluster1, cluster2, Lprob
 
-def generate_split(oldcluster:Cluster, dataset:Mydataset): #需提前判定oldcluster内的数量>1
+def generate_split(oldcluster:Cluster, dataset:Mydataset): 
 
     dataset.proposal = "split"
     
@@ -272,12 +269,12 @@ def Decompose(occ1:Occurrence, occ2:Occurrence, cluster1:Cluster, cluster2:Clust
     old_cluster_idx = occ1.clusteridx
     oldCluster = dataset.idx2cluster[old_cluster_idx]
     oldCluster.remove(occ1)
-    cluster1.ins(occ1) #父节点还是原来的cluster
-    cluster2.ins(occ2) #子节点加入新的cluster
+    cluster1.ins(occ1) 
+    cluster2.ins(occ2) 
     occ2.resumelabel(occ1.label, occ2)
     return oldCluster
 
-# compose后只以根结点的属性为key出现在cluster中，自身不会出现在cluster中
+
 
 def createDecompose(occ1:Occurrence, occ2:Occurrence, dataset:Mydataset): #occ1:fater, occ2:son
     #label = occ1.label
@@ -285,7 +282,7 @@ def createDecompose(occ1:Occurrence, occ2:Occurrence, dataset:Mydataset): #occ1:
     cluster1 = Cluster(dataset, -1)
     cluster2 = Cluster(dataset, -1)
     oldClusters = []
-    for pair in dataset.TokPair2FaSon[tokPair]: #对所有同样的父子节点对都要进行操作
+    for pair in dataset.TokPair2FaSon[tokPair]: 
         oldClusters.append(Decompose(pair[0], pair[1], cluster1, cluster2, dataset))
     return cluster1, cluster2, oldClusters
 
@@ -298,7 +295,7 @@ def Compose(occ1:Occurrence, occ2:Occurrence, newCluster:Cluster, dataset:Mydata
 
     cluster1.remove(occ1)
     cluster2.remove(occ2)
-    newCluster.ins(occ1) #加入新的cluster
+    newCluster.ins(occ1) 
     
     occ2.setlabel(occ1)
 
@@ -367,7 +364,7 @@ def accept(hyp, dataset:Mydataset):
         tokPair = occ1.token+","+occ2.token
         idx = 0
         dataset.pair_composed_cnt -= len(dataset.TokPair2FaSon[tokPair])
-        for pair in dataset.TokPair2FaSon[tokPair]: #对所有同样的父子节点对都要进行操作
+        for pair in dataset.TokPair2FaSon[tokPair]: 
             if (dataset.args.Faiss):
                 dataset.faiss_remove(pair[0])
             Decompose(pair[0], pair[1], hyp["new"][0], hyp["new"][1], dataset)
@@ -385,15 +382,14 @@ def reject(hyp, dataset:Mydataset):
 
 def resume(hyp, dataset:Mydataset):
     if dataset.proposal == "merge":
-        assigned = [hyp["old"][0].GetAllOcc(), hyp["old"][1].GetAllOcc()]
-        cluster1, cluster2, hyp["splitTransLprob"] = createSplit(dataset, hyp["new"][0], assigned)
+        cluster1, cluster2, hyp["splitTransLprob"] = createSplit(dataset, hyp["new"][0], hyp['occ'])
     elif dataset.proposal == "split": 
         Merge(hyp["new"][0], hyp["new"][1], hyp["old"][0])
     elif dataset.proposal == "compose":
         occ1, occ2 = hyp["occ"]
         tokPair = occ1.token+","+occ2.token
         idx = 0
-        for pair in dataset.TokPair2FaSon[tokPair]: #对所有同样的父子节点对都要进行操作
+        for pair in dataset.TokPair2FaSon[tokPair]: 
             Decompose(pair[0], pair[1], hyp["old"][idx][0], hyp["old"][idx][1], dataset)
             idx += 1
     else:
