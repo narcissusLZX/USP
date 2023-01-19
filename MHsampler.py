@@ -4,6 +4,7 @@ from turtle import title
 from tqdm import tqdm
 import argparse
 import numpy as np
+import os
 
 from mydataset import Mydataset
 from cluster import Cluster
@@ -134,11 +135,10 @@ def CalcProb(dataset:Mydataset, newClusters):
             if (occ.token not in toks):
                 toks[occ.token] = 0
             toks[occ.token] += 1
-            if (dataset.args.Distributed and dataset.args.Df):
+            if (dataset.args.Df):
                 vector = occ.getFeatureVector()
                 norm1 = np.linalg.norm(vector)
                 if (dataset.args.Faiss):
-                    #todo
                     Lprob_phrase += dataset.faiss_calcLprob(vector)
                 else:
                     cnt = 0
@@ -164,11 +164,12 @@ def CalcProb(dataset:Mydataset, newClusters):
 #compose后应该是新的类还是同父结点的类？ 目前是新的类
 
 def Merge(cluster1:Cluster, cluster2:Cluster, mergeCluster:Cluster): #merge (cluster1 & cluster2) into mergeCluster
-    for idx, occ in cluster1.idx2Occ.items():
+    occs = list(cluster1.idx2Occ.values())
+    for occ in occs:
         cluster1.remove(occ)
         mergeCluster.ins(occ)
-    
-    for idx, occ in cluster2.idx2Occ.items():
+    occs = list(cluster2.idx2Occ.values())
+    for occ in occs:
         cluster2.remove(occ)
         mergeCluster.ins(occ)
 
@@ -191,7 +192,7 @@ def generate_merge(Cluster1:Cluster, dataset:Mydataset):
     return {"new":[newCluster], "old":[Cluster1, Cluster2], "occ":[occ_1, occ_2]}
 
 def createSplit(dataset:Mydataset, cluster:Cluster, assigned=None): #if assigned!=None, then assign Occs according to assigned
-    Occs = cluster.idx2Occ.values()
+    Occs = list(cluster.idx2Occ.values())
     if (assigned != None):
         occ1, occ2 = assigned[0][0], assigned[1][0]
         cluster1, cluster2 = dataset.idx2cluster[occ1.clusteridx], dataset.idx2cluster[occ2.clusteridx]
@@ -234,15 +235,17 @@ def generate_split(oldcluster:Cluster, dataset:Mydataset): #需提前判定oldcl
     
 
 
-    cluster1, cluster2, Lprob = createSplit(oldcluster)
+    cluster1, cluster2, Lprob = createSplit(dataset, oldcluster)
         
     return {"new":[cluster1, cluster2], "old":[oldcluster], "occ":[cluster1.GetAllOcc(), cluster2.GetAllOcc()], "splitTransLprob":Lprob}
 
 def generate_mergesplit(dataset:Mydataset):
     if (not dataset.args.Df):
         Occ1 = dataset.getRandomOcc()
-        Occ2 = alias_sample(dataset.stats.alias_distribution[Occ1.idx])
-        if (Occ1.clusteridx == Occ2.clusteridx):
+        Occ2_idx = alias_sample(dataset.stats.alias_distribution[Occ1.idx])
+        Occ2 = dataset.idx2occ[Occ2_idx+1]
+        #print(Occ1.clusteridx, Occ2.clusteridx)
+        if (Occ1.clusteridx != Occ2.clusteridx):
             dataset.proposal = "merge"
 
             Cluster1 = dataset.idx2cluster[Occ1.clusteridx]
@@ -382,7 +385,8 @@ def reject(hyp, dataset:Mydataset):
 
 def resume(hyp, dataset:Mydataset):
     if dataset.proposal == "merge":
-        cluster1, cluster2, hyp["splitTransLprob"] = createSplit(dataset, hyp["new"][0], hyp["old"])
+        assigned = [hyp["old"][0].GetAllOcc(), hyp["old"][1].GetAllOcc()]
+        cluster1, cluster2, hyp["splitTransLprob"] = createSplit(dataset, hyp["new"][0], assigned)
     elif dataset.proposal == "split": 
         Merge(hyp["new"][0], hyp["new"][1], hyp["old"][0])
     elif dataset.proposal == "compose":
@@ -425,11 +429,11 @@ def CalcAcceptRatio(hyp, dataset:Mydataset):
         transLprob = hyp["splitTransLprob"]
     else:
         transLprob = -hyp["spliTransLprob"]
-    if (NewLprob > OldLprob):
+    if (NewLprob+transLprob - OldLprob>1):
         return 1
-    if (NewLprob - OldLprob < -20):
-        return 20
-    return math.exp(NewLprob-OldLprob)
+    if (NewLprob +transLprob - OldLprob < -20):
+        return -20
+    return math.exp(NewLprob-OldLprob+transLprob)
 
 def onestep(idx, dataset):
     rd = random.random()
@@ -449,23 +453,27 @@ def onestep(idx, dataset):
         return False
 
 def main(args):
-    Max_epoch, success_cnt = args.n_epoch, 0
+    Max_epoch, success_cnt = args.n_epoch, 1
 
     random.seed(args.seed)
     dataset = Mydataset(args)
+    
+    if (not os.path.exists(args.save_model_path)):
+        os.mkdir(args.save_model_path)
+
     for i in tqdm(range(args.start_epoch, Max_epoch)):
         if (onestep(i, dataset)):
             success_cnt += 1
         #if (i % 1000 == 0):
             #print("Step {} done".format(i))
-        if (success_cnt * 10 < (i-args.start_epoch)):
+        if (success_cnt * 20 < (i-args.start_epoch)):
             print("Converge after {} steps.".format(i))
             break
         if ((i+1) % args.save_per_epoch == 0):
-            dataset.store(args.model_path+str(i+1)+".json")
+            dataset.store(args.save_model_path+str(i+1)+".json")
             print("Accept Rate:", success_cnt / (i+1))
         #dataset.check()
-    dataset.store(args.model_path+"final.json")
+    dataset.store(args.save_model_path+"final.json")
     if dataset.args.eval:
         eval = Evaluation(dataset.args, dataset)
 
@@ -484,14 +492,13 @@ if __name__ == '__main__':
     parser.add_argument("--eval_path", default=None, type=str)
     parser.add_argument("--eval_ans", action="store_true", help="Match ans?")
     parser.add_argument("--eval_threshold", default=0.8, type=float)
-    parser.add_argument("--model_path", default="./model/", type=str)
+    parser.add_argument("--save_model_path", default="./model/", type=str)
     parser.add_argument("--save_per_epoch", default=10000, type=int)
     parser.add_argument("--load_model_path", type=str)
     parser.add_argument("--start_epoch", default=0, type=int)
     parser.add_argument("--sim_threshold", default=0.8, type=float)
 
     representation_args = parser.add_argument_group(title="Args of representation")
-    representation_args.add_argument("--Distributed", action="store_true")
     representation_args.add_argument("--Faiss", action="store_true")
     representation_args.add_argument("--Df", action="store_true", help="Dynamically adjust feature vectors of occurrences?")
     representation_args.add_argument("--ExtVector", action="store_true", help="Extern precomputed feature vectors?")
@@ -509,5 +516,6 @@ if __name__ == '__main__':
                         help="Parameters of generating more arguments")
     model_args.add_argument("--cluster_alpha", default=0.75, type=float)
     model_args.add_argument("--arg_alpha", default=0.5, type=float)
+    model_args.add_argument("--w_c", default=1e-35, type=float)
     args = parser.parse_args()
     main(args)

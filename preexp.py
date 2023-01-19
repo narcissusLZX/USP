@@ -3,8 +3,17 @@ from tqdm import tqdm
 
 path = "./dataset/genia"
 word2idx = {}
+word2list = {}
 sentences = [[]]
 words = []
+stopwords = set()
+
+with open("stopwords.txt", "r", encoding="utf-8") as f:
+    for line in f.readlines():
+        tok = line.strip()
+        stopwords.add(tok)
+
+cnt = 0
 with open(path+".tok", "r", encoding='utf-8') as f:
     for line in f.readlines():
         tok = line.strip()
@@ -13,9 +22,12 @@ with open(path+".tok", "r", encoding='utf-8') as f:
             continue
         else:
             sentences[-1].append(tok)
+            cnt += 1
             if tok not in word2idx:
                 word2idx[tok] = len(word2idx)
+                word2list[tok] = []
                 words.append(tok)
+            word2list[tok].append((cnt, len(sentences)))
 edge = []
 st = [-1]*len(word2idx)
 
@@ -33,6 +45,36 @@ u, s, vh = np.linalg.svd(cov)
 W = np.dot(u, np.diag(1 / np.sqrt(s)))
 Vecs = (Vecs - mu).dot(W[:, :64])
 V_idx = 0
+
+print(cnt, Vecs.shape)
+
+for i in range(Vecs.shape[0]):
+    Vecs[i] /= np.linalg.norm(Vecs[i])
+
+sim_list = []
+
+
+for word, lst in tqdm(word2list.items()):
+    if word in stopwords:
+        continue
+    n = len(lst)
+    print(word, n)
+    for i in range(n):
+        idx1 = lst[i][0]
+        for j in range(i+1, n):
+            idx2 = lst[j][0]
+            cos_sim = np.dot(Vecs[idx1], Vecs[idx2].T) 
+            sim_list.append((cos_sim, word, lst[i], lst[j]))
+
+print(len(sim_list))
+
+sim_list = sorted(sim_list, key=lambda x:x[0])
+
+with open("preexp.out", "w", encoding="utf-8") as f:
+    for x in sim_list[:100]:
+        f.write(x[0], x[1], x[2], x[3]))
+
+'''
 word2vec = np.zeros((len(word2idx), 64))
 for i in tqdm(range(len(sentences))):
     sentence = sentences[i]
@@ -67,7 +109,7 @@ for i in range(len(x)):
 
 #print((count-len(word2idx))/2, len(word2idx))
 #print(count, len(sentences)**2, cos_sim[30, 30], cos_sim[20, 182], cos_sim[182,20])
-'''
+
 sim = []
 for i in tqdm(range(len(word2idx))):
     for j in tqdm(range(i+1, len(word2idx))):
@@ -76,7 +118,7 @@ sim = sorted(sim)
 
 print(sim[100], sim[-100])
 
-'''
+
 
 #dep
 flag = False
@@ -135,3 +177,5 @@ for i in range(len(word2idx)):
         print(bfs(i))
 
 print(cnt)
+
+'''

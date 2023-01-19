@@ -55,7 +55,7 @@ class Cluster():
         return SonArgs
  
     def ins(self, Occ:Occurrence): #会在这里更改Occ的cluster
-        self.idx2occ[Occ.idx] = Occ
+        self.idx2Occ[Occ.idx] = Occ
         '''
         for argType, args in Occ.sonArgType2Arg.items():
             for arg in args:

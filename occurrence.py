@@ -138,7 +138,7 @@ class Occurrence():
                 son = arg.son
                 if (son.label == self.label):
                     ret += math.log(len(self.dataset.TokPair2FaSon[self.token+","+son.token]) / self.dataset.pair_cnt)
-                    ret -= math.log(len(self.dataset.tok2occ[son.token])*len(self.dataset.tok2occ[self.token]))
+                    ret -= math.log(self.dataset.tok2cnt[son.token]*self.dataset.tok2cnt[self.token])
                     ret += son.PhraseLprob()
 
         return ret

@@ -9,7 +9,7 @@ def alias_transform(prob_list):
     small, large = [], []
     accept_small, accept_large_idx = [0]*N, [-1]*N
     for i, prob in enumerate(prob_list):
-        if (prob_list < 1.0):
+        if (prob < 1.0):
             small.append(i)
         else:
             large.append(i)
@@ -27,7 +27,8 @@ def alias_transform(prob_list):
         accept_small[large_idx] = 1
     return accept_small, accept_large_idx
 
-def alias_sample(accept_small_ratio, accept_large_idx):
+def alias_sample(accept_args):
+    accept_small_ratio, accept_large_idx = accept_args
     N = len(accept_small_ratio)
     i = np.random.randint(low=0, high=N)
     r = np.random.random()
@@ -39,11 +40,11 @@ class Stats:
     def __init__(self, dataset) -> None:
         self.dataset = dataset
         self.n_occ = len(dataset.idx2occ)
-        vectors = np.zeros(self.n_occ, dataset.vector_dim)
+        vectors = np.zeros((self.n_occ, dataset.vector_dim))
         for idx in range(self.n_occ):
-            vectors[idx] = dataset.idx2occ[idx].featureVector #ensure normalized
+            vectors[idx] = dataset.idx2occ[idx+1].featureVector
         cos = np.dot(vectors, vectors.T)
-        self.distribute = []
+        self.distribute = [0]*self.n_occ
         random.seed(dataset.args.seed)
         np.random.seed(dataset.args.seed)
         self.alias_distribution = []

@@ -62,8 +62,8 @@ with open(path, "r", encoding="utf-8") as f:
 print(cnt)
 '''
 
-path = "./dataset/question_origin.dep"
-f_dep = open("./dataset/question.dep", "w", encoding="utf-8")
+path = "./dataset/test_data.ori"
+f_dep = open("./dataset/test_data.dep", "w", encoding="utf-8")
 with open(path, "r", encoding="utf-8") as f:
     for line in f.readlines():
         a = line.strip().split("(")

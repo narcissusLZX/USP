@@ -22,7 +22,7 @@ class Mydataset():
         self.pos2occ = {}  #pos->occ key:"sentenceIdx(start from 0),tokenidx(start from 1)"
         self.args = args
         self.idx2root = {}
-        self.tok2occ = {}
+        self.tok2cnt = {}
 
         self.argIdx = 0
         self.idx2arg = {}
@@ -64,6 +64,7 @@ class Mydataset():
         with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
         
+        '''
         self.n_argType = int(data["n_argType"])
         self.n_sentence = int(data["n_sentence"])
         self.n_eval = int(data["n_eval"])
@@ -74,7 +75,7 @@ class Mydataset():
         self.argIdx = int(data["argIdx"])
         self.occIdx = int(data["occIdx"])
         self.clusterIdx = int(data["clusterIdx"])
-        self.vector_dim = data["vector_dim"]
+        self.vector_dim = int(data["vector_dim"])
         self.argType2cnt = data["argType2cnt"]
         #print("Load sentences")
         #print(data["sentences"])
@@ -89,6 +90,14 @@ class Mydataset():
         for idx, root in data["idx2root"].items():
             self.idx2root[int(idx)] = self.idx2occ[int(root)]
         self.argtype2idx = data["argtype2idx"]
+        
+        '''
+
+        for k in self.__dict__.keys():
+            if k == "TokPair2FaSon":
+                continue
+            if (k in data):
+                self.__dict__[k] = data[k]
         
         for cluster in data["clusters"]:
             self.idx2cluster[int(cluster["idx"])].load(cluster)
@@ -128,16 +137,16 @@ class Mydataset():
             if fa[x] != x:
                 fa[x] = getfa(fa[x])
             return fa[x]
-        for idx1, idx2 in range(index):
-            fa[getfa(idx1)] = getfa(idx2)
+        for idx in range(len(index[0])):
+            fa[getfa(index[0][idx])] = getfa(index[1][idx])
         
         for idx in range(len(data)):
             if getfa(idx) == idx:
                 nc = Cluster(self)
-                self.idx2occ[idx].clusteridx = nc.idx
+                self.idx2occ[idx+1].clusteridx = nc.idx
         for idx in range(len(data)):
-            Occ = self.idx2occ[idx]
-            Occ.clusteridx = self.idx2occ[getfa(idx)].clusteridx
+            Occ = self.idx2occ[idx+1]
+            Occ.clusteridx = self.idx2occ[getfa(idx)+1].clusteridx
             self.idx2cluster[Occ.clusteridx].ins(Occ)
 
 
@@ -147,7 +156,6 @@ class Mydataset():
         self.span_index = faiss.IndexIVFFlat(self.faiss_quantizer, self.vector_dim, 50, faiss.METRIC_INNER_PRODUCT) 
         data = [occ.featureVector for occ in self.idx2occ.values()]
         data = np.array(data).astype('float32')
-        print(data.shape, self.vector_dim)
         self.span_index.train(data)
         ids = np.arange(1, len(self.idx2occ)+1).astype('int64')
         self.span_index.add_with_ids(data, ids)
@@ -190,6 +198,9 @@ class Mydataset():
                 else:
                     self.sentences[self.n_sentence].append(tok)
                     occ = Occurrence(tok, self, -1, [self.n_sentence, len(self.sentences[self.n_sentence])], 0)
+                    if (tok not in self.tok2cnt):
+                        self.tok2cnt[tok] = 0
+                    self.tok2cnt[tok] += 1
 
             if (len(self.sentences[self.n_sentence])==0):
                 self.sentences.pop()
@@ -205,7 +216,7 @@ class Mydataset():
                     idx += 1
                     continue
                 if (len(a) != 3):
-                    print("warning!")
+                    print("warning! dependency requires 3 args", a)
                     continue
                 dep, fa, so = a
                 fa_pos = fa.split("-")[-1]
@@ -422,7 +433,7 @@ class Mydataset():
             self.faiss_cluster_remove(clusters)
         new_clusters = []
         for cluster in clusters:
-            if len(cluster.Span2Occurr) == 0:
+            if len(cluster.idx2Occ) == 0:
                 self.removeCluster(cluster)
             else:
                 new_clusters.append(cluster)
@@ -431,7 +442,7 @@ class Mydataset():
 
     def check(self):
         for idx, cluster in self.idx2cluster.items():
-            if (len(cluster.Span2Occurr) == 0):
+            if (len(cluster.idx2Occ) == 0):
                 print(idx)
 
     def faiss_cluster_remove(self, clusters):
@@ -480,15 +491,15 @@ class Mydataset():
         #if not os.path.exists(path):
             #os.mkdir("path")
         data = {}
-        data["idx2cluster"]=self.transform2idx(self.idx2cluster)
-        data["idx2occ"] = self.transform2idx(self.idx2occ)
-        data["idx2arg"] = self.transform2idx(self.idx2arg)
         data["idx2root"] = self.transform2idx(self.idx2root)
         data["argtype2idx"] = self.argtype2idx
         data["argType2cnt"] = self.argType2cnt
+        data["tok2cnt"] = self.tok2cnt
         #data["argType2Arg"] = self.transform2idx(self.argType2Arg)
         for k, v in self.__dict__.items():
             if isinstance(v, dict):
+                if (k not in data):
+                    print(k)
                 continue
             if k == "span_index" or k == "cluster_index" or k == "faiss_quantizer" or k == "faiss_quantizer_cluster":
                 continue
@@ -507,6 +518,7 @@ class Mydataset():
 
 
         #path += "model.json"    
+        print(data)
         with open(path, "w", encoding="utf-8") as f:
             json.dump(data, f)
         
