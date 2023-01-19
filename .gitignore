@@ -14,3 +14,4 @@ __pycache__/
 model_ext/
 preexp.py
 preexp.out
+model_new/
